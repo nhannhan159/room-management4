@@ -1,0 +1,32 @@
+﻿@model RoomM.WebApp.Models.Room.GetAllRoomModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Date Create</th>
+    </tr>
+
+@foreach (var item in Model.RoomCommons) {
+    <tr>
+        <td>@item.Id</td>
+        <td>@item.Name</td>
+        <td>@item.DateCreate</td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
