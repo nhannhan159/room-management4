@@ -17,7 +17,6 @@ namespace RoomM.Business.Rooms
         static RoomService()
         {
             repository = RepositoryFactory.GetRepository<IRoomRepository, Room>();
-            // repository = new RoomRepository(StaticRoomContext.Context);
         }
 
         public static IList<Room> GetAll()
