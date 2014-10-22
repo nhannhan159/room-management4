@@ -1,4 +1,4 @@
-﻿using RoomM.Models.Rooms;
+﻿using RoomM.Models.Entities;
 using RoomM.Models;
 using RoomM.Repositories.RepositoryFramework;
 using System;

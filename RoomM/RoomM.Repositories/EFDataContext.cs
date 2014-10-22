@@ -1,4 +1,5 @@
-﻿using RoomM.Models.Rooms;
+﻿using RoomM.Models.Entities;
+using RoomM.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -19,6 +20,8 @@ namespace RoomM.Repositories
 
         public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomType> RoomTypes { get; set; }
+        public DbSet<Device> Devices { get; set; }
+        public DbSet<DeviceType> DeviceTypes { get; set; }
     }
     public static class StaticRoomContext
     {

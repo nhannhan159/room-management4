@@ -1,5 +1,5 @@
 ﻿using RoomM.Models;
-using RoomM.Models.Rooms;
+using RoomM.Models.Entities;
 using RoomM.Repositories.Rooms;
 using RoomM.Repositories.RepositoryFramework;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RoomM.Business.Rooms
 {
-    public class RoomService
+    public partial class RoomService
     {
         public static IRoomRepository repository;
         

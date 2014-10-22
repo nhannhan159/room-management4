@@ -1,4 +1,4 @@
-﻿using RoomM.Models.Rooms;
+﻿using RoomM.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -19,10 +19,6 @@ namespace RoomM.Repositories
             var roomPy = new RoomType { Id = 3, Name = "Thuc hanh li" };
             var roomLi = new RoomType { Id = 4, Name = "Thuc hanh li thuyet" };
 
-           
-
-            // context.SaveChanges();
-
             var room1 = new Room
             {
                 Id =1,
@@ -39,6 +35,41 @@ namespace RoomM.Repositories
                 RoomType = roomLi
             };
 
+            var devicetype1 = new DeviceType { Id = 1, Name = "Thiet bi dien tu" };
+            var devicetype2 = new DeviceType { Id = 2, Name = "Cong cu thi nghiem" };
+
+            var device1 = new Device
+            {
+                Id = 1,
+                Name = "DV001",
+                DeviceType = devicetype1,
+                Amount = 5
+            };
+
+            var device2 = new Device
+            {
+                Id = 2,
+                Name = "DV002",
+                DeviceType = devicetype1,
+                Amount = 10
+            };
+
+            var device3 = new Device
+            {
+                Id = 3,
+                Name = "DV003",
+                DeviceType = devicetype2,
+                Amount = 3
+            };
+
+            var device4 = new Device
+            {
+                Id = 4,
+                Name = "DV004",
+                DeviceType = devicetype2,
+                Amount = 4
+            };
+
             context.RoomTypes.Add(roomTH);
             context.RoomTypes.Add(roomBi);
             context.RoomTypes.Add(roomPy);
@@ -47,6 +78,16 @@ namespace RoomM.Repositories
             context.Rooms.Add(room1);
             context.Rooms.Add(room2);
 
+            context.DeviceTypes.Add(devicetype1);
+            context.DeviceTypes.Add(devicetype2);
+
+            context.Devices.Add(device1);
+            context.Devices.Add(device2);
+            context.Devices.Add(device3);
+            context.Devices.Add(device4);
+
+            // context.Entry()
+            
             int i = context.SaveChanges();
             Console.WriteLine("{0} records added...", i);
         }

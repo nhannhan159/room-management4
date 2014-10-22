@@ -1,5 +1,5 @@
 ﻿using RoomM.Models;
-using RoomM.Models.Rooms;
+using RoomM.Models.Entities;
 using RoomM.Business.Rooms;
 using System;
 using System.Collections.Generic;

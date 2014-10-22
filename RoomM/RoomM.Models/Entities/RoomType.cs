@@ -6,20 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoomM.Models.Rooms
+namespace RoomM.Models.Entities
 {
-    [Table("Rooms")]
-    public class Room : EntityBase
+    [Table("RoomTypes")]
+    public class RoomType : EntityBase
     {
         [Key]
         public int Id { get; set; }
-
         public string Name { get; set; }
-        public DateTime DateCreate { get; set; }
 
-        [ForeignKey("RoomType")]
-        public int RoomTypeId { get; set; }
-
-        public virtual RoomType RoomType { get; set; }
+        public virtual ICollection<Room> Rooms { get; set; }
     }
 }

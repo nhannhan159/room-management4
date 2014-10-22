@@ -6,15 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoomM.Models.Rooms
+namespace RoomM.Models.Entities
 {
-    [Table("RoomTypes")]
-    public class RoomType : EntityBase
+    [Table("DeviceTypes")]
+    public class DeviceType : EntityBase
     {
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
 
-        // public virtual ICollection<Room> Rooms { get; set; }
+        public virtual ICollection<Device> Devices { get; set; }
     }
 }

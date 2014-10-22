@@ -50,15 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Device.cs" />
+    <Compile Include="Entities\DeviceType.cs" />
     <Compile Include="EntityBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rooms\Room.cs" />
-    <Compile Include="Rooms\RoomType.cs" />
+    <Compile Include="Entities\Room.cs" />
+    <Compile Include="Entities\RoomType.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Staffs\" />
-    <Folder Include="Users\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
