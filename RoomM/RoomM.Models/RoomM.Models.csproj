@@ -50,12 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Device.cs" />
-    <Compile Include="Entities\DeviceType.cs" />
+    <Compile Include="Devices\Device.cs" />
+    <Compile Include="Devices\DeviceType.cs" />
     <Compile Include="EntityBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Entities\Room.cs" />
-    <Compile Include="Entities\RoomType.cs" />
+    <Compile Include="Rooms\Room.cs" />
+    <Compile Include="Rooms\RoomType.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

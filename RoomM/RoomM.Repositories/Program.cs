@@ -1,4 +1,4 @@
-﻿using RoomM.Models.Entities;
+﻿using RoomM.Models.Devices;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
