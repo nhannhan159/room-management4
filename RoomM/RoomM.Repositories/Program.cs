@@ -12,7 +12,8 @@ namespace RoomM.Repositories
     {
         static void Main(string[] args)
         {
-            Database.SetInitializer(new RoomMgrContextCustomInitializer());
+            Console.WriteLine("Begin");
+            Database.SetInitializer(new RoomMgrContextCustomInitializer());        
             using (var db = new EFDataContext())
             {
                 db.Database.Initialize(false);

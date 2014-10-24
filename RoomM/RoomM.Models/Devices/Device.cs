@@ -1,4 +1,4 @@
-﻿using RoomM.Models.Devices;
+﻿using RoomM.Models.Rooms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,8 +13,9 @@ namespace RoomM.Models.Devices
     {
         public string Name { get; set; }
         public int Amount { get; set; }
-        public int DeviceTypeId { get; set; }
-        public int RoomId { get; set; }
+        public Int64 DeviceTypeId { get; set; }
+        public Int64 RoomId { get; set; }
         public virtual DeviceType DeviceType { get; set; }
+        public virtual Room Room { get; set; }
     }
 }

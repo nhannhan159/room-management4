@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RoomM.Models.Devices;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,5 +15,6 @@ namespace RoomM.Models.Rooms
         public DateTime DateCreate { get; set; }
         public Int64 RoomTypeId { get; set; }
         public virtual RoomType RoomType { get; set; }
+        public virtual ICollection<Device> Devices { get; set; }
     }
 }
