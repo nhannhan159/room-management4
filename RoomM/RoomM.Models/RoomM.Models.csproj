@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Devices\DeviceHistoryType.cs" />
+    <Compile Include="Devices\DeviceHistory.cs" />
     <Compile Include="Devices\Device.cs" />
     <Compile Include="Devices\DeviceType.cs" />
     <Compile Include="EntityBase.cs" />

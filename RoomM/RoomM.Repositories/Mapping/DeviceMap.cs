@@ -20,7 +20,6 @@ namespace RoomM.Repositories.Mapping
             Property(t => t.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Name).IsRequired();
             Property(t => t.DeviceTypeId).IsRequired();
-            Property(t => t.RoomId).IsRequired();
             Property(t => t.Amount);
 
             // table
@@ -29,8 +28,10 @@ namespace RoomM.Repositories.Mapping
             // relationship
             HasRequired(t => t.DeviceType).WithMany(c => c.Devices)
                 .HasForeignKey(t => t.DeviceTypeId).WillCascadeOnDelete(false);
-            HasRequired(t => t.Room).WithMany(c => c.Devices)
-                .HasForeignKey(t => t.RoomId).WillCascadeOnDelete(false);
+            HasMany(t => t.Rooms).WithMany(c => c.Devices)
+                                .Map(t => t.ToTable("RoomDevice")
+                                    .MapLeftKey("DeviceId")
+                                    .MapRightKey("RoomId")); 
 
         }
 

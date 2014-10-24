@@ -57,6 +57,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EFDataContext.cs" />
+    <Compile Include="Mapping\DeviceHistoryMap.cs" />
+    <Compile Include="Mapping\DeviceHistoryTypeMap.cs" />
     <Compile Include="Mapping\DeviceMap.cs" />
     <Compile Include="Mapping\DeviceTypeMap.cs" />
     <Compile Include="Mapping\RoomMap.cs" />
