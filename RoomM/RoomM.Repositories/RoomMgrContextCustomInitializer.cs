@@ -1,5 +1,6 @@
 ﻿using RoomM.Models.Devices;
 using RoomM.Models.Rooms;
+using RoomM.Models.Users;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -25,6 +26,9 @@ namespace RoomM.Repositories
 
             DeviceHistoryType devicehistorytype1 = new DeviceHistoryType { Name = "Device History Type 1" };
             DeviceHistoryType devicehistorytype2 = new DeviceHistoryType { Name = "Device History Type 2" };
+
+            UserType usertype1 = new UserType { Name = "User Type 1" };
+            UserType usertype2 = new UserType { Name = "User Type 2" };
 
             Room room1 = new Room
             {
@@ -114,6 +118,33 @@ namespace RoomM.Repositories
                 Room = room2,
             };
 
+            User user1 = new User
+            {
+                Name = "adminname",
+                Sex = false,
+                Phone = "0123456789",
+                UserType = usertype2,
+                UserAccount = new UserAccount
+                {
+                    UserName = "admin",
+                    PasswordStored = CryptorEngine.Encrypt("admin", true),
+                    LastLogin = new DateTime(2011, 1, 5),
+                },
+            };
+            User user2 = new User
+            {
+                Name = "user2name",
+                Sex = true,
+                Phone = "0123456790",
+                UserType = usertype1,
+                UserAccount = new UserAccount
+                {
+                    UserName = "user",
+                    PasswordStored = CryptorEngine.Encrypt("user", true),
+                    LastLogin = new DateTime(2011, 1, 7),
+                },
+            };
+
             context.Entry(roomTH).State = EntityState.Added;
             context.Entry(roomBi).State = EntityState.Added;
             context.Entry(roomPy).State = EntityState.Added;
@@ -140,6 +171,12 @@ namespace RoomM.Repositories
             context.Entry(devicehistory1).State = EntityState.Added;
             context.Entry(devicehistory2).State = EntityState.Added;
             context.Entry(devicehistory3).State = EntityState.Added;
+
+            context.Entry(usertype1).State = EntityState.Added;
+            context.Entry(usertype2).State = EntityState.Added;
+
+            context.Entry(user1).State = EntityState.Added;
+            context.Entry(user2).State = EntityState.Added;
 
             context.SaveChanges();
         }

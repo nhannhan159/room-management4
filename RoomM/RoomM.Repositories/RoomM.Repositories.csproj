@@ -57,6 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EFDataContext.cs" />
+    <Compile Include="Mapping\UserTypeMap.cs" />
+    <Compile Include="Mapping\UserMap.cs" />
+    <Compile Include="Mapping\UserAccountMap.cs" />
     <Compile Include="Mapping\DeviceHistoryMap.cs" />
     <Compile Include="Mapping\DeviceHistoryTypeMap.cs" />
     <Compile Include="Mapping\DeviceMap.cs" />
