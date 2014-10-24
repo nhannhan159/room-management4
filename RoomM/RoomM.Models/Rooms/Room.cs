@@ -17,5 +17,6 @@ namespace RoomM.Models.Rooms
         public virtual RoomType RoomType { get; set; }
         public virtual ICollection<Device> Devices { get; set; }
         public virtual ICollection<DeviceHistory> DeviceHistorys { get; set; }
+        public virtual ICollection<RoomCalendar> RoomCalendars { get; set; }
     }
 }

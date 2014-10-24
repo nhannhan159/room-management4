@@ -30,6 +30,10 @@ namespace RoomM.Repositories
             UserType usertype1 = new UserType { Name = "User Type 1" };
             UserType usertype2 = new UserType { Name = "User Type 2" };
 
+            RoomCalendarStatus roomcalendarstatus1 = new RoomCalendarStatus { Name = "Room Calendar Status 1" };
+            RoomCalendarStatus roomcalendarstatus2 = new RoomCalendarStatus { Name = "Room Calendar Status 2" };
+            RoomCalendarStatus roomcalendarstatus3 = new RoomCalendarStatus { Name = "Room Calendar Status 2" };
+
             Room room1 = new Room
             {
                 Name = "A111",
@@ -145,6 +149,52 @@ namespace RoomM.Repositories
                 },
             };
 
+            RoomCalendar roomcalendar1 = new RoomCalendar
+            {
+                Date = new DateTime(2011, 1, 5),
+                Start = 4,
+                Length = 2,
+                RoomCalendarStatus = roomcalendarstatus1,
+                Room = room2,
+                User = user2
+            };
+            RoomCalendar roomcalendar2 = new RoomCalendar
+            {
+                Date = new DateTime(2011, 1, 5),
+                Start = 10,
+                Length = 2,
+                RoomCalendarStatus = roomcalendarstatus1,
+                Room = room2,
+                User = user2
+            };
+            RoomCalendar roomcalendar3 = new RoomCalendar
+            {
+                Date = new DateTime(2011, 1, 7),
+                Start = 1,
+                Length = 3,
+                RoomCalendarStatus = roomcalendarstatus2,
+                Room = room1,
+                User = user1
+            };
+            RoomCalendar roomcalendar4 = new RoomCalendar
+            {
+                Date = new DateTime(2011, 1, 8),
+                Start = 8,
+                Length =4,
+                RoomCalendarStatus = roomcalendarstatus1,
+                Room = room6,
+                User = user2
+            };
+            RoomCalendar roomcalendar5 = new RoomCalendar
+            {
+                Date = new DateTime(2011, 1, 8),
+                Start = 4,
+                Length = 2,
+                RoomCalendarStatus = roomcalendarstatus2,
+                Room = room4,
+                User = user1
+            };
+
             context.Entry(roomTH).State = EntityState.Added;
             context.Entry(roomBi).State = EntityState.Added;
             context.Entry(roomPy).State = EntityState.Added;
@@ -155,6 +205,9 @@ namespace RoomM.Repositories
 
             context.Entry(devicehistorytype1).State = EntityState.Added;
             context.Entry(devicehistorytype2).State = EntityState.Added;
+
+            context.Entry(roomcalendarstatus1).State = EntityState.Added;
+            context.Entry(roomcalendarstatus2).State = EntityState.Added;
 
             context.Entry(room1).State = EntityState.Added;
             context.Entry(room2).State = EntityState.Added;
@@ -177,6 +230,12 @@ namespace RoomM.Repositories
 
             context.Entry(user1).State = EntityState.Added;
             context.Entry(user2).State = EntityState.Added;
+
+            context.Entry(roomcalendar1).State = EntityState.Added;
+            context.Entry(roomcalendar2).State = EntityState.Added;
+            context.Entry(roomcalendar3).State = EntityState.Added;
+            context.Entry(roomcalendar4).State = EntityState.Added;
+            context.Entry(roomcalendar5).State = EntityState.Added;
 
             context.SaveChanges();
         }

@@ -1,5 +1,4 @@
 ﻿using RoomM.Models.Devices;
-using RoomM.Models.Rooms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,16 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoomM.Models.Users
+namespace RoomM.Models.Rooms
 {
-    public class User : EntityBase
+    public class RoomCalendarStatus : EntityBase
     {
         public string Name { get; set; }
-        public bool Sex { get; set; }
-        public string Phone { get; set; }
-        public Int64 UserTypeId { get; set; }
-        public virtual UserType UserType { get; set; }
-        public UserAccount UserAccount { get; set; }
         public virtual ICollection<RoomCalendar> RoomCalendars { get; set; }
     }
 }
