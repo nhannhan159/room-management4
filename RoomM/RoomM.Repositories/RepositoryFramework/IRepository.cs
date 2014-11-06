@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoomM.Repositories.RepositoryFramework
+namespace RoomM.Model.RepositoryFramework
 {
     public interface IRepository<T> where T : EntityBase
     {

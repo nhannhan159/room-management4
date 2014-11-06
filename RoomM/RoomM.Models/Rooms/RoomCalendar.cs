@@ -14,10 +14,13 @@ namespace RoomM.Models.Rooms
         public DateTime Date { get; set; }
         public int Start { get; set; }
         public int Length { get; set; }
+
         public Int64 RoomId { get; set; }
         public virtual Room Room { get; set; }
+
         public Int64 UserId { get; set; }
         public virtual User User { get; set; }
+
         public Int64 RoomCalendarStatusId { get; set; }
         public virtual RoomCalendarStatus RoomCalendarStatus { get; set; }
     }

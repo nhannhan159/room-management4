@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 
-namespace RoomM.Repositories.RepositoryFramework
+namespace RoomM.Model.RepositoryFramework
 {
     public static class RepositoryFactory
     {

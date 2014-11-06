@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoomM.Repositories.RepositoryFramework
+namespace RoomM.Model.RepositoryFramework
 {
     public abstract class RepositoryBase<T> : IRepository<T>
         where T : EntityBase

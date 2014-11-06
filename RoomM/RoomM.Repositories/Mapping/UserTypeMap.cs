@@ -7,7 +7,7 @@ using System.Data.Entity.ModelConfiguration;
 using RoomM.Models.Users;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RoomM.Repositories.Mapping
+namespace RoomM.Model.Mapping
 {
     public class UserTypeMap : EntityTypeConfiguration<UserType>
     {

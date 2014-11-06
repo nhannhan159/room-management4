@@ -7,7 +7,7 @@
     <ProjectGuid>{61FAA63A-110F-42FB-A273-6362F5730E68}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RoomM.Repositories</RootNamespace>
+    <RootNamespace>RoomM.Model</RootNamespace>
     <AssemblyName>RoomM.Repositories</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -59,13 +59,12 @@
     <Compile Include="EFDataContext.cs" />
     <Compile Include="Mapping\RoomCalendarMap.cs" />
     <Compile Include="Mapping\RoomCalendarStatusMap.cs" />
+    <Compile Include="Mapping\RoomDeviceMap.cs" />
     <Compile Include="Mapping\UserTypeMap.cs" />
     <Compile Include="Mapping\UserMap.cs" />
-    <Compile Include="Mapping\UserAccountMap.cs" />
     <Compile Include="Mapping\DeviceHistoryMap.cs" />
     <Compile Include="Mapping\DeviceHistoryTypeMap.cs" />
     <Compile Include="Mapping\DeviceMap.cs" />
-    <Compile Include="Mapping\DeviceTypeMap.cs" />
     <Compile Include="Mapping\RoomMap.cs" />
     <Compile Include="Mapping\RoomTypeMap.cs" />
     <Compile Include="Program.cs" />

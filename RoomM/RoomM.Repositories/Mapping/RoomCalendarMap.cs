@@ -7,7 +7,7 @@ using System.Data.Entity.ModelConfiguration;
 using RoomM.Models.Rooms;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RoomM.Repositories.Mapping
+namespace RoomM.Model.Mapping
 {
     public class RoomCalendarMap : EntityTypeConfiguration<RoomCalendar>
     {
@@ -19,8 +19,8 @@ namespace RoomM.Repositories.Mapping
             // properties
             Property(t => t.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Date).IsRequired();
-            Property(t => t.Start);
-            Property(t => t.Length);
+            Property(t => t.Start).IsRequired();
+            Property(t => t.Length).IsRequired();
             Property(t => t.RoomId).IsRequired();
             Property(t => t.UserId).IsRequired();
             Property(t => t.RoomCalendarStatusId).IsRequired();
@@ -35,7 +35,6 @@ namespace RoomM.Repositories.Mapping
                 .HasForeignKey(t => t.RoomId).WillCascadeOnDelete(false);
             HasRequired(t => t.User).WithMany(c => c.RoomCalendars)
                 .HasForeignKey(t => t.UserId).WillCascadeOnDelete(false);
-
         }
 
     }

@@ -1,13 +1,14 @@
 ﻿using RoomM.Models;
 using RoomM.Models.Devices;
-using RoomM.Repositories.Rooms;
-using RoomM.Repositories.RepositoryFramework;
+using RoomM.Model.Rooms;
+using RoomM.Model.RepositoryFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RoomM.Models.Rooms;
+using RoomM.Repositories.Rooms;
 
 namespace RoomM.Business.Rooms
 {

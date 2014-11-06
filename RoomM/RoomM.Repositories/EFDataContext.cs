@@ -1,4 +1,5 @@
-﻿using RoomM.Models.Devices;
+﻿using RoomM.Model.Rooms;
+using RoomM.Models.Devices;
 using RoomM.Models.Rooms;
 using System;
 using System.Collections.Generic;
@@ -9,16 +10,19 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoomM.Repositories
+namespace RoomM.Model
 {
     public class EFDataContext : DbContext
     {
         // connection string:
         private const string connectionString =
-            "Data Source=.\\SQLEXPRESS;Initial Catalog=room_mgr;Integrated Security=True";
-        public EFDataContext() : base(connectionString) { 
+            "Data Source=QUOCVU-PC;Initial Catalog=room_mgr;Integrated Security=True";
+        public EFDataContext() : base(connectionString) {
         
         }
+
+        // public DbSet<RoomDevice> RoomDevices { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

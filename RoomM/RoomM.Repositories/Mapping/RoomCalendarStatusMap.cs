@@ -7,7 +7,7 @@ using System.Data.Entity.ModelConfiguration;
 using RoomM.Models.Rooms;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RoomM.Repositories.Mapping
+namespace RoomM.Model.Mapping
 {
     public class RoomCalendarStatusMap : EntityTypeConfiguration<RoomCalendarStatus>
     {

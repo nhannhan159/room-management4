@@ -172,6 +172,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RoomCalendarController.cs" />
     <Compile Include="Controllers\RoomsController.cs" />
     <Compile Include="Controllers\UIController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -179,6 +180,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\RoomM\WebAppContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -293,6 +295,9 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Rooms\Index.cshtml" />
     <Content Include="Views\Rooms\Details.cshtml" />
+    <Content Include="Views\RoomCalendar\Index.cshtml" />
+    <Content Include="Views\RoomCalendar\next.cshtml" />
+    <Content Include="Views\RoomCalendar\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

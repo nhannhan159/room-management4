@@ -1,6 +1,7 @@
 ﻿using RoomM.Models.Devices;
 using RoomM.Models.Rooms;
 using RoomM.Models.Users;
+using RoomM.Model.Rooms;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoomM.Repositories
+namespace RoomM.Model
 {
     public class RoomMgrContextCustomInitializer : DropCreateDatabaseAlways<EFDataContext>
     {
@@ -21,18 +22,15 @@ namespace RoomM.Repositories
             RoomType roomPy = new RoomType { Name = "Thuc hanh li" };
             RoomType roomLi = new RoomType { Name = "Thuc hanh li thuyet" };
 
-            DeviceType devicetype1 = new DeviceType { Name = "Thiet bi dien tu" };
-            DeviceType devicetype2 = new DeviceType { Name = "Cong cu thi nghiem" };
+            DeviceHistoryType devicehistorytype1 = new DeviceHistoryType { Name = "Chuyen thiet bi" };
+            DeviceHistoryType devicehistorytype2 = new DeviceHistoryType { Name = "Thanh li thiet bi" };
 
-            DeviceHistoryType devicehistorytype1 = new DeviceHistoryType { Name = "Device History Type 1" };
-            DeviceHistoryType devicehistorytype2 = new DeviceHistoryType { Name = "Device History Type 2" };
+            UserType usertype1 = new UserType { Name = "Giang vien" };
+            UserType usertype2 = new UserType { Name = "Nhan vien quan li thiet bi" };
 
-            UserType usertype1 = new UserType { Name = "User Type 1" };
-            UserType usertype2 = new UserType { Name = "User Type 2" };
-
-            RoomCalendarStatus roomcalendarstatus1 = new RoomCalendarStatus { Name = "Room Calendar Status 1" };
-            RoomCalendarStatus roomcalendarstatus2 = new RoomCalendarStatus { Name = "Room Calendar Status 2" };
-            RoomCalendarStatus roomcalendarstatus3 = new RoomCalendarStatus { Name = "Room Calendar Status 2" };
+            RoomCalendarStatus roomcalendarstatus1 = new RoomCalendarStatus { Name = "Cho xac nhan" };
+            RoomCalendarStatus roomcalendarstatus2 = new RoomCalendarStatus { Name = "Da dang ki" };
+            RoomCalendarStatus roomcalendarstatus3 = new RoomCalendarStatus { Name = "Chua dang ki" };
 
             Room room1 = new Room
             {
@@ -74,30 +72,40 @@ namespace RoomM.Repositories
             Device device1 = new Device
             {
                 Name = "DV001",
-                DeviceType = devicetype1,
-                Amount = 5,
-                Rooms = new List<Room> { room1, room3 }
             };
             Device device2 = new Device
             {
                 Name = "DV002",
-                DeviceType = devicetype1,
-                Amount = 10,
-                Rooms = new List<Room> { room1, room4, room6 }
             };
             Device device3 = new Device
             {
                 Name = "DV003",
-                DeviceType = devicetype2,
-                Amount = 3,
-                Rooms = new List<Room> { room2 }
             };
             Device device4 = new Device
             {
                 Name = "DV004",
-                DeviceType = devicetype2,
-                Amount = 4,
-                Rooms = new List<Room> { room2, room3 }
+            };
+
+
+            RoomDevice roomD1 = new RoomDevice
+            {
+                Device = device1,
+                Amount = 10,
+                Room = room1
+            };
+
+            RoomDevice roomD2 = new RoomDevice
+            {
+                Device = device3,
+                Amount = 5,
+                Room = room1
+            };
+
+            RoomDevice roomD3 = new RoomDevice
+            {
+                Device = device4,
+                Amount = 100,
+                Room = room2
             };
 
             DeviceHistory devicehistory1 = new DeviceHistory
@@ -128,12 +136,9 @@ namespace RoomM.Repositories
                 Sex = false,
                 Phone = "0123456789",
                 UserType = usertype2,
-                UserAccount = new UserAccount
-                {
-                    UserName = "admin",
-                    PasswordStored = CryptorEngine.Encrypt("admin", true),
-                    LastLogin = new DateTime(2011, 1, 5),
-                },
+                UserName = "admin",
+                PasswordStored = CryptorEngine.Encrypt("admin", true),
+                LastLogin = new DateTime(2011, 1, 5),
             };
             User user2 = new User
             {
@@ -141,12 +146,9 @@ namespace RoomM.Repositories
                 Sex = true,
                 Phone = "0123456790",
                 UserType = usertype1,
-                UserAccount = new UserAccount
-                {
-                    UserName = "user",
-                    PasswordStored = CryptorEngine.Encrypt("user", true),
-                    LastLogin = new DateTime(2011, 1, 7),
-                },
+                UserName = "user",
+                PasswordStored = CryptorEngine.Encrypt("user", true),
+                LastLogin = new DateTime(2011, 1, 7),
             };
 
             RoomCalendar roomcalendar1 = new RoomCalendar
@@ -158,6 +160,7 @@ namespace RoomM.Repositories
                 Room = room2,
                 User = user2
             };
+
             RoomCalendar roomcalendar2 = new RoomCalendar
             {
                 Date = new DateTime(2011, 1, 5),
@@ -167,6 +170,7 @@ namespace RoomM.Repositories
                 Room = room2,
                 User = user2
             };
+
             RoomCalendar roomcalendar3 = new RoomCalendar
             {
                 Date = new DateTime(2011, 1, 7),
@@ -176,15 +180,17 @@ namespace RoomM.Repositories
                 Room = room1,
                 User = user1
             };
+
             RoomCalendar roomcalendar4 = new RoomCalendar
             {
                 Date = new DateTime(2011, 1, 8),
                 Start = 8,
-                Length =4,
+                Length = 4,
                 RoomCalendarStatus = roomcalendarstatus1,
                 Room = room6,
                 User = user2
             };
+
             RoomCalendar roomcalendar5 = new RoomCalendar
             {
                 Date = new DateTime(2011, 1, 8),
@@ -200,14 +206,21 @@ namespace RoomM.Repositories
             context.Entry(roomPy).State = EntityState.Added;
             context.Entry(roomLi).State = EntityState.Added;
 
-            context.Entry(devicetype1).State = EntityState.Added;
-            context.Entry(devicetype2).State = EntityState.Added;
+
+
+
+            
 
             context.Entry(devicehistorytype1).State = EntityState.Added;
             context.Entry(devicehistorytype2).State = EntityState.Added;
 
             context.Entry(roomcalendarstatus1).State = EntityState.Added;
             context.Entry(roomcalendarstatus2).State = EntityState.Added;
+
+            context.Entry(device1).State = EntityState.Added;
+            context.Entry(device2).State = EntityState.Added;
+            context.Entry(device3).State = EntityState.Added;
+            context.Entry(device4).State = EntityState.Added;
 
             context.Entry(room1).State = EntityState.Added;
             context.Entry(room2).State = EntityState.Added;
@@ -216,10 +229,9 @@ namespace RoomM.Repositories
             context.Entry(room5).State = EntityState.Added;
             context.Entry(room6).State = EntityState.Added;
 
-            context.Entry(device1).State = EntityState.Added;
-            context.Entry(device2).State = EntityState.Added;
-            context.Entry(device3).State = EntityState.Added;
-            context.Entry(device4).State = EntityState.Added;
+            context.Entry(roomD1).State = EntityState.Added;
+            context.Entry(roomD2).State = EntityState.Added;
+            context.Entry(roomD3).State = EntityState.Added;
 
             context.Entry(devicehistory1).State = EntityState.Added;
             context.Entry(devicehistory2).State = EntityState.Added;

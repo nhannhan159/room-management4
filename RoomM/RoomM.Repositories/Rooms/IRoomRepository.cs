@@ -1,5 +1,5 @@
 ﻿using RoomM.Models.Rooms;
-using RoomM.Repositories.RepositoryFramework;
+using RoomM.Model.RepositoryFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
