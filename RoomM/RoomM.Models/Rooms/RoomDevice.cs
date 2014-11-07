@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RoomM.Model.Rooms
 {
@@ -18,6 +20,12 @@ namespace RoomM.Model.Rooms
         public virtual Device Device { get; set; }
 
         public int Amount { get; set; }
+
+
+        public override string ToString()
+        {
+            return ID + " #RoomId: " + RoomId + " #DeviceId: " + DeviceId + " #amount: " + Amount;
+        }
 
     }
 }

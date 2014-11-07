@@ -19,17 +19,11 @@ namespace RoomM.Model.Mapping
             // properties
             Property(t => t.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Name).IsRequired();
+            Property(t => t.IsUsing).IsRequired();
 
             // table
             ToTable("Devices");
 
-            // relationship
-            /* HasRequired(t => t.RoomDevices).WithMany(c => c.)
-            HasMany(t => t.RoomDevices).WithMany(c => c.Devices)
-                                .Map(t => t.ToTable("RoomDevice")
-                                    .MapLeftKey("DeviceId")
-                                    .MapRightKey("RoomId")); 
-            */
         }
 
     }

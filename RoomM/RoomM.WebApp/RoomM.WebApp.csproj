@@ -298,6 +298,8 @@
     <Content Include="Views\RoomCalendar\Index.cshtml" />
     <Content Include="Views\RoomCalendar\next.cshtml" />
     <Content Include="Views\RoomCalendar\Edit.cshtml" />
+    <Content Include="Views\Rooms\Edit.cshtml" />
+    <Content Include="Views\Rooms\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -73,8 +73,20 @@
     <Compile Include="RepositoryFramework\RepositoryBase.cs" />
     <Compile Include="RepositoryFramework\RepositoryFactory.cs" />
     <Compile Include="RoomMgrContextCustomInitializer.cs" />
+    <Compile Include="Devices\DeviceRepository.cs" />
+    <Compile Include="Devices\IDeviceRepository.cs" />
+    <Compile Include="Rooms\IRoomCalendarRepository.cs" />
+    <Compile Include="Rooms\IRoomCalendarStatusRepository.cs" />
+    <Compile Include="Rooms\IRoomDeviceRepository.cs" />
     <Compile Include="Rooms\IRoomRepository.cs" />
+    <Compile Include="Rooms\IRoomTypeRepository.cs" />
+    <Compile Include="Rooms\RoomCalendarRepository.cs" />
+    <Compile Include="Rooms\RoomCalendarStatusRepository.cs" />
+    <Compile Include="Rooms\RoomDeviceRepository.cs" />
     <Compile Include="Rooms\RoomRepository.cs" />
+    <Compile Include="Rooms\RoomTypeRepository.cs" />
+    <Compile Include="Users\IUserRepository.cs" />
+    <Compile Include="Users\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

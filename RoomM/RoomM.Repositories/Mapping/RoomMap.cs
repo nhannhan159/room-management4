@@ -19,15 +19,16 @@ namespace RoomM.Model.Mapping
             // properties
             Property(t => t.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Name).IsRequired();
-            Property(t => t.RoomTypeId).IsRequired();
+            Property(t => t.RoomTypeId).IsOptional();
             Property(t => t.DateCreate);
+            Property(t => t.IsUsing).IsRequired();
 
             // table
             ToTable("Rooms");
 
             // relationship
-            HasRequired(t => t.RoomType).WithMany(c => c.Rooms)
-                .HasForeignKey(t => t.RoomTypeId).WillCascadeOnDelete(false);
+            HasOptional(t => t.RoomType).WithMany(c => c.Rooms)
+                .HasForeignKey(t => t.RoomTypeId).WillCascadeOnDelete(true);
 
         }
 

@@ -27,7 +27,8 @@ namespace RoomM.Models.Users
         [StringLength(50)]
         public string UserName { get; set; }
 
-        [StringLength(30)]
+        [StringLength(30, MinimumLength = 6)]
+        [DataType(DataType.Password)]
         public string PasswordStored { get; set; }
 
         [NotMapped]
@@ -37,8 +38,17 @@ namespace RoomM.Models.Users
             set { PasswordStored = CryptorEngine.Encrypt(value, true); }
         }
 
+        public Boolean IsWorking { get; set; }
+
+        [Display(Name = "Lan cuoi dang nhap")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime LastLogin { get; set; }
 
         public virtual ICollection<RoomCalendar> RoomCalendars { get; set; }
+
+        public override string ToString()
+        {
+            return ID + " #name " + Name + " #username " + UserName + " #pass " + PasswordStored + "#realpass " + Password;
+        }
     }
 }

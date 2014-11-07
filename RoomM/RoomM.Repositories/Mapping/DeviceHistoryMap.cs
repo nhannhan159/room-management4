@@ -18,21 +18,21 @@ namespace RoomM.Model.Mapping
 
             // properties
             Property(t => t.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(t => t.Date).IsRequired();
-            Property(t => t.DeviceHistoryTypeId).IsRequired();
-            Property(t => t.DeviceId).IsRequired();
-            Property(t => t.RoomId).IsRequired();
+            Property(t => t.Date);
+            Property(t => t.DeviceHistoryTypeId).IsOptional();
+            Property(t => t.DeviceId).IsOptional();
+            Property(t => t.RoomId).IsOptional();
 
             // table
             ToTable("DeviceHistorys");
 
             // relationship
-            HasRequired(t => t.DeviceHistoryType).WithMany(c => c.DeviceHistorys)
-                .HasForeignKey(t => t.DeviceHistoryTypeId).WillCascadeOnDelete(false);
-            HasRequired(t => t.Device).WithMany(c => c.DeviceHistorys)
-                .HasForeignKey(t => t.DeviceId).WillCascadeOnDelete(false);
-            HasRequired(t => t.Room).WithMany(c => c.DeviceHistorys)
-                .HasForeignKey(t => t.RoomId).WillCascadeOnDelete(false);
+            HasOptional(t => t.DeviceHistoryType).WithMany(c => c.DeviceHistorys)
+                .HasForeignKey(t => t.DeviceHistoryTypeId).WillCascadeOnDelete(true);
+            HasOptional(t => t.Device).WithMany(c => c.DeviceHistorys)
+                .HasForeignKey(t => t.DeviceId).WillCascadeOnDelete(true);
+            HasOptional(t => t.Room).WithMany(c => c.DeviceHistorys)
+                .HasForeignKey(t => t.RoomId).WillCascadeOnDelete(true);
 
         }
 

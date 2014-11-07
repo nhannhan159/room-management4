@@ -13,6 +13,7 @@ namespace RoomM.Models.Devices
     {
         public Int64 DeviceHistoryTypeId { get; set; }
         public virtual DeviceHistoryType DeviceHistoryType { get; set; }
+        
         public DateTime Date { get; set; }
 
         public Int64 DeviceId { get; set; }
@@ -20,5 +21,12 @@ namespace RoomM.Models.Devices
 
         public Int64 RoomId { get; set; }
         public virtual Room Room { get; set; }
+
+
+        public override string ToString()
+        {
+            return ID + " # " + " #type:" + DeviceHistoryTypeId + " #roomID: " + RoomId;
+        }
+
     }
 }

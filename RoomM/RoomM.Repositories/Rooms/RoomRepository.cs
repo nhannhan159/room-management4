@@ -10,12 +10,16 @@ using RoomM.Model;
 
 namespace RoomM.Repositories.Rooms
 {
-    public class RoomRepository : RepositoryBase<Room>, IRoomRepository
+    public class RoomRepository : RepositoryBase<EFDataContext, Room>, IRoomRepository
     {
-        public RoomRepository(EFDataContext context)
-            : base(context)
+        public RoomRepository()
+        { 
+        }
+
+        public Room GetSingle(int roomId)
         {
-            // add -CRUD here 
+            var query = GetAllWithQuery().SingleOrDefault(x => x.ID == roomId);
+            return query;
         }
     }
 }

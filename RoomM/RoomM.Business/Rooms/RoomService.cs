@@ -14,21 +14,67 @@ namespace RoomM.Business.Rooms
 {
     public partial class RoomService
     {
-        public static IRoomRepository repository;
+        public static IRoomRepository roomRepo;
+        public static IRoomTypeRepository roomTypeRepo;
         
         static RoomService()
         {
-            repository = RepositoryFactory.GetRepository<IRoomRepository, Room>();
+            roomRepo = RepositoryFactory.GetRepository<IRoomRepository, Room>();
+            roomTypeRepo = RepositoryFactory.GetRepository<IRoomTypeRepository, RoomType>();
         }
 
+        // get all room
         public static IList<Room> GetAll()
         {
-            return RoomService.repository.GetAll();
+            return roomRepo.GetAll();
+        }
+
+        // get all room type
+        public static IList<RoomType> GetAllRoomType()
+        {
+            return roomTypeRepo.GetAll();
+        }
+
+        // get all room type label
+        public static IList<String> GetAllRoomTypeName()
+        {
+            IList<String> roomTypeNames = new List<String>();
+            foreach (RoomType rt in GetAllRoomType()) 
+            {
+                roomTypeNames.Add(rt.Name);
+            }
+            return roomTypeNames;
         }
 
         public static Room GetByID(int id)
         {
-            return RoomService.repository.GetByID(id);
+            return roomRepo.GetSingle(id);
+        }
+
+        public static void Add(Room r)
+        {
+            roomRepo.Add(r);
+        }
+
+        public static void Edit(Room r)
+        {
+            roomRepo.Edit(r);
+        }
+
+        public static void Delete(Room r)
+        {
+            roomRepo.Delete(r);
+        }
+
+        public static void Delete(int id) {
+            roomRepo.Delete(id);
+        }
+
+
+        // commit changes
+        public static void Save() 
+        {
+            roomRepo.Save();
         }
     }
 }

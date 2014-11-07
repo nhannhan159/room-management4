@@ -13,7 +13,15 @@ namespace RoomM.Models.Devices
     public class Device : EntityBase
     {
         public string Name { get; set; }
+        public Boolean IsUsing { get; set; }
+
         public virtual ICollection<RoomDevice> RoomDevices { get; set; }
         public virtual ICollection<DeviceHistory> DeviceHistorys { get; set; }
+
+        public override string ToString()
+        {
+            return ID + " # " + Name;
+        }
+
     }
 }

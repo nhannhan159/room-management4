@@ -18,18 +18,21 @@ namespace RoomM.Model.Mapping
 
             // properties
             Property(t => t.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            Property(t => t.UserTypeId).IsOptional();
             Property(t => t.Name).IsRequired();
             Property(t => t.Sex);
             Property(t => t.Phone);
             Property(t => t.UserName).IsRequired();
             Property(t => t.PasswordStored).IsRequired();
+            Property(t => t.IsWorking).IsRequired();
+
 
             // table
             ToTable("Users");
 
             // relationship
-            HasRequired(t => t.UserType).WithMany(c => c.Users)
-                .HasForeignKey(t => t.UserTypeId).WillCascadeOnDelete(false);
+            HasOptional(t => t.UserType).WithMany(c => c.Users)
+                .HasForeignKey(t => t.UserTypeId).WillCascadeOnDelete(true);
 
         }
 

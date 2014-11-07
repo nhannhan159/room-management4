@@ -12,14 +12,32 @@ namespace RoomM.Models.Rooms
 {
     public class Room : EntityBase
     {
+        [Required]
+        [Display(Name = "Ten phong")]
+        [StringLength(120)]
         public string Name { get; set; }
+
+        [Display(Name = "Ngay tao")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateCreate { get; set; }
+
+        [Display(Name = "Loai phong")]
         public Int64 RoomTypeId { get; set; }
+
         public virtual RoomType RoomType { get; set; }
 
-        // public virtual ICollection<Device> Devices { get; set; }
+        public Boolean IsUsing { get; set; }
+
         public virtual ICollection<RoomDevice> RoomDevices { get; set; }
         public virtual ICollection<DeviceHistory> DeviceHistorys { get; set; }
         public virtual ICollection<RoomCalendar> RoomCalendars { get; set; }
+
+
+        public override string ToString()
+        {
+            return ID + "#" + Name + "#RoomType:" + RoomTypeId + "#Status: " + IsUsing;
+        }
+
     }
 }

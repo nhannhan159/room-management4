@@ -21,11 +21,14 @@ namespace RoomM.Model
         
         }
 
-        // public DbSet<RoomDevice> RoomDevices { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<RoomDevice> RoomDevices { get; set; }
+
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            
             var typesToRegister = Assembly.GetExecutingAssembly().GetTypes()
            .Where(type => !String.IsNullOrEmpty(type.Namespace))
            .Where(type => type.BaseType != null && type.BaseType.IsGenericType
@@ -34,7 +37,9 @@ namespace RoomM.Model
             {
                 dynamic configurationInstance = Activator.CreateInstance(type);
                 modelBuilder.Configurations.Add(configurationInstance);
-            }  
+            }
+            
+            // modelBuilder.Entity<Room>().Property(m => m.RoomTypeId).IsOptional();  
 
             base.OnModelCreating(modelBuilder);
         }

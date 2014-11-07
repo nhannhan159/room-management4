@@ -16,19 +16,19 @@ namespace RoomM.Repositories.Mapping
             HasKey(t => t.ID);
 
             // property
-            Property(t => t.RoomId).IsRequired();
-            Property(t => t.DeviceId).IsRequired();
+            Property(t => t.RoomId).IsOptional();
+            Property(t => t.DeviceId).IsOptional();
             Property(t => t.Amount).IsRequired();
 
-            //table
+            // table
             ToTable("RoomDevices");
 
             // replationship
-            HasRequired(t => t.Room).WithMany(c => c.RoomDevices)
-                .HasForeignKey(t => t.RoomId).WillCascadeOnDelete(false);
-            HasRequired(t => t.Device).WithMany(c => c.RoomDevices)
-                .HasForeignKey(t => t.DeviceId).WillCascadeOnDelete(false);
-
+            HasOptional(t => t.Room).WithMany(c => c.RoomDevices)
+                .HasForeignKey(t => t.RoomId).WillCascadeOnDelete(true);
+            HasOptional(t => t.Device).WithMany(c => c.RoomDevices)
+                .HasForeignKey(t => t.DeviceId).WillCascadeOnDelete(true);
+            
 
         }
     }
