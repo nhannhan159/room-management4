@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoomM.Models.Rooms
+namespace RoomM.Models.Assets
 {
-    public class RoomCalendarStatus : EntityBase
+    public class HistoryType : EntityBase
     {
         public string Name { get; set; }
-        public virtual ICollection<RoomCalendar> RoomCalendars { get; set; }
+        public virtual ICollection<RoomAssetHistory> AssetHistories { get; set; }
     }
 }

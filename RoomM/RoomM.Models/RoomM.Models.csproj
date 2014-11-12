@@ -50,19 +50,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Devices\DeviceHistoryType.cs" />
-    <Compile Include="Devices\DeviceHistory.cs" />
-    <Compile Include="Devices\Device.cs" />
+    <Compile Include="Assets\DeviceHistoryType.cs" />
+    <Compile Include="Assets\HistoryType.cs" />
+    <Compile Include="Assets\RoomAssetHistory.cs" />
+    <Compile Include="Assets\Asset.cs" />
     <Compile Include="EntityBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rooms\RoomCalendarStatus.cs" />
     <Compile Include="Rooms\RoomCalendar.cs" />
     <Compile Include="Rooms\Room.cs" />
+    <Compile Include="Rooms\RoomAsset.cs" />
     <Compile Include="Rooms\RoomDevice.cs" />
     <Compile Include="Rooms\RoomType.cs" />
-    <Compile Include="Users\CryptorEngine.cs" />
-    <Compile Include="Users\UserType.cs" />
-    <Compile Include="Users\User.cs" />
+    <Compile Include="Staffs\CryptorEngine.cs" />
+    <Compile Include="Staffs\StaffType.cs" />
+    <Compile Include="Staffs\Staff.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

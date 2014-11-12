@@ -1,5 +1,4 @@
-﻿using RoomM.Models.Devices;
-using RoomM.Model.Rooms;
+﻿using RoomM.Model.Rooms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RoomM.Models.Assets;
 
 namespace RoomM.Models.Rooms
 {
@@ -29,8 +29,8 @@ namespace RoomM.Models.Rooms
 
         public Boolean IsUsing { get; set; }
 
-        public virtual ICollection<RoomDevice> RoomDevices { get; set; }
-        public virtual ICollection<DeviceHistory> DeviceHistorys { get; set; }
+        public virtual ICollection<RoomAsset> RoomAssets { get; set; }
+        public virtual ICollection<RoomAssetHistory> AssetHistories { get; set; }
         public virtual ICollection<RoomCalendar> RoomCalendars { get; set; }
 
 

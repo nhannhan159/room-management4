@@ -1,4 +1,4 @@
-﻿using RoomM.Models.Users;
+﻿using RoomM.Models.Staffs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,8 +18,8 @@ namespace RoomM.Models.Rooms
         public Int64 RoomId { get; set; }
         public virtual Room Room { get; set; }
 
-        public Int64 UserId { get; set; }
-        public virtual User User { get; set; }
+        public Int64 StaffId { get; set; }
+        public virtual Staff Staff { get; set; }
 
         public Int64 RoomCalendarStatusId { get; set; }
         public virtual RoomCalendarStatus RoomCalendarStatus { get; set; }
@@ -27,7 +27,7 @@ namespace RoomM.Models.Rooms
 
         public override string ToString()
         {
-            return ID + " #room " + RoomId + " #user " + UserId + " #start " + Start + " #len " + Length + " #cal " + RoomCalendarStatus.Name;
+            return ID + " #room " + RoomId + " #user " + StaffId + " #start " + Start + " #len " + Length + " #cal " + RoomCalendarStatus.Name;
         }
     }
 }

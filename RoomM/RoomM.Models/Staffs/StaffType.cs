@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoomM.Models.Rooms
+namespace RoomM.Models.Staffs
 {
-    public class RoomCalendarStatus : EntityBase
+    public class StaffType : EntityBase
     {
         public string Name { get; set; }
-        public virtual ICollection<RoomCalendar> RoomCalendars { get; set; }
+        public virtual ICollection<Staff> Staffs { get; set; }
     }
 }
