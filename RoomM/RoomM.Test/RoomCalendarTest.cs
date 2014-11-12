@@ -30,7 +30,7 @@ namespace RoomM.Test
                 RoomId = 3,
                 Start = 10,
                 Length = 5,
-                UserId = 1,
+                StaffId = 1,
                 Date = DateTime.Now,
                 RoomCalendarStatusId = 2
             };

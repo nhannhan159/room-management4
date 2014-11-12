@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using RoomM.Model.Rooms;
 using RoomM.Business.Rooms;
-using RoomM.Models.Devices;
+using RoomM.Models.Assets;
 
 namespace RoomM.Test
 {
@@ -13,10 +13,10 @@ namespace RoomM.Test
 
         public void showRoomDeviceList()
         {
-            IList<RoomDevice> lst = RoomDeviceService.GetAll();
+            IList<RoomAsset> lst = RoomAssetService.GetAll();
 
             Console.WriteLine("Room device list:");
-            foreach (RoomDevice rm in lst)
+            foreach (RoomAsset rm in lst)
             {
                 Console.WriteLine(rm.ToString());
             }
@@ -31,7 +31,7 @@ namespace RoomM.Test
             // RoomDeviceService.Add
 
 
-            RoomDevice dl = RoomDeviceService.GetByID(1);
+            RoomAsset dl = RoomAssetService.GetByID(1);
 
 
             Console.WriteLine(dl.ToString());
@@ -40,8 +40,8 @@ namespace RoomM.Test
             dl.Amount = 0;
 
 
-            RoomDeviceService.Delete(dl);
-            RoomDeviceService.Save();
+            RoomAssetService.Delete(dl);
+            RoomAssetService.Save();
 
 
             showRoomDeviceList();
@@ -52,16 +52,16 @@ namespace RoomM.Test
    
         public void AddRoomDeviceTest()
         { 
-            RoomDevice rm = new RoomDevice
+            RoomAsset rm = new RoomAsset
             {
                 RoomId = 1,
-                DeviceId = 1,
+                AssetId = 1,
                 Amount = 150,
             };
 
 
-            RoomDeviceService.Add(rm);
-            RoomDeviceService.Save();
+            RoomAssetService.Add(rm);
+            RoomAssetService.Save();
             showRoomDeviceList();
 
         }
@@ -69,9 +69,9 @@ namespace RoomM.Test
         [TestMethod]
         public void GetByRoomIdTest()
         {
-            IList<RoomDevice> lst = RoomDeviceService.GetByRoomId(1);
+            IList<RoomAsset> lst = RoomAssetService.GetByRoomId(1);
 
-            foreach (RoomDevice rm in lst)
+            foreach (RoomAsset rm in lst)
                 Console.WriteLine(rm.ToString());
         }
 
@@ -79,9 +79,9 @@ namespace RoomM.Test
         [TestMethod]
         public void GetAllDeviceTest()
         {
-            IList<Device> lst = RoomDeviceService.GetAllDevice();
+            IList<Asset> lst = RoomAssetService.GetAllAsset();
 
-            foreach (Device d in lst)
+            foreach (Asset d in lst)
                 Console.WriteLine(d.ToString());
 
         }
