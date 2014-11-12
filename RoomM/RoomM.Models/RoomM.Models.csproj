@@ -50,7 +50,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\DeviceHistoryType.cs" />
     <Compile Include="Assets\HistoryType.cs" />
     <Compile Include="Assets\RoomAssetHistory.cs" />
     <Compile Include="Assets\Asset.cs" />
@@ -60,7 +59,6 @@
     <Compile Include="Rooms\RoomCalendar.cs" />
     <Compile Include="Rooms\Room.cs" />
     <Compile Include="Rooms\RoomAsset.cs" />
-    <Compile Include="Rooms\RoomDevice.cs" />
     <Compile Include="Rooms\RoomType.cs" />
     <Compile Include="Staffs\CryptorEngine.cs" />
     <Compile Include="Staffs\StaffType.cs" />
