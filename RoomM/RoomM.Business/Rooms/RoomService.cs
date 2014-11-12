@@ -1,5 +1,4 @@
 ﻿using RoomM.Models;
-using RoomM.Models.Devices;
 using RoomM.Model.Rooms;
 using RoomM.Model.RepositoryFramework;
 using System;

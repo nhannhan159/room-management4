@@ -1,8 +1,8 @@
 ﻿using RoomM.Model.RepositoryFramework;
 using RoomM.Model.Rooms;
-using RoomM.Models.Devices;
+using RoomM.Models.Assets;
 using RoomM.Models.Rooms;
-using RoomM.Repositories.Devices;
+using RoomM.Repositories.Assets;
 using RoomM.Repositories.Rooms;
 using System;
 using System.Collections.Generic;
@@ -12,37 +12,37 @@ using System.Threading.Tasks;
 
 namespace RoomM.Business.Rooms
 {
-    public class RoomDeviceService
+    public class RoomAssetService
     {
-        public static IRoomDeviceRepository roomDeviceRepo;
-        public static IDeviceRepository deviceRepo;
+        public static IRoomAssetRepository roomDeviceRepo;
+        public static IAssetRepository deviceRepo;
 
-        static RoomDeviceService()
+        static RoomAssetService()
         {
-            roomDeviceRepo = RepositoryFactory.GetRepository<IRoomDeviceRepository, RoomDevice>();
-            deviceRepo = RepositoryFactory.GetRepository<IDeviceRepository, Device>();
+            roomDeviceRepo = RepositoryFactory.GetRepository<IRoomAssetRepository, RoomAsset>();
+            deviceRepo = RepositoryFactory.GetRepository<IAssetRepository, Asset>();
         }
 
         // get all room device list
-        public static IList<RoomDevice> GetAll() 
+        public static IList<RoomAsset> GetAll() 
         {
             return roomDeviceRepo.GetAll();
         }
 
-        public static RoomDevice GetByID(int id)
+        public static RoomAsset GetByID(int id)
         {
             return roomDeviceRepo.GetSingle(id);
         }
 
         // get all room device with room id
-        public static IList<RoomDevice> GetByRoomId(int id)
+        public static IList<RoomAsset> GetByRoomId(int id)
         {
             return roomDeviceRepo.GetByRoomId(id);
         }
 
 
         // get all device exist in store
-        public static IList<Device> GetAllDevice()
+        public static IList<Asset> GetAllAsset()
         {
             return deviceRepo.GetAll();
         }
@@ -53,17 +53,17 @@ namespace RoomM.Business.Rooms
             return deviceRepo.GetNameList();
         }
 
-        public static void Add(RoomDevice roomDevice)
+        public static void Add(RoomAsset roomDevice)
         {
             roomDeviceRepo.Add(roomDevice);
         }
 
-        public static void Edit(RoomDevice roomDevice)
+        public static void Edit(RoomAsset roomDevice)
         {
             roomDeviceRepo.Edit(roomDevice);
         }
 
-        public static void Delete(RoomDevice roomDevice)
+        public static void Delete(RoomAsset roomDevice)
         {
             roomDeviceRepo.Delete(roomDevice);
         }

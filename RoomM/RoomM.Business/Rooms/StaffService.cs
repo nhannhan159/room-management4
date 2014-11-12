@@ -1,6 +1,6 @@
 ﻿using RoomM.Model.RepositoryFramework;
-using RoomM.Models.Users;
-using RoomM.Repositories.Users;
+using RoomM.Models.Staffs;
+using RoomM.Repositories.Staffs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +9,21 @@ using System.Threading.Tasks;
 
 namespace RoomM.Business.Rooms
 {
-    public class UserService
+    public class StaffService
     {
-        private static IUserRepository userRepo;
+        private static IStaffRepository userRepo;
 
-        static UserService()
+        static StaffService()
         {
-            userRepo = RepositoryFactory.GetRepository<IUserRepository, User>();
+            userRepo = RepositoryFactory.GetRepository<IStaffRepository, Staff>();
         }
 
-        public static User GetByID(int id)
+        public static Staff GetByID(int id)
         {
             return userRepo.GetSingle(id);
         }
 
-        public static Boolean CheckPassword(User u, string password)
+        public static Boolean CheckPassword(Staff u, string password)
         {
             return userRepo.CheckPassword(u, password);
         }

@@ -41,9 +41,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rooms\RoomCalendarService.cs" />
-    <Compile Include="Rooms\RoomDeviceService.cs" />
+    <Compile Include="Rooms\RoomAssetService.cs" />
     <Compile Include="Rooms\RoomService.cs" />
-    <Compile Include="Rooms\UserService.cs" />
+    <Compile Include="Rooms\StaffService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RoomM.Models\RoomM.Models.csproj">
