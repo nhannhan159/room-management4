@@ -56,17 +56,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\DeviceRepository.cs" />
-    <Compile Include="Assets\IDeviceRepository.cs" />
-    <Compile Include="Devices\DeviceRepository.cs" />
-    <Compile Include="Devices\IDeviceRepository.cs" />
     <Compile Include="EFDataContext.cs" />
-    <Compile Include="Mapping\DeviceMap.cs" />
     <Compile Include="Mapping\RoomCalendarMap.cs" />
     <Compile Include="Mapping\RoomCalendarStatusMap.cs" />
     <Compile Include="Mapping\RoomAssetMap.cs" />
-    <Compile Include="Mapping\RoomDeviceHistory.cs" />
-    <Compile Include="Mapping\RoomDeviceMap.cs" />
     <Compile Include="Mapping\StaffTypeMap.cs" />
     <Compile Include="Mapping\StaffMap.cs" />
     <Compile Include="Mapping\RoomAssetHistoryMap.cs" />
@@ -85,21 +78,15 @@
     <Compile Include="Rooms\IRoomCalendarRepository.cs" />
     <Compile Include="Rooms\IRoomCalendarStatusRepository.cs" />
     <Compile Include="Rooms\IRoomAssetRepository.cs" />
-    <Compile Include="Rooms\IRoomDeviceRepository.cs" />
     <Compile Include="Rooms\IRoomRepository.cs" />
     <Compile Include="Rooms\IRoomTypeRepository.cs" />
     <Compile Include="Rooms\RoomCalendarRepository.cs" />
     <Compile Include="Rooms\RoomCalendarStatusRepository.cs" />
     <Compile Include="Rooms\RoomAssetRepository.cs" />
-    <Compile Include="Rooms\RoomDeviceRepository.cs" />
     <Compile Include="Rooms\RoomRepository.cs" />
     <Compile Include="Rooms\RoomTypeRepository.cs" />
     <Compile Include="Staffs\IStaffRepository.cs" />
-    <Compile Include="Staffs\IUserRepository.cs" />
     <Compile Include="Staffs\StaffRepository.cs" />
-    <Compile Include="Staffs\UserRepository.cs" />
-    <Compile Include="Users\IUserRepository.cs" />
-    <Compile Include="Users\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
