@@ -1,6 +1,4 @@
-﻿using RoomM.Models.Devices;
-using RoomM.Models.Rooms;
-using RoomM.Models.Users;
+﻿using RoomM.Models.Rooms;
 using RoomM.Model.Rooms;
 using System;
 using System.Collections.Generic;
@@ -8,6 +6,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RoomM.Models.Assets;
+using RoomM.Models.Staffs;
 
 namespace RoomM.Model
 {
@@ -22,11 +22,11 @@ namespace RoomM.Model
             RoomType roomPy = new RoomType { Name = "Thuc hanh li" };
             RoomType roomLi = new RoomType { Name = "Thuc hanh li thuyet" };
 
-            DeviceHistoryType devicehistorytype1 = new DeviceHistoryType { Name = "Chuyen thiet bi" };
-            DeviceHistoryType devicehistorytype2 = new DeviceHistoryType { Name = "Thanh li thiet bi" };
+            HistoryType devicehistorytype1 = new HistoryType { Name = "Chuyen thiet bi" };
+            HistoryType devicehistorytype2 = new HistoryType { Name = "Thanh li thiet bi" };
 
-            UserType usertype1 = new UserType { Name = "Giang vien" };
-            UserType usertype2 = new UserType { Name = "Nhan vien quan li thiet bi" };
+            StaffType usertype1 = new StaffType { Name = "Giang vien" };
+            StaffType usertype2 = new StaffType { Name = "Nhan vien quan li thiet bi" };
 
             RoomCalendarStatus roomcalendarstatus1 = new RoomCalendarStatus { Name = "Cho xac nhan" };
             RoomCalendarStatus roomcalendarstatus2 = new RoomCalendarStatus { Name = "Da dang ki" };
@@ -69,83 +69,83 @@ namespace RoomM.Model
                 RoomType = roomLi
             };
 
-            Device device1 = new Device
+            Asset device1 = new Asset
             {
                 Name = "DV001",
             };
-            Device device2 = new Device
+            Asset device2 = new Asset
             {
                 Name = "DV002",
             };
-            Device device3 = new Device
+            Asset device3 = new Asset
             {
                 Name = "DV003",
             };
-            Device device4 = new Device
+            Asset device4 = new Asset
             {
                 Name = "DV004",
             };
 
 
-            RoomDevice roomD1 = new RoomDevice
+            RoomAsset roomD1 = new RoomAsset
             {
-                Device = device1,
+                Asset = device1,
                 Amount = 10,
                 Room = room1
             };
 
-            RoomDevice roomD2 = new RoomDevice
+            RoomAsset roomD2 = new RoomAsset
             {
-                Device = device3,
+                Asset = device3,
                 Amount = 5,
                 Room = room1
             };
 
-            RoomDevice roomD3 = new RoomDevice
+            RoomAsset roomD3 = new RoomAsset
             {
-                Device = device4,
+                Asset = device4,
                 Amount = 100,
                 Room = room2
             };
 
-            DeviceHistory devicehistory1 = new DeviceHistory
+            RoomAssetHistory devicehistory1 = new RoomAssetHistory
             {
                 Date = new DateTime(2011, 1, 1),
-                DeviceHistoryType = devicehistorytype1,
-                Device = device3,
+                HistoryType = devicehistorytype1,
+                Asset = device3,
                 Room = room6,
             };
-            DeviceHistory devicehistory2 = new DeviceHistory
+            RoomAssetHistory devicehistory2 = new RoomAssetHistory
             {
                 Date = new DateTime(2011, 1, 3),
-                DeviceHistoryType = devicehistorytype1,
-                Device = device1,
+                HistoryType = devicehistorytype1,
+                Asset = device1,
                 Room = room1,
             };
-            DeviceHistory devicehistory3 = new DeviceHistory
+            RoomAssetHistory devicehistory3 = new RoomAssetHistory
             {
                 Date = new DateTime(2011, 1, 5),
-                DeviceHistoryType = devicehistorytype2,
-                Device = device2,
+                HistoryType = devicehistorytype2,
+                Asset = device2,
                 Room = room2,
             };
 
-            User user1 = new User
+            Staff user1 = new Staff
             {
                 Name = "adminname",
                 Sex = false,
                 Phone = "0123456789",
-                UserType = usertype2,
+                StaffType = usertype2,
                 UserName = "admin",
                 PasswordStored = CryptorEngine.Encrypt("admin", true),
                 LastLogin = new DateTime(2011, 1, 5),
             };
-            User user2 = new User
+            Staff user2 = new Staff
             {
                 Name = "user2name",
                 Sex = true,
                 Phone = "0123456790",
-                UserType = usertype1,
+                StaffType = usertype1,
                 UserName = "user",
                 PasswordStored = CryptorEngine.Encrypt("user", true),
                 LastLogin = new DateTime(2011, 1, 7),
@@ -158,7 +158,7 @@ namespace RoomM.Model
                 Length = 2,
                 RoomCalendarStatus = roomcalendarstatus1,
                 Room = room2,
-                User = user2
+                Staff = user2
             };
 
             RoomCalendar roomcalendar2 = new RoomCalendar
@@ -168,7 +168,7 @@ namespace RoomM.Model
                 Length = 2,
                 RoomCalendarStatus = roomcalendarstatus1,
                 Room = room2,
-                User = user2
+                Staff = user2
             };
 
             RoomCalendar roomcalendar3 = new RoomCalendar
@@ -178,7 +178,7 @@ namespace RoomM.Model
                 Length = 3,
                 RoomCalendarStatus = roomcalendarstatus2,
                 Room = room1,
-                User = user1
+                Staff = user1
             };
 
             RoomCalendar roomcalendar4 = new RoomCalendar
@@ -188,7 +188,7 @@ namespace RoomM.Model
                 Length = 4,
                 RoomCalendarStatus = roomcalendarstatus1,
                 Room = room6,
-                User = user2
+                Staff = user2
             };
 
             RoomCalendar roomcalendar5 = new RoomCalendar
@@ -198,7 +198,7 @@ namespace RoomM.Model
                 Length = 2,
                 RoomCalendarStatus = roomcalendarstatus2,
                 Room = room4,
-                User = user1
+                Staff = user1
             };
 
             context.Entry(roomTH).State = EntityState.Added;

@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity.ModelConfiguration;
-using RoomM.Models.Users;
 using System.ComponentModel.DataAnnotations.Schema;
+using RoomM.Models.Assets;
 
 namespace RoomM.Model.Mapping
 {
-    public class UserTypeMap : EntityTypeConfiguration<UserType>
+    public class HistoryTypeMap : EntityTypeConfiguration<HistoryType>
     {
-        public UserTypeMap()
+        public HistoryTypeMap()
         { 
             
             // key 
@@ -22,7 +22,7 @@ namespace RoomM.Model.Mapping
             Property(t => t.Name);
 
             // table
-            ToTable("UserTypes");
+            ToTable("HistoryTypes");
         }
 
     }

@@ -1,16 +1,12 @@
-﻿using RoomM.Model.RepositoryFramework;
-using RoomM.Model.Rooms;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoomM.Repositories.Rooms
+namespace RoomM.Model.Rooms
 {
-    public interface IRoomDeviceRepository : IRepository<RoomDevice>
+    class IRoomDeviceRepository
     {
-        RoomDevice GetSingle(int roomDeviceId);
-        IList<RoomDevice> GetByRoomId(int id);
     }
 }

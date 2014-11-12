@@ -1,5 +1,4 @@
 ﻿using RoomM.Model.Rooms;
-using RoomM.Models.Devices;
 using RoomM.Models.Rooms;
 using System;
 using System.Collections.Generic;
@@ -16,13 +15,13 @@ namespace RoomM.Model
     {
         // connection string:
         private const string connectionString =
-            "Data Source=QUOCVU-PC;Initial Catalog=room_mgr;Integrated Security=True";
+            "Data Source=(LocalDB)\v11.0;Initial Catalog=room_mgr;Integrated Security=True";
         public EFDataContext() : base(connectionString) {
         
         }
 
         public DbSet<Room> Rooms { get; set; }
-        public DbSet<RoomDevice> RoomDevices { get; set; }
+        public DbSet<RoomAsset> RoomDevices { get; set; }
 
 
 

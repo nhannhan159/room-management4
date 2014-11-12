@@ -22,7 +22,7 @@ namespace RoomM.Model.Mapping
             Property(t => t.Start).IsRequired();
             Property(t => t.Length).IsRequired();
             Property(t => t.RoomId).IsOptional(); 
-            Property(t => t.UserId).IsOptional();
+            Property(t => t.StaffId).IsOptional();
             Property(t => t.RoomCalendarStatusId).IsOptional();
 
             // table
@@ -33,8 +33,8 @@ namespace RoomM.Model.Mapping
                 .HasForeignKey(t => t.RoomCalendarStatusId).WillCascadeOnDelete(true);
             HasOptional(t => t.Room).WithMany(c => c.RoomCalendars)
                 .HasForeignKey(t => t.RoomId).WillCascadeOnDelete(true);
-            HasOptional(t => t.User).WithMany(c => c.RoomCalendars)
-                .HasForeignKey(t => t.UserId).WillCascadeOnDelete(true);
+            HasOptional(t => t.Staff).WithMany(c => c.RoomCalendars)
+                .HasForeignKey(t => t.StaffId).WillCascadeOnDelete(true);
         }
 
     }

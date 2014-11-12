@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoomM.Model.Assets
+namespace RoomM.Model.Mapping
 {
-    class DeviceRepository
+    class RoomDeviceHistory
     {
     }
 }

@@ -4,21 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity.ModelConfiguration;
-using RoomM.Models.Users;
 using System.ComponentModel.DataAnnotations.Schema;
+using RoomM.Models.Staffs;
 
 namespace RoomM.Model.Mapping
 {
-    public class UserMap : EntityTypeConfiguration<User>
+    public class StaffMap : EntityTypeConfiguration<Staff>
     {
-        public UserMap()
+        public StaffMap()
         { 
             // key
             HasKey(t => t.ID);
 
             // properties
             Property(t => t.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(t => t.UserTypeId).IsOptional();
+            Property(t => t.StaffTypeId).IsOptional();
             Property(t => t.Name).IsRequired();
             Property(t => t.Sex);
             Property(t => t.Phone);
@@ -28,11 +28,11 @@ namespace RoomM.Model.Mapping
 
 
             // table
-            ToTable("Users");
+            ToTable("Staffs");
 
             // relationship
-            HasOptional(t => t.UserType).WithMany(c => c.Users)
-                .HasForeignKey(t => t.UserTypeId).WillCascadeOnDelete(true);
+            HasOptional(t => t.StaffType).WithMany(c => c.Staffs)
+                .HasForeignKey(t => t.StaffTypeId).WillCascadeOnDelete(true);
 
         }
 

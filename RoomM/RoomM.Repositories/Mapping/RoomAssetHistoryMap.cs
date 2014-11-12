@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity.ModelConfiguration;
-using RoomM.Models.Devices;
 using System.ComponentModel.DataAnnotations.Schema;
+using RoomM.Models.Assets;
 
 namespace RoomM.Model.Mapping
 {
-    public class DeviceHistoryMap : EntityTypeConfiguration<DeviceHistory>
+    public class RoomAssetHistoryMap : EntityTypeConfiguration<RoomAssetHistory>
     {
-        public DeviceHistoryMap()
+        public RoomAssetHistoryMap()
         { 
             // key
             HasKey(t => t.ID);
@@ -19,19 +19,19 @@ namespace RoomM.Model.Mapping
             // properties
             Property(t => t.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Date);
-            Property(t => t.DeviceHistoryTypeId).IsOptional();
-            Property(t => t.DeviceId).IsOptional();
+            Property(t => t.AssetHistoryTypeId).IsOptional();
+            Property(t => t.AssetId).IsOptional();
             Property(t => t.RoomId).IsOptional();
 
             // table
-            ToTable("DeviceHistorys");
+            ToTable("RoomAssetHistorys");
 
             // relationship
-            HasOptional(t => t.DeviceHistoryType).WithMany(c => c.DeviceHistorys)
-                .HasForeignKey(t => t.DeviceHistoryTypeId).WillCascadeOnDelete(true);
-            HasOptional(t => t.Device).WithMany(c => c.DeviceHistorys)
-                .HasForeignKey(t => t.DeviceId).WillCascadeOnDelete(true);
-            HasOptional(t => t.Room).WithMany(c => c.DeviceHistorys)
+            HasOptional(t => t.HistoryType).WithMany(c => c.AssetHistories)
+                .HasForeignKey(t => t.AssetHistoryTypeId).WillCascadeOnDelete(true);
+            HasOptional(t => t.Asset).WithMany(c => c.AssetHistories)
+                .HasForeignKey(t => t.AssetId).WillCascadeOnDelete(true);
+            HasOptional(t => t.Room).WithMany(c => c.AssetHistories)
                 .HasForeignKey(t => t.RoomId).WillCascadeOnDelete(true);
 
         }

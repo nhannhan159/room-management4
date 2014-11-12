@@ -14,11 +14,11 @@ namespace RoomM.Model.RepositoryFramework
             {
                 {"IRoomRepository" , "RoomM.Repositories.Rooms.RoomRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
                 {"IRoomTypeRepository" , "RoomM.Repositories.Rooms.RoomTypeRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
-                {"IRoomDeviceRepository" , "RoomM.Repositories.Rooms.RoomDeviceRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
-                {"IDeviceRepository" , "RoomM.Repositories.Devices.DeviceRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
+                {"IRoomAssetRepository" , "RoomM.Repositories.Rooms.RoomAssetRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
+                {"IAssetRepository" , "RoomM.Repositories.Assets.AssetRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
                 {"IRoomCalendarRepository" , "RoomM.Repositories.Rooms.RoomCalendarRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
                 {"IRoomCalendarStatusRepository" , "RoomM.Repositories.Rooms.RoomCalendarStatusRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
-                {"IUserRepository" , "RoomM.Repositories.Users.UserRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
+                {"IStaffRepository" , "RoomM.Repositories.Staffs.UserRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
             };
 
         public static T GetRepository<T, TEntity>()

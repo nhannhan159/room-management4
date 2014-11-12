@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity.ModelConfiguration;
-using RoomM.Models.Devices;
 using System.ComponentModel.DataAnnotations.Schema;
+using RoomM.Models.Staffs;
 
 namespace RoomM.Model.Mapping
 {
-    public class DeviceHistoryTypeMap : EntityTypeConfiguration<DeviceHistoryType>
+    public class StaffTypeMap : EntityTypeConfiguration<StaffType>
     {
-        public DeviceHistoryTypeMap()
+        public StaffTypeMap()
         { 
             
             // key 
@@ -22,7 +22,7 @@ namespace RoomM.Model.Mapping
             Property(t => t.Name);
 
             // table
-            ToTable("DeviceHistoryTypes");
+            ToTable("StaffTypes");
         }
 
     }
