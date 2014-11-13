@@ -7,6 +7,10 @@
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/Site.css")
         @Scripts.Render("~/bundles/modernizr")
+
+
+        <script type="text/javascript" src="@Url.Content("~/Script/myjs.js")"></script>
+        @RenderSection("JavaScript", required: false);
     </head>
     <body>
         <header>
@@ -25,6 +29,7 @@
                             <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                             <li>@Html.ActionLink("Room", "Index", "Rooms")</li>
                             <li>@Html.ActionLink("Room calendar", "Index", "RoomCalendar")</li>
+                            <li>@Html.ActionLink("UI", "Index", "UI")</li>
                         </ul>
                     </nav>
                 </div>

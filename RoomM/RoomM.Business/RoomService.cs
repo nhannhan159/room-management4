@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using RoomM.Models.Rooms;
 using RoomM.Repositories.Rooms;
 
-namespace RoomM.Business.Rooms
+namespace RoomM.Business
 {
     public partial class RoomService
     {

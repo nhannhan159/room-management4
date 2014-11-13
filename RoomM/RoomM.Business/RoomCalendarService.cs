@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoomM.Business.Rooms
+namespace RoomM.Business
 {
     public class RoomCalendarService
     {

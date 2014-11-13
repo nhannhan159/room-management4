@@ -24,6 +24,7 @@ namespace RoomM.Models.Rooms
         public Int64 RoomCalendarStatusId { get; set; }
         public virtual RoomCalendarStatus RoomCalendarStatus { get; set; }
 
+        public bool IsWatched { get; set; }
 
         public override string ToString()
         {

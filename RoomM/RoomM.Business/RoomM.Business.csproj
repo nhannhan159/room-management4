@@ -40,10 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rooms\RoomCalendarService.cs" />
-    <Compile Include="Rooms\RoomAssetService.cs" />
-    <Compile Include="Rooms\RoomService.cs" />
-    <Compile Include="Rooms\StaffService.cs" />
+    <Compile Include="RoomCalendarService.cs" />
+    <Compile Include="RoomAssetService.cs" />
+    <Compile Include="RoomService.cs" />
+    <Compile Include="StaffService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RoomM.Models\RoomM.Models.csproj">
@@ -54,6 +54,9 @@
       <Project>{61faa63a-110f-42fb-a273-6362f5730e68}</Project>
       <Name>RoomM.Repositories</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Rooms\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

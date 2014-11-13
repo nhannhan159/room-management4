@@ -18,7 +18,7 @@ namespace RoomM.Model.RepositoryFramework
                 {"IAssetRepository" , "RoomM.Repositories.Assets.AssetRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
                 {"IRoomCalendarRepository" , "RoomM.Repositories.Rooms.RoomCalendarRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
                 {"IRoomCalendarStatusRepository" , "RoomM.Repositories.Rooms.RoomCalendarStatusRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
-                {"IStaffRepository" , "RoomM.Repositories.Staffs.UserRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
+                {"IStaffRepository" , "RoomM.Repositories.Staffs.StaffRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
             };
 
         public static T GetRepository<T, TEntity>()

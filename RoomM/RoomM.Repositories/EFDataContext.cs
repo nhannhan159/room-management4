@@ -15,7 +15,7 @@ namespace RoomM.Model
     {
         // connection string:
         private const string connectionString =
-            "Data Source=(LocalDB)\v11.0;Initial Catalog=room_mgr;Integrated Security=True";
+            "Data Source=QUOCVU\\SQLEXPRESS;Initial Catalog=room_mgr;Integrated Security=True";
         public EFDataContext() : base(connectionString) {
         
         }

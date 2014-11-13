@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RoomM.Business.Rooms;
 using RoomM.Models.Staffs;
+using RoomM.Business;
 
 namespace RoomM.Test
 {

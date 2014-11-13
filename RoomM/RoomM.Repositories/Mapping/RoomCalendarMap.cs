@@ -23,6 +23,7 @@ namespace RoomM.Model.Mapping
             Property(t => t.Length).IsRequired();
             Property(t => t.RoomId).IsOptional(); 
             Property(t => t.StaffId).IsOptional();
+            Property(t => t.IsWatched).IsOptional();
             Property(t => t.RoomCalendarStatusId).IsOptional();
 
             // table

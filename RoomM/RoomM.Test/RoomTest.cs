@@ -2,8 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using RoomM.Models.Rooms;
-using RoomM.Business.Rooms;
 using System.Linq;
+using RoomM.Business;
 
 namespace RoomM.Test
 {

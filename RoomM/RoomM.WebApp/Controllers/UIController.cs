@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RoomM.Business;
+using RoomM.Models.Staffs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,9 +13,28 @@ namespace RoomM.WebApp.Controllers
         //
         // GET: /UI/
 
+        
         public ActionResult Index()
         {
-            return View();
+            var data = StaffService.GetByID(1);
+            return View(data);
+        }
+
+
+        [HttpPost]
+        public string ProcessForm(Staff obj)
+        {
+            var data = StaffService.GetByID((int)obj.ID);
+            data.Name = obj.Name;
+            // save to db
+            return "<h2>Staff updated successfully!</h2>";
+        }
+
+
+        [HttpPost]
+        public string ProcessLink()
+        {
+            return "<h2>This is a response from action method!</h2>";
         }
 
         //

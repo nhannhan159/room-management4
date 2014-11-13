@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<RoomM.Models.Rooms.RoomCalendar>
+@{
     ViewBag.Title = "Index";
 }
 
@@ -17,22 +18,27 @@
 
 </div>
 
-<div>
-    @GetType().Name <br/>
-</div>
+<ul>
+@foreach (var item in Model)
+{
+    <li>@item.Room.Name # @item.Start # @item.Length </li>    
+}
+</ul>
+
+
 
 <table width="80%" align="center" >
     <div id="head_nav">
-    <tr>
-        <th>Time</th>
-        <th>Monday</th>
-        <th>Tuesday</th>
-        <th>Wednesday</th>
-        <th>Thrusday</th>
-        <th>Friday</th>
-        <th>Saturday</th>
-    </tr>
-</div>  
+        <tr>
+            <th>Time</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thrusday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+        </tr>
+    </div>  
 
     <tr>
         <th>10:00 - 11:00</th>
@@ -43,19 +49,16 @@
             <td>Chemestry-1</td>
             <td>Alzebra</td>
             <td>Physical</td>
-        </div>
     </tr>
 
     <tr>
         <th>11:00 - 12:00</td>
-        
             <td>Math-2</td>
             <td>Chemestry-2</td>
             <td>Physics-1</td>
             <td>Hindi</td>
             <td>English</td>
             <td>Soft Skill</td>
-        </div>
     </tr>
 
     <tr>

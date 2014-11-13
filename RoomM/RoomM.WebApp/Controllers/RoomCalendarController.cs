@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RoomM.Business;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +11,7 @@ namespace RoomM.WebApp.Controllers
     {
         //
         // GET: /RoomCalendar/
-        public string Index(string name, int number = 100)
+        public ActionResult Index(string name, int number = 100)
         {
             // ViewData.Model = greeting;
             // ViewData.Add("get", "This is get string");
@@ -19,12 +20,13 @@ namespace RoomM.WebApp.Controllers
             ViewData.Add("three", "three value");
             */
 
+            var roomCals = RoomCalendarService.GetAll();
 
-            // ViewResult particalR = View("next");
-            // return View(particalR);
+            ViewResult particalR = View("next");
+            return View(roomCals);
 
 
-            return HttpUtility.HtmlEncode("Hello " + name + ", number: " + number);
+            // return HttpUtility.HtmlEncode("Hello " + name + ", number: " + number);
 
 
         }
