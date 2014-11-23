@@ -1,5 +1,4 @@
 ﻿using RoomM.Models.Rooms;
-using RoomM.Model.Rooms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

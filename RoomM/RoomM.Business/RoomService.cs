@@ -1,6 +1,6 @@
 ﻿using RoomM.Models;
-using RoomM.Model.Rooms;
-using RoomM.Model.RepositoryFramework;
+using RoomM.Models.Rooms;
+using RoomM.Repositories.RepositoryFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;

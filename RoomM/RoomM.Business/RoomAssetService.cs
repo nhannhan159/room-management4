@@ -1,5 +1,4 @@
-﻿using RoomM.Model.RepositoryFramework;
-using RoomM.Model.Rooms;
+﻿using RoomM.Repositories.RepositoryFramework;
 using RoomM.Models.Assets;
 using RoomM.Models.Rooms;
 using RoomM.Repositories.Assets;

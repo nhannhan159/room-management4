@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using RoomM.Models.Assets;
 
-namespace RoomM.Model.Rooms
+namespace RoomM.Models.Rooms
 {
     public class RoomAsset : EntityBase
     {

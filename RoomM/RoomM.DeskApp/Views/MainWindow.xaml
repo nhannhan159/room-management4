@@ -1,0 +1,64 @@
+﻿<Window x:Class="RoomM.DeskApp.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:RoomM.DeskApp.ViewModels"
+        Title="MainWindow" Height="720" Width="1280">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Menu IsMainMenu="True" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="1272">
+            <MenuItem Header="Tập tin"/>
+            <MenuItem Header="Cài đặt"/>
+            <MenuItem Header="Trợ giúp"/>
+        </Menu>
+        <TextBlock HorizontalAlignment="Left" Margin="0,25,0,0" Padding="15,5" TextWrapping="Wrap" VerticalAlignment="Top" Height="27" Width="149" Text="Thực đơn quản lý"/>
+        <TreeView HorizontalAlignment="Left" Height="436" Margin="0,52,0,0" VerticalAlignment="Top" Width="149">
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <Hyperlink Command="{Binding SelectRoomPage0}" TextDecorations="{x:Null}">
+                        <TextBlock Text="Quản lý phòng"/>
+                    </Hyperlink>
+                </TreeViewItem.Header>
+                <TreeViewItem>
+                    <TreeViewItem.Header>
+                        <Hyperlink Command="{Binding SelectRoomPage1}" TextDecorations="{x:Null}">
+                            <TextBlock Text="Lịch đăng ký phòng"/>
+                        </Hyperlink>
+                    </TreeViewItem.Header>
+                </TreeViewItem>
+                <TreeViewItem>
+                    <TreeViewItem.Header>
+                        <Hyperlink Command="{Binding SelectRoomPage2}" TextDecorations="{x:Null}">
+                            <TextBlock Text="Tài sản phòng"/>
+                        </Hyperlink>
+                    </TreeViewItem.Header>
+                </TreeViewItem>
+                <TreeViewItem>
+                    <TreeViewItem.Header>
+                        <Hyperlink Command="{Binding SelectRoomPage3}" TextDecorations="{x:Null}">
+                            <TextBlock Text="Lịch sử tài sản phòng"/>
+                        </Hyperlink>
+                    </TreeViewItem.Header>
+                </TreeViewItem>
+            </TreeViewItem>
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <Hyperlink Command="{Binding SelectAssetPage}" TextDecorations="{x:Null}">
+                        <TextBlock Text="Quản lý tài sản"/>
+                    </Hyperlink>
+                </TreeViewItem.Header>
+            </TreeViewItem>
+            <TreeViewItem>
+                <TreeViewItem.Header>
+                    <Hyperlink Command="{Binding SelectStaffPage}" TextDecorations="{x:Null}">
+                        <TextBlock Text="Quản lý nhân viên"/>
+                    </Hyperlink>
+                </TreeViewItem.Header>
+            </TreeViewItem>
+        </TreeView>
+        <Frame NavigationUIVisibility="Hidden" Content="Frame" HorizontalAlignment="Left" Height="639" Margin="154,25,0,0" VerticalAlignment="Top" Width="1100" Source="{Binding SourcePage}"/>
+        <StatusBar HorizontalAlignment="Left" Height="20" Margin="0,646,0,0" VerticalAlignment="Bottom" Width="1272"/>
+
+    </Grid>
+</Window>

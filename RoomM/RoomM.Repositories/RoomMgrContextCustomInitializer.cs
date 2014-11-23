@@ -1,5 +1,5 @@
 ﻿using RoomM.Models.Rooms;
-using RoomM.Model.Rooms;
+using RoomM.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using RoomM.Models.Assets;
 using RoomM.Models.Staffs;
 
-namespace RoomM.Model
+namespace RoomM.Repositories
 {
     public class RoomMgrContextCustomInitializer : DropCreateDatabaseAlways<EFDataContext>
     {

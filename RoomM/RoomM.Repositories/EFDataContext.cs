@@ -1,5 +1,4 @@
-﻿using RoomM.Model.Rooms;
-using RoomM.Models.Rooms;
+﻿using RoomM.Models.Rooms;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,13 +8,13 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RoomM.Model
+namespace RoomM.Repositories
 {
     public class EFDataContext : DbContext
     {
         // connection string:
         private const string connectionString =
-            "Data Source=QUOCVU\\SQLEXPRESS;Initial Catalog=room_mgr;Integrated Security=True";
+            "Data Source=.\\SQLEXPRESS;Initial Catalog=room_mgr;Integrated Security=True";
         public EFDataContext() : base(connectionString) {
         
         }

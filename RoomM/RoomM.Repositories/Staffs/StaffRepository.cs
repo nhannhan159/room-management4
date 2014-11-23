@@ -1,5 +1,5 @@
-﻿using RoomM.Model;
-using RoomM.Model.RepositoryFramework;
+﻿using RoomM.Models;
+using RoomM.Repositories.RepositoryFramework;
 using RoomM.Models.Staffs;
 using System;
 using System.Collections.Generic;
