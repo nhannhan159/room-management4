@@ -1,0 +1,14 @@
+﻿body {
+}
+
+.free {
+    
+}
+
+.busy {
+    background-color: red;
+}
+
+.selected {
+    background-color: blue;
+}

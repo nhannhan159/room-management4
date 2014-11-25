@@ -1,0 +1,60 @@
+﻿@model IEnumerable<RoomM.Models.Rooms.RoomCalendar>
+
+@{
+    ViewBag.Title = "RoomRegistered";
+    int counter = 0;
+}
+
+<h2>Phòng đã đăng kí</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table width="90%" align="center">
+    <tr>
+        <th>STT</th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Start)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Length)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoomId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoomCalendarStatus)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    counter++;
+    <tr>
+        <th>@counter</th>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Start)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Length)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Room.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RoomCalendarStatus.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Đồng ý", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Hủy", "Details", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

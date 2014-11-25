@@ -45,7 +45,7 @@ namespace RoomM.Business
             return roomTypeNames;
         }
 
-        public static Room GetByID(int id)
+        public static Room GetByID(Int64 id)
         {
             return roomRepo.GetSingle(id);
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Web.WebPages.OAuth;
 using RoomM.WebApp.Models;
+using System.Data.Entity;
 
 namespace RoomM.WebApp
 {
@@ -27,6 +28,7 @@ namespace RoomM.WebApp
             //    appSecret: "");
 
             //OAuthWebSecurity.RegisterGoogleClient();
+
         }
     }
 }

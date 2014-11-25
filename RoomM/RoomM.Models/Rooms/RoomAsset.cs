@@ -13,12 +13,16 @@ namespace RoomM.Models.Rooms
 {
     public class RoomAsset : EntityBase
     {
+        [Display(Name = "Mã phòng")]
         public Int64 RoomId { get; set; }
         public virtual Room Room { get; set; }
 
         public Int64 AssetId { get; set; }
+
+        [Display(Name = "Thiết bị")]
         public virtual Asset Asset { get; set; }
 
+        [Display(Name = "Số lượng")]
         public int Amount { get; set; }
 
 

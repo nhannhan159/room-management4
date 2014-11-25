@@ -16,10 +16,20 @@ namespace RoomM.Repositories.Rooms
         { 
         }
 
-        public Room GetSingle(int roomId)
+        public Room GetSingle(Int64 roomId)
         {
             var query = GetAllWithQuery().SingleOrDefault(x => x.ID == roomId);
             return query;
         }
+
+        public IList<Room> GetByRoomTypeId(long roomTypeId)
+        {
+            return (from p in GetAllWithQuery()
+                    where p.RoomType.ID == roomTypeId
+                    select p).ToList();
+        }
+
+
+        
     }
 }

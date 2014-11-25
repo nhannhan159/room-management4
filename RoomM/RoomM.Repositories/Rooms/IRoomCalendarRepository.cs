@@ -12,6 +12,10 @@ namespace RoomM.Repositories.Rooms
     {
         RoomCalendar GetSingle(int roomCalId);
         IList<RoomCalendar> GetByRoomId(int roomId);
+        IList<RoomCalendar> GetByStaffId(int staffId);
+        IList<RoomCalendar> GetByDate(DateTime date);
+        IList<RoomCalendar> GetByDateAndRoomId(DateTime date, long roomId);
+        IList<RoomCalendar> GetByWeekAndRoomId(DateTime date, long roomId);
 
     }
 }

@@ -50,6 +50,26 @@ namespace RoomM.Business
             return roomCalStatusRepo.GetNameList();
         }
 
+        public static IList<RoomCalendar> GetByStaffId(int id)
+        {
+            return roomCalRepo.GetByStaffId(id);
+        }
+
+        public static IList<RoomCalendar> GetByDate(DateTime date)
+        {
+            return roomCalRepo.GetByDate(date);
+        }
+
+        public static IList<RoomCalendar> GetByDateAndRoomId(DateTime date, long roomId)
+        {
+            return roomCalRepo.GetByDateAndRoomId(date, roomId);
+        }
+
+        public static IList<RoomCalendar> GetByWeekAndRoomId(DateTime date, long roomId)
+        {
+            return roomCalRepo.GetByWeekAndRoomId(date, roomId);
+        }
+
         public static void Add(RoomCalendar rc)
         {
             roomCalRepo.Add(rc);
@@ -76,5 +96,13 @@ namespace RoomM.Business
         {
             roomCalRepo.Save();
         }
+
+
+
+
+
+
+
+        
     }
 }

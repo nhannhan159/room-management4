@@ -172,15 +172,21 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\RoomCalendarController.cs" />
-    <Compile Include="Controllers\RoomsController.cs" />
-    <Compile Include="Controllers\UIController.cs" />
+    <Compile Include="Controllers\RoomAssetsController.cs" />
+    <Compile Include="Controllers\RoomRegisterController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\RoomM\WebAppContext.cs" />
+    <Compile Include="Models\MyDatabaseContext.cs" />
+    <Compile Include="Models\MyDatabaseInit.cs" />
+    <Compile Include="Models\RoomM\JsonRegisterViewModel.cs" />
+    <Compile Include="Models\RoomM\RoomAssetViewModel.cs" />
+    <Compile Include="Models\RoomM\RoomViewModel.cs" />
+    <Compile Include="Models\RoomM\RegisterChangeSelectViewModel.cs" />
+    <Content Include="Content\css\timetable.css" />
+    <Content Include="Images\delete.png" />
     <Content Include="Scripts\myjs.js" />
   </ItemGroup>
   <ItemGroup>
@@ -256,7 +262,9 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\SomeScript.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -295,14 +303,17 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Rooms\Index.cshtml" />
-    <Content Include="Views\Rooms\Details.cshtml" />
-    <Content Include="Views\RoomCalendar\Index.cshtml" />
-    <Content Include="Views\RoomCalendar\next.cshtml" />
-    <Content Include="Views\RoomCalendar\Edit.cshtml" />
-    <Content Include="Views\Rooms\Edit.cshtml" />
-    <Content Include="Views\Rooms\Delete.cshtml" />
-    <Content Include="Views\UI\Index.cshtml" />
+    <Content Include="Views\RoomRegister\RegisterByStaff.cshtml" />
+    <Content Include="Views\RoomRegister\Index.cshtml" />
+    <Content Include="Views\RoomRegister\Create.cshtml" />
+    <Content Include="Views\RoomRegister\RoomRegistered.cshtml" />
+    <Content Include="Views\RoomRegister\HistoryRegistered.cshtml" />
+    <Content Include="Views\Account\RoleCreate.cshtml" />
+    <Content Include="Views\Account\RoleIndex.cshtml" />
+    <Content Include="Views\Account\RoleDelete.cshtml" />
+    <Content Include="Views\Account\RoleAddToUser.cshtml" />
+    <Content Include="Views\Account\DeleteRoleForUser.cshtml" />
+    <Content Include="Views\RoomAssets\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -319,6 +330,10 @@
     <ProjectReference Include="..\RoomM.Models\RoomM.Models.csproj">
       <Project>{a2cd9ea0-9e0c-4b0a-87f5-9baddc4f9422}</Project>
       <Name>RoomM.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RoomM.Repositories\RoomM.Repositories.csproj">
+      <Project>{61faa63a-110f-42fb-a273-6362f5730e68}</Project>
+      <Name>RoomM.Repositories</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

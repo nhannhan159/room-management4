@@ -2,21 +2,18 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+        <title>@ViewBag.Title</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/Site.css")
+        @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
-
-
-        <script type="text/javascript" src="@Url.Content("~/Script/myjs.js")"></script>
-        @RenderSection("JavaScript", required: false);
+        @RenderSection("styles", false)
     </head>
     <body>
         <header>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("Room Management", "Index", "Home")</p>
+                    <p class="site-title">@Html.ActionLink("RoomMOn", "Index", "Home")</p>
                 </div>
                 <div class="float-right">
                     <section id="login">
@@ -24,12 +21,22 @@
                     </section>
                     <nav>
                         <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li>@Html.ActionLink("Room", "Index", "Rooms")</li>
-                            <li>@Html.ActionLink("Room calendar", "Index", "RoomCalendar")</li>
-                            <li>@Html.ActionLink("UI", "Index", "UI")</li>
+                            <li>@Html.ActionLink("Lịch phòng", "Index", "RoomRegister")
+                            @if (Roles.IsUserInRole("Manager")) {
+                                <li>@Html.ActionLink("Thiết bị phòng", "Index", "RoomAssets")</li>
+                            }
+                            @if (Roles.IsUserInRole("Teacher")) {
+                                <li>@Html.ActionLink("Đăng kí phòng", "Create", "RoomRegister")</li>
+                                <li> @Html.ActionLink("Phòng đã đăng kí", "RoomRegistered", "RoomRegister")</li>
+                                <li>@Html.ActionLink("Lịch sử đăng kí", "HistoryRegistered", "RoomRegister")</li>
+                            }
+                            @if (Roles.IsUserInRole("Admin")) {
+                                <li>@Html.ActionLink("Quản lí quyền", "RoleIndex", "Account")</li>
+                                <li>@Html.ActionLink("Gán quyền", "RoleAddToUser", "Account")</li>
+                            } else {
+                                <li>@Html.ActionLink("Thông tin", "About", "Home")</li>
+                                <li>@Html.ActionLink("Liên hệ", "Contact", "Home")</li>
+                            }
                         </ul>
                     </nav>
                 </div>

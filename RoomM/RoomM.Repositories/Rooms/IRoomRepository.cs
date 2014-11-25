@@ -10,7 +10,8 @@ namespace RoomM.Repositories.Rooms
 {
     public interface IRoomRepository : IRepository<Room>
     {
-        Room GetSingle(int roomId);
+        Room GetSingle(Int64 roomId);
+        IList<Room> GetByRoomTypeId(Int64 roomTypeId);
 
     }
 }
