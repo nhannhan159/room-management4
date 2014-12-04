@@ -13,8 +13,8 @@
     <Grid Margin="20,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400"/>
-            <ColumnDefinition Width="30"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="570"/>
             <ColumnDefinition Width="80"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
@@ -79,6 +79,7 @@
                             <RowDefinition Height="30"/>
                             <RowDefinition Height="170"/>
                             <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
@@ -93,11 +94,13 @@
                         <Label Grid.Row="0" Grid.Column="0" Content="Tên phòng:" HorizontalAlignment="Left"/>
                         <Label Grid.Row="1" Grid.Column="0" Content="Ngày tạo:" HorizontalAlignment="Left"/>
                         <Label Grid.Row="2" Grid.Column="0" Content="Loại phòng:" HorizontalAlignment="Left"/>
-                        <Label Grid.Row="3" Grid.Column="0" Content="Mô tả:" HorizontalAlignment="Left"/>
+                        <Label Grid.Row="3" Grid.Column="0" Content="Tình trạng:" HorizontalAlignment="Left"/>
+                        <Label Grid.Row="4" Grid.Column="0" Content="Mô tả:" HorizontalAlignment="Left"/>
                         <TextBox Grid.Row="0" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="250"/>
                         <Calendar Grid.Row="1" Grid.Column="1" Margin="0,0,0,0" HorizontalAlignment="Left" Width="250" />
                         <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="250"/>
-                        <RichTextBox Grid.Row="3" Grid.Column="1" Grid.RowSpan="5" HorizontalAlignment="Left" Width="340"/>
+                        <ComboBox Grid.Row="3" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="250"/>
+                        <RichTextBox Grid.Row="4" Grid.Column="1" Grid.RowSpan="5" HorizontalAlignment="Left" Width="340"/>
                         
                     </Grid>
                 </TabItem>
