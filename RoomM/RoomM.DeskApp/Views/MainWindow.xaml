@@ -7,63 +7,61 @@
         <local:MainWindowViewModel />
     </Window.DataContext>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="5*"/>
-            <ColumnDefinition Width="42*"/>
-            <ColumnDefinition Width="377*"/>
-        </Grid.ColumnDefinitions>
-        <Menu IsMainMenu="True" FontSize="12pt" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="1272" Grid.ColumnSpan="3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" IsMainMenu="True" FontSize="12pt" HorizontalAlignment="Left" VerticalAlignment="Top">
             <MenuItem Header="Tập tin"/>
             <MenuItem Header="Cài đặt"/>
             <MenuItem Header="Trợ giúp"/>
         </Menu>
-        <TextBlock HorizontalAlignment="Left" Margin="0,38,0,0" Padding="15,5" FontSize="18pt" FontWeight="Bold" TextWrapping="Wrap" VerticalAlignment="Top" Height="45" Width="240" Text="Thực đơn quản lý" Grid.ColumnSpan="3"/>
-        <TreeView HorizontalAlignment="Left" Height="576" Margin="0,88,0,0" VerticalAlignment="Top" Width="240" FontSize="15pt" Grid.ColumnSpan="3">
-            <TreeViewItem>
-                <TreeViewItem.Header>
-                    <Hyperlink Command="{Binding SelectRoomPage0}" TextDecorations="{x:Null}">
-                        <TextBlock Text="Quản lý phòng"/>
-                    </Hyperlink>
-                </TreeViewItem.Header>
-                <TreeViewItem>
-                    <TreeViewItem.Header>
-                        <Hyperlink Command="{Binding SelectRoomPage1}" TextDecorations="{x:Null}">
-                            <TextBlock Text="Lịch đăng ký phòng"/>
-                        </Hyperlink>
-                    </TreeViewItem.Header>
-                </TreeViewItem>
-                <TreeViewItem>
-                    <TreeViewItem.Header>
-                        <Hyperlink Command="{Binding SelectRoomPage2}" TextDecorations="{x:Null}">
-                            <TextBlock Text="Tài sản phòng"/>
-                        </Hyperlink>
-                    </TreeViewItem.Header>
-                </TreeViewItem>
-                <TreeViewItem>
-                    <TreeViewItem.Header>
-                        <Hyperlink Command="{Binding SelectRoomPage3}" TextDecorations="{x:Null}">
-                            <TextBlock Text="Lịch sử tài sản phòng"/>
-                        </Hyperlink>
-                    </TreeViewItem.Header>
-                </TreeViewItem>
-            </TreeViewItem>
-            <TreeViewItem>
-                <TreeViewItem.Header>
-                    <Hyperlink Command="{Binding SelectAssetPage}" TextDecorations="{x:Null}">
-                        <TextBlock Text="Quản lý tài sản"/>
-                    </Hyperlink>
-                </TreeViewItem.Header>
-            </TreeViewItem>
-            <TreeViewItem>
-                <TreeViewItem.Header>
-                    <Hyperlink Command="{Binding SelectStaffPage}" TextDecorations="{x:Null}">
-                        <TextBlock Text="Quản lý nhân viên"/>
-                    </Hyperlink>
-                </TreeViewItem.Header>
-            </TreeViewItem>
-        </TreeView>
-        <Frame NavigationUIVisibility="Hidden" Content="Frame" HorizontalAlignment="Left" Height="631" Margin="104,33,0,0" VerticalAlignment="Top" Width="1009" Source="{Binding SourcePage}" Grid.Column="2"/>
-        <StatusBar HorizontalAlignment="Left" Height="20" VerticalAlignment="Bottom" Width="1272" Grid.ColumnSpan="3"/>
+        <TabControl Grid.Row="1" TabStripPlacement="Left">
+            <TabItem IsEnabled="False">
+                <TabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="Thực đơn" FontSize="18pt" FontWeight="Bold" />
+                        </StackPanel>
+                    </DataTemplate>
+                </TabItem.HeaderTemplate>
+            </TabItem>
+            <TabItem Selector.IsSelected="True">
+                <TabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Source="/Icon/icon-room.png"/>
+                            <TextBlock Text="Quản lý phòng"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabItem.HeaderTemplate>
+                <Frame NavigationUIVisibility="Hidden" Content="Frame" Margin="5" Source="RoomManagement.xaml" Grid.Column="2"/>
+            </TabItem>
+            <TabItem>
+                <TabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Source="/Icon/icon-asset.png"/>
+                            <TextBlock Text="Quản lý tài sản"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabItem.HeaderTemplate>
+                <Frame NavigationUIVisibility="Hidden" Content="Frame" Margin="5" Source="AssetManagement.xaml" Grid.Column="2"/>
+            </TabItem>
+            <TabItem>
+                <TabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <Image Source="/Icon/icon-staff.png"/>
+                            <TextBlock Text="Quản lý nhân viên"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </TabItem.HeaderTemplate>
+                <Frame NavigationUIVisibility="Hidden" Content="Frame" Margin="5" Source="StaffManagement.xaml" Grid.Column="2"/>
+            </TabItem>
+        </TabControl>
+        <StatusBar Grid.Row="2" />
 
     </Grid>
 </Window>
