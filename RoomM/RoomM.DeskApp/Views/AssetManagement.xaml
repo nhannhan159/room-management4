@@ -24,7 +24,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="Danh sách thiết bị" Margin="5" FontSize="15"/>
+            <TextBlock Grid.Row="0" Text="Danh sách tài sản" Height="27" Padding="5" VerticalAlignment="Top" FontSize="15" Background="LightGray" FontWeight="Bold"/>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -45,7 +45,7 @@
             </Grid>
             <DataGrid Grid.Row="2" VerticalAlignment="Top" Margin="0,7,0,0" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Tên thiết bị" Width="80" Binding="{Binding Name}"/>
+                    <DataGridTextColumn Header="Tên tài sản" Width="80" Binding="{Binding Name}"/>
                     <DataGridTextColumn Header="Số lượng" Width="100"/>
                     <DataGridTextColumn Header="Tình trạng" Width="110" Binding="{Binding RoomTypeId}"/>
                     <DataGridTemplateColumn Width="*" Header="Hành động">
@@ -71,13 +71,13 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <WrapPanel Grid.Row="0" Margin="10,0,10,2">
-                <TextBlock Text="Thiết bị" Padding="5" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
-                <TextBlock Text="111" Padding="5" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
+            <WrapPanel Grid.Row="0" Height="27" VerticalAlignment="Top" Background="LightGray">
+                <TextBlock Text="Tài sản" Padding="5" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
+                <TextBlock Text="111" Padding="5" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
             </WrapPanel>
             <Grid Grid.Row="1" Background="#FFE5E5E5">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="200"/>
+                    <RowDefinition Height="170"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -113,31 +113,26 @@
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
-                            <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="110"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Chuyển vào" Margin="3" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15"/>
-                        <Label Grid.Row="1" Grid.Column="0" Content="Từ phòng:" HorizontalAlignment="Left"/>
-                        <Label Grid.Row="2" Grid.Column="0" Content="Số lượng hiện có:" HorizontalAlignment="Left"/>
-                        <Label Grid.Row="3" Grid.Column="0" Content="Số lượng chuyển:" HorizontalAlignment="Left"/>
+                        <Label Grid.Row="1" Grid.Column="0" Content="Đến phòng:" HorizontalAlignment="Left"/>
+                        <Label Grid.Row="2" Grid.Column="0" Content="Số lượng chuyển:" HorizontalAlignment="Left"/>
                         <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="140"/>
                         <TextBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="140"/>
-                        <TextBox Grid.Row="3" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="140"/>
-                        <Button Grid.Row="4" Grid.ColumnSpan="2" Content="Chuyển vào" HorizontalAlignment="Center" Height="25" Width="120"/>
+                        <Button Grid.Row="3" Grid.ColumnSpan="2" Content="Chuyển vào" HorizontalAlignment="Center" Height="25" Width="120"/>
                     </Grid>
                 </Border>
-                <Border Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" BorderBrush="Black" BorderThickness="2" Background="WhiteSmoke" Margin="5" Height="270">
+                <Border Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" BorderBrush="Black" BorderThickness="2" Background="WhiteSmoke" Margin="5" Height="225">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
                             <RowDefinition Height="90"/>
-                            <RowDefinition Height="125"/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Chuyển đi" Margin="3" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15"/>
-                        <Grid Grid.Row="1">
+                        <Grid Grid.Row="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="30"/>
                                 <RowDefinition/>
@@ -147,12 +142,12 @@
                                 <ColumnDefinition Width="110"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Chuyển đến hư không" Margin="3" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="13"/>
+                            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Chuyển đi" Margin="3" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15"/>
                             <Label Grid.Row="1" Grid.Column="0" Content="Số lượng chuyển:" HorizontalAlignment="Left"/>
                             <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="140"/>
-                            <Button Grid.Row="4" Grid.ColumnSpan="2" Content="Chuyển đi 1" HorizontalAlignment="Center" Height="25" Width="120"/>
+                            <Button Grid.Row="4" Grid.ColumnSpan="2" Content="Chuyển đi" HorizontalAlignment="Center" Height="25" Width="120"/>
                         </Grid>
-                        <Grid Grid.Row="2">
+                        <Grid Grid.Row="1" Margin="0,10,0,0">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="30"/>
                                 <RowDefinition/>
@@ -163,17 +158,18 @@
                                 <ColumnDefinition Width="110"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Chuyển đến phòng khác" Margin="3" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="13"/>
+                            <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Chuyển đến phòng khác" Margin="3" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15"/>
                             <Label Grid.Row="1" Grid.Column="0" Content="Đến phòng:" HorizontalAlignment="Left"/>
                             <Label Grid.Row="2" Grid.Column="0" Content="Số lượng chuyển:" HorizontalAlignment="Left"/>
                             <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="140"/>
                             <TextBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="140"/>
-                            <Button Grid.Row="3" Grid.ColumnSpan="2" Content="Chuyển đi 2" HorizontalAlignment="Center" Height="25" Width="120"/>
+                            <Button Grid.Row="3" Grid.ColumnSpan="2" Content="Chuyển đến p. khác" HorizontalAlignment="Center" Height="25" Width="120"/>
                         </Grid>
                     </Grid>
                 </Border>
             </Grid>
         </Grid>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Center" Width="2" Background="LightGray"/>
 
     </Grid>
 </Page>

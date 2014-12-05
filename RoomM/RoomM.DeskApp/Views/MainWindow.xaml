@@ -6,15 +6,14 @@
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
-    <Grid>
+    <Grid Background="WhiteSmoke">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" IsMainMenu="True" FontSize="12pt" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <MenuItem Header="Tập tin"/>
-            <MenuItem Header="Cài đặt"/>
+        <Menu Grid.Row="0" IsMainMenu="True" FontSize="12pt" HorizontalAlignment="Left" VerticalAlignment="Top" Background="WhiteSmoke">
+            <MenuItem Header="Tài khoản"/>
             <MenuItem Header="Trợ giúp"/>
         </Menu>
         <TabControl Grid.Row="1" TabStripPlacement="Left">
@@ -22,7 +21,7 @@
                 <TabItem.HeaderTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock Text="Thực đơn" FontSize="18pt" FontWeight="Bold" />
+                            <TextBlock Text="Thực đơn" FontSize="18pt" FontWeight="Bold"/>
                         </StackPanel>
                     </DataTemplate>
                 </TabItem.HeaderTemplate>
@@ -61,7 +60,7 @@
                 <Frame NavigationUIVisibility="Hidden" Content="Frame" Margin="5" Source="StaffManagement.xaml" Grid.Column="2"/>
             </TabItem>
         </TabControl>
-        <StatusBar Grid.Row="2" />
+        <StatusBar Grid.Row="2"/>
 
     </Grid>
 </Window>

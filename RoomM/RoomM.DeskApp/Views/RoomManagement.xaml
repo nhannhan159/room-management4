@@ -24,7 +24,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="Danh sách phòng" Margin="5" FontSize="15"/>
+            <TextBlock Grid.Row="0" Text="Danh sách phòng" Height="27" Padding="5" VerticalAlignment="Top" FontSize="15" Background="LightGray" FontWeight="Bold"/>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -68,9 +68,9 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
-            <WrapPanel Grid.Row="0" Margin="10,0,10,2">
-                <TextBlock Text="Phòng" Padding="5" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
-                <TextBlock Text="111" Padding="5" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15"/>
+            <WrapPanel Grid.Row="0" Height="27" VerticalAlignment="Top" Background="LightGray">
+                <TextBlock Text="Phòng" Padding="5" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
+                <TextBlock Text="111" Padding="5" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
             </WrapPanel> 
             <TabControl Grid.Row="1" Margin="0,10,0,5">
                 <TabItem Header="Thông tin phòng" Width="110">
@@ -275,6 +275,6 @@
             </TabControl>
             <Button Grid.Row="2" Content="Lưu thay đổi" Height="25" Width="120"/>
         </Grid>
-        
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Center" Width="2" Background="LightGray"/>
     </Grid>
 </Page>
