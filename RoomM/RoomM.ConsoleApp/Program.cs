@@ -13,11 +13,9 @@ namespace RoomM.ConsoleApp
     {
         static void Main(string[] args)
         {
-            RoomAsset dl = RoomAssetService.GetByID(1);
-            Console.WriteLine(dl.ToString());
-            dl.Amount = 0;
-            RoomAssetService.Edit(dl);
-            RoomAssetService.Save();
+            AssetsReportToExcel reportDemo = new AssetsReportToExcel("sgu university", "roomM", "templates/book1.xls");
+            reportDemo.setupExport();
+            reportDemo.save("reports/myreport.xls");
         }
     }
 }

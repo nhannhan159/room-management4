@@ -15,6 +15,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomM.ConsoleApp", "RoomM.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoomM.DeskApp", "RoomM.DeskApp\RoomM.DeskApp.csproj", "{43B13507-686D-4D50-B207-3135877386C8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{606C1545-BFE0-4F8D-8CEE-EBE67D58511E}"
+	ProjectSection(SolutionItems) = preProject
+		Libs\Ionic.Zip.dll = Libs\Ionic.Zip.dll
+		Libs\NPOI.dll = Libs\NPOI.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
