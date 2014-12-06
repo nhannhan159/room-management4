@@ -2,7 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:RoomM.DeskApp.ViewModels"
-        Title="Quản lý phòng học" Height="720" Width="1280">
+        Title="Quản lý phòng học" 
+        Icon="/Icon/icon-cat.png"
+        Height="720" Width="1280">
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
