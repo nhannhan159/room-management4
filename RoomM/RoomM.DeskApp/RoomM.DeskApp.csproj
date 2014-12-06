@@ -72,6 +72,12 @@
     <Compile Include="Views\AssetManagement.xaml.cs">
       <DependentUpon>AssetManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewAsset.xaml.cs">
+      <DependentUpon>NewAsset.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NewRoom.xaml.cs">
+      <DependentUpon>NewRoom.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RoomManagement.xaml.cs">
       <DependentUpon>RoomManagement.xaml</DependentUpon>
     </Compile>
@@ -81,6 +87,14 @@
     <Page Include="Views\AssetManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewAsset.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\NewRoom.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -159,6 +173,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\icon-redo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\icon-clipboard.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

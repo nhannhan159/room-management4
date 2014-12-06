@@ -18,11 +18,12 @@ namespace RoomM.DeskApp.Views
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class NewAsset : Window
     {
-        public MainWindow()
+        public NewAsset()
         {
             InitializeComponent();
         }
+
     }
 }

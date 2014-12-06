@@ -1,18 +1,21 @@
 ﻿using RoomM.DeskApp.UIHelper;
 using RoomM.Models.Rooms;
 using RoomM.Business;
+using RoomM.DeskApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace RoomM.DeskApp.ViewModels
 {
     class RoomManagementViewModel : EditableViewModel<Room>
     {
-        public RoomManagementViewModel() : base() 
-        { 
+        public RoomManagementViewModel()
+            : base()
+        {
         }
 
         protected override List<Room> GetEntitiesList()
@@ -62,6 +65,17 @@ namespace RoomM.DeskApp.ViewModels
                         return bt.Mota.Contains(Filter) || bt.Xe.ToString().Contains(Filter);
                 }
             }*/
+        }
+
+        public ICommand NewRoomCommand { get { return new RelayCommand(newRoomCommand, canExecute); } }
+        private void newRoomCommand()
+        {
+            var newRoom = new NewRoom();
+            newRoom.ShowDialog();
+        }
+        private bool canExecute()
+        {
+            return true;
         }
     }
 }
