@@ -212,8 +212,9 @@ namespace RoomM.WebApp.Controllers
             foreach (RoomCalendar rc in calInWeek)
             {
                 int dayOfWeek = (int)rc.Date.DayOfWeek;
+                if (dayOfWeek == 0) dayOfWeek = 7;
 
-                for (int i = rc.Start; i <= rc.Start + rc.Length; ++i)
+                for (int i = rc.Start; i <= rc.Start + rc.Length - 1; ++i)
                 {
                     timeTblList[i][dayOfWeek] = 1;
                 }

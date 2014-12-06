@@ -69,56 +69,51 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>RoomCalendar</legend>
-
-        <div class="editor-label">
+    <div class="form-register">
+        <div class="form-title">
             @Html.LabelFor(model => model.RoomId)
         </div>
-        <div class="editor-field">
-            @Html.DropDownList("RoomId", "- chọn một -")
+        <div class="form-value">
+            @Html.DropDownList("RoomId")
             @Html.ValidationMessageFor(model => model.RoomId)
         </div>
-        <div class="both"></div>
 
-        <div class="editor-label">
+        
+        <div class="form-title">
             @Html.LabelFor(model => model.Date)
         </div>
-        <div class="editor-field">
+        <div class="form-value">
             @Html.EditorFor(model => model.Date, DateTime.Now.ToShortDateString())
             @Html.ValidationMessageFor(model => model.Date)
         </div>
+
         <div class="both"></div>
 
-        <div class="editor-label">
+
+        <div class="form-title">
             @Html.LabelFor(model => model.Start)
         </div>
-        <div class="editor-field">
+        <div class="form-value">
             @Html.DropDownList("StartDump", "- chọn một -")
             @Html.ValidationMessageFor(model => model.Start)
             @Html.Hidden("Start")
         </div>
-        <div class="both"></div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Length)
+        <div class="form-title">
+             @Html.LabelFor(model => model.Length)
         </div>
-        <div class="editor-field">
+        <div class="form-value">
             @Html.DropDownList("Length", "- chọn một -")
             @Html.ValidationMessageFor(model => model.Length)
         </div>
+
         <div class="both"></div>
-
-        <p>
-            <input type="submit" value="Create" class="carrot-flat-button" />
+        <p class="form-submit">
+            <input id="submit-button" type="submit" value="Lưu đăng kí" class="carrot-flat-button" />
         </p>
-    </fieldset>
+
+    </div>
 }
-
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -136,9 +131,17 @@
 
 
             function buildLenghSelector(maxFree) {
+                
+
+                console.log("Goo: " + maxFree);
                 var opsForLength = "";
-                for (var i = 1; i <= maxFree; ++i) {
-                    opsForLength += '<option value="' + i + '">' + i + '</option>';
+
+                if (maxFree > 0) {
+                    for (var i = 1; i <= maxFree; ++i) {
+                        opsForLength += '<option value="' + i + '">' + i + '</option>';
+                    }
+                } else {
+                    opsForLength = '<option value="0">bận</option>';
                 }
 
                 $("#Length").html(opsForLength);
@@ -206,12 +209,21 @@
 
                         var opsForLength = "";
 
-                        $.each(data.StartList, function (i, val) {
-                            opsForLength += '<option value="' + val.ID + '">' + val.Value + '</option>';
-                        });
+                        if (data.StartList.length > 0) {
 
-                        $('#StartDump').html(opsForLength);
-                        $('#StartDump').val(data.StartList[0].ID);
+                            $.each(data.StartList, function (i, val) {
+                                opsForLength += '<option value="' + val.ID + '">' + val.Value + '</option>';
+                            });
+
+                            $('#StartDump').html(opsForLength);
+                            $('#StartDump').val(data.StartList[0].ID);
+                        } else {
+                            opsForLength = '<option value="0_0">bận</option>';
+                            $('#StartDump').html(opsForLength);
+                            $('#StartDump').val("0_0");
+                        }
+
+                        
 
                         // set value for start 
                         $('#Start').val($('#StartDump').val().split("_", 2)[0]);
@@ -224,6 +236,17 @@
 
                         // build time table
                         buildTimeTable(data.TimeTableList);
+
+
+                        // disable submit button
+                        $('#submit-button').attr('disabled', data.StartList.length == 0);
+
+                        if (data.StartList.length == 0)
+                            $("#submit-button").attr('class', 'asbestos-flat-button');
+                        else
+                            $("#submit-button").attr('class', 'carrot-flat-button');
+                        
+
 
                         // update start and end day
                         $('#startDay').html(data.StartDay);
@@ -252,7 +275,7 @@
                 updatePage(date, roomId);
 
                 // update title
-                $('#title').html('Thoi gian bieu cua phong ' + $('#RoomId option:selected').text());
+                $('#title').html('Thời gian biểu của phòng ' + $('#RoomId option:selected').text());
             });
 
             $('#Date').change(function () {

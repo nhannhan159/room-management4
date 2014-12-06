@@ -30,6 +30,14 @@ namespace RoomM.Repositories.Rooms
         }
 
 
-        
+
+
+
+        public IList<Room> GetRoomListLimitByRegister(int limit)
+        {
+            return (from p in GetAllWithQuery()
+                    orderby p.RoomCalendars.Count descending
+                    select p).Take(limit).ToList();
+        }
     }
 }

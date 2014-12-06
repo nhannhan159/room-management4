@@ -69,8 +69,8 @@
                             <TextBlock Text="Thống kê" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </DataTemplate>
-                </TabItem.HeaderTemplate>
-                <Frame NavigationUIVisibility="Hidden" Content="Frame" Margin="5" Grid.Column="2"/>
+                </TabItem.HeaderTemplate> 
+                <Frame NavigationUIVisibility="Hidden" Content="Frame" Margin="5" Grid.Column="2" Source="Statistic.xaml"/>
             </TabItem>
         </TabControl>
         <StatusBar Grid.Row="2"/>

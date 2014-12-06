@@ -34,5 +34,13 @@ namespace RoomM.Repositories.Staffs
                     where p.UserName.Equals(username)
                     select p).ToList().Count != 0;
         }
+
+
+        public IList<Staff> GetStaffLimitByRegister(int limit)
+        {
+            return (from p in GetAllWithQuery()
+                    orderby p.RoomCalendars.Count descending
+                    select p).Take(limit).ToList();
+        }
     }
 }

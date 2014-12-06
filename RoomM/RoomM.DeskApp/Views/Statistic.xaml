@@ -1,0 +1,36 @@
+﻿<Page x:Class="RoomM.DeskApp.Views.Statictis"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="639" d:DesignWidth="1100"
+      xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+	  Title="Statictis">
+
+    <Grid>
+        <TabControl Margin="-10,10,10,5">
+            <TabItem Header="Tần xuất đăng kí phòng" Width="200">
+                <chartingToolkit:Chart Height="519" 
+		            Margin="42,0,43,41" Name="fregisterChart" Title="Tần xuất đăng kí phòng" 
+		            VerticalAlignment="Bottom">
+                    <chartingToolkit:ColumnSeries DependentValuePath="Value" 
+		        IndependentValuePath="Key" ItemsSource="{Binding}" Title="So lan dang ki" />
+                </chartingToolkit:Chart>
+            </TabItem>
+            <TabItem Header="Tần xuất phòng sử dụng" Width="200">
+                <chartingToolkit:Chart Height="519" 
+		            Margin="42,0,43,41" Name="fusingChart" Title="Tần xuất đăng kí phòng" 
+		            VerticalAlignment="Bottom">
+                    <chartingToolkit:ColumnSeries DependentValuePath="Value" 
+		        IndependentValuePath="Key" ItemsSource="{Binding}" Title="So lan dang ki" />
+                </chartingToolkit:Chart>
+            </TabItem>
+        </TabControl>
+
+
+
+
+
+    </Grid>
+</Page>

@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{606C1545-B
 	ProjectSection(SolutionItems) = preProject
 		Libs\Ionic.Zip.dll = Libs\Ionic.Zip.dll
 		Libs\NPOI.dll = Libs\NPOI.dll
+		Libs\System.Windows.Controls.DataVisualization.Toolkit.dll = Libs\System.Windows.Controls.DataVisualization.Toolkit.dll
 	EndProjectSection
 EndProject
 Global

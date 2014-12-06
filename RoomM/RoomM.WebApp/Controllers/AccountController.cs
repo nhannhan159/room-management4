@@ -10,6 +10,9 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using RoomM.WebApp.Filters;
 using RoomM.WebApp.Models;
+using RoomM.Repositories.Staffs;
+using RoomM.Repositories.RepositoryFramework;
+using RoomM.Models.Staffs;
 
 namespace RoomM.WebApp.Controllers
 {
@@ -17,6 +20,9 @@ namespace RoomM.WebApp.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+
+        IStaffRepository staffRep = RepositoryFactory.GetRepository<IStaffRepository, Staff>();
+
         //
         // GET: /Account/Login
 
@@ -81,6 +87,24 @@ namespace RoomM.WebApp.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
+
+                    // save to staffs table
+                    staffRep.Add(new Staff
+                    {
+                        Name = model.UserName,
+                        Password = model.Password,
+                        StaffTypeId = 1,
+                        Sex = true,
+                        Phone = "0123456789",
+                        IsWorking = true,
+                        LastLogin = DateTime.Now,
+                        UserName = model.UserName
+                        
+                        
+                    });
+
+                    staffRep.Save();
+
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)

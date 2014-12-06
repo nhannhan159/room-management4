@@ -17,13 +17,6 @@
 
 <h2 id="title"></h2>
 
-
-@if (Request.IsAuthenticated)
-{
-    <h1>@User.Identity.Name with Id @WebSecurity.GetUserId(User.Identity.Name)</h1>
-    
-}
-
 <fieldset>
     <legend>RoomCalendar</legend>
 
@@ -31,7 +24,7 @@
         @Html.LabelFor(model => model.RoomId)
     </div>
     <div class="editor-field">
-        @Html.DropDownList("RoomId", "- chọn một -")
+        @Html.DropDownList("RoomId")
         @Html.ValidationMessageFor(model => model.RoomId)
     </div>
     <div class="both"></div>
@@ -221,7 +214,7 @@
                 updatePage(date, roomId);
 
                 // update title
-                $('#title').html('Thoi gian bieu cua phong ' + $('#RoomId option:selected').text());
+                $('#title').html('Thời gian biểu của phòng ' + $('#RoomId option:selected').text());
             });
 
             // set title

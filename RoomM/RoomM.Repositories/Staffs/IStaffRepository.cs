@@ -13,5 +13,6 @@ namespace RoomM.Repositories.Staffs
         Staff GetSingle(int staffId);
         Boolean CheckPassword(Staff staff, string password);
         Boolean CheckUserExists(string username);
+        IList<Staff> GetStaffLimitByRegister(int limit); 
     }
 }

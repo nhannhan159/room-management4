@@ -12,6 +12,6 @@ namespace RoomM.Repositories.Rooms
     {
         Room GetSingle(Int64 roomId);
         IList<Room> GetByRoomTypeId(Int64 roomTypeId);
-
+        IList<Room> GetRoomListLimitByRegister(int limit);
     }
 }
