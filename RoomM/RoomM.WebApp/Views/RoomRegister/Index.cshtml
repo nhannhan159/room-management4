@@ -63,15 +63,15 @@
             {
                 if (ViewBag.TimeTbl[i][j] == 0)
                 {
-                <td class="free" title="Có thể đăng kí"></td>
+                    <td class="free" title="Có thể đăng kí"></td>
                 }
                 else if (ViewBag.TimeTbl[i][j] == 1)
                 { 
-                <td class="busy" title="Không thể đăng kí"></td>
+                     <td class="wait" title="Đợi xác nhận"></td>
                 }
                 else
                 {
-                <td class="selected"></td>
+                    <td class="setup" title="Không thể đăng kí"></td>
                 }
             }
         </tr>
@@ -125,9 +125,9 @@
                         if (timeTbl[i][j] == 0)
                             row += "<td class='free' title='Có thể đăng kí'></td>";
                         else if (timeTbl[i][j] == 1)
-                            row += "<td class='busy' title='Không thể đăng kí'></td>";
+                            row += "<td class='wait' title='Đợi xác nhận'></td>";
                         else
-                            row += "<td class='selected'></td>";
+                            row += "<td class='setup' title='Không thể đăng kí'></td>";
                     }
 
                     row += "</tr>";

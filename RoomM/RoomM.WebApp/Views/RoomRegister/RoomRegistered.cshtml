@@ -7,9 +7,8 @@
 
 <h2>Phòng đã đăng kí</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="notify">@ViewBag.MessageConfirm</div>
+
 <table width="90%" align="center">
     <tr>
         <th>STT</th>
@@ -51,10 +50,31 @@
             @Html.DisplayFor(modelItem => item.RoomCalendarStatus.Name)
         </td>
         <td>
-            @Html.ActionLink("Đồng ý", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Hủy", "Details", new { id=item.ID })
+            @if (item.RoomCalendarStatusId == 3 || item.RoomCalendarStatusId == 2 )
+            {
+                @Html.ActionLink("Đồng ý", "RoomRegisteredAccept", new { id = item.ID });
+            } else {                                                               
+                @Html.ActionLink("Hủy", "RoomRegisteredReject", new { id = item.ID });
+            }
         </td>
     </tr>
 }
 
 </table>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+
+            if ($('.notify').html() == "")
+                $('.notify').hide();
+            else
+                $('.notify').show(0.8);
+
+        });
+    </script>
+}
+        
+

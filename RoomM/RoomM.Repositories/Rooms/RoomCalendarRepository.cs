@@ -80,5 +80,23 @@ namespace RoomM.Repositories.Rooms
 
             return calLst;
         }
+
+
+        public IList<RoomCalendar> GetByWatchedState(bool isWatched, int staffId)
+        {
+            return (from p in GetAllWithQuery()
+                    where p.Staff.ID == staffId && p.IsWatched == isWatched
+                    orderby p.Date descending
+                    select p).ToList();
+        }
+
+
+        public IList<RoomCalendar> GetByRegisteredState(int registeredState, int staffId)
+        {
+            return (from p in GetAllWithQuery()
+                    where p.Staff.ID == staffId && p.RoomCalendarStatusId == registeredState
+                    orderby p.Date descending
+                    select p).ToList();
+        }
     }
 }

@@ -17,5 +17,8 @@ namespace RoomM.Repositories.Rooms
         IList<RoomCalendar> GetByDateAndRoomId(DateTime date, long roomId);
         IList<RoomCalendar> GetByWeekAndRoomId(DateTime date, long roomId);
 
+        IList<RoomCalendar> GetByWatchedState(bool isWatched, int staffId);
+        IList<RoomCalendar> GetByRegisteredState(int registeredState, int staffId);
+
     }
 }

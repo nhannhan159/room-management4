@@ -1,6 +1,5 @@
 ﻿using RoomM.Business;
 using RoomM.Models.Rooms;
-using RoomM.Models.Rooms;
 using RoomM.Repositories.RepositoryFramework;
 using RoomM.Repositories.Rooms;
 using RoomM.WebApp.Models.RoomM;
@@ -47,24 +46,67 @@ namespace RoomM.WebApp.Controllers
             // init for lesson list
             var startLst = buildStartList(calInDate);
 
-            ViewBag.StartDump = new SelectList(startLst, "ID", "Value", startLst[0].ID);
-            ViewBag.Length = new SelectList(startLst);
             ViewBag.TimeTbl = buildTimeTableList(calInWeek);
 
             return View();
         }
 
         [Authorize(Roles = "Teacher")]
-        public ActionResult RoomRegistered()
+        public ActionResult RoomRegistered(string messageConfirm)
         {
-            IList<RoomCalendar> calLst = roomCalRepo.GetByStaffId(1);
+            IList<RoomCalendar> calLst = roomCalRepo.GetByWatchedState(false, WebSecurity.GetUserId(User.Identity.Name));
+            // IList<RoomCalendar> calLst = roomCalRepo.GetByRegisteredState(1, 1);
+            // IList<RoomCalendar> calLst = roomCalRepo.GetByStaffId(1);
+            ViewBag.MessageConfirm = messageConfirm;
             return View(calLst);
+        }
+
+        [Authorize(Roles = "Teacher")]
+        public ActionResult RoomRegisteredAccept(int id)
+        {
+            RoomCalendar rc = roomCalRepo.GetSingle(id);
+            rc.IsWatched = true;
+            roomCalRepo.Edit(rc);
+            roomCalRepo.Save();
+
+            string message = "";
+            if (rc.RoomCalendarStatusId == 3) // huy dk tu quan tri vien
+                message = "Xác nhận hủy đăng kí phòng " + rc.Room.Name + " vào ngày " 
+                + rc.Date.ToShortDateString() + " từ tiết " + rc.Start + " đến tiết " + (rc.Start + rc.Length - 1); 
+            else // dk thanh cong
+                message = "Xác nhận đăng kí phòng " + rc.Room.Name + " vào ngày "
+                + rc.Date.ToShortDateString() + " từ tiết " + rc.Start + " đến tiết " + (rc.Start + rc.Length - 1); 
+
+            return RedirectToAction("RoomRegistered", new { messageConfirm = message });
+        }
+
+        [Authorize(Roles = "Teacher")]
+        public ActionResult RoomRegisteredReject(int id)
+        {
+            RoomCalendar rc = roomCalRepo.GetSingle(id);
+
+            RoomCalendar rcInfo = new RoomM.Models.Rooms.RoomCalendar
+            {
+                Room = rc.Room,
+                Start = rc.Start,
+                Length = rc.Length,
+                Date = rc.Date
+            };
+
+            // rc.IsWatched = true;
+            // roomCalRepo.Edit(rc);
+            roomCalRepo.Delete(id);
+            roomCalRepo.Save();
+
+            string message = "Xác nhận hủy đăng kí phòng " + rcInfo.Room.Name + " vào ngày "
+                + rcInfo.Date.ToShortDateString() + " từ tiết " + rcInfo.Start + " đến tiết " + (rcInfo.Start + rcInfo.Length - 1);
+            return RedirectToAction("RoomRegistered", new { messageConfirm = message });
         }
 
         [Authorize(Roles = "Teacher")]
         public ActionResult HistoryRegistered()
         {
-            IList<RoomCalendar> calLst = roomCalRepo.GetByStaffId(1);
+            IList<RoomCalendar> calLst = roomCalRepo.GetByWatchedState(true, WebSecurity.GetUserId(User.Identity.Name));
             return View(calLst);
         }
 
@@ -72,7 +114,7 @@ namespace RoomM.WebApp.Controllers
 
         // create with params date time vs room
         [Authorize(Roles = "Teacher")]
-        public ActionResult Create(string messageConfirm)
+        public ActionResult Create(string messageConfirm = "", bool isErrorMessage = false)
         {
             IList<RoomType> allRoomType = roomTypeRepo.GetAll();
             IList<Room> allRoom = roomRepo.GetAll();
@@ -94,13 +136,22 @@ namespace RoomM.WebApp.Controllers
             // init for lesson list
             var startLst = buildStartList(calInDate);
 
-            ViewBag.StartDump = new SelectList(startLst, "ID", "Value", startLst[0].ID);
+            if (startLst.Count == 0)
+                startLst.Add(new ItemList{
+                    ID = "0_0",
+                    Value = "bận"
+                });
+
+           ViewBag.StartDump = new SelectList(startLst, "ID", "Value", startLst[0].ID);
+           
+
             ViewBag.Length = new SelectList(startLst);
             ViewBag.TimeTbl = buildTimeTableList(calInWeek);
 
             if (messageConfirm != null)
             {
                 ViewBag.MessageConfirm = messageConfirm;
+                ViewBag.IsErrorMessage = isErrorMessage;
             }
 
             return View();
@@ -112,17 +163,25 @@ namespace RoomM.WebApp.Controllers
 
             if (ModelState.IsValid)
             {
-                // roomCal.Room = roomRepo.GetSingle(roomCal.RoomId);
-                roomCal.RoomCalendarStatusId = 1; // wait
-                roomCal.StaffId = WebSecurity.GetUserId(User.Identity.Name);
+                if (roomCal.Date < DateTime.Now.Date)
+                {
+                    string message = "Bạn không thể đăng kí phòng trước ngày hiện tại " + DateTime.Now.ToShortDateString();
+                    return RedirectToAction("Create", new { messageConfirm = message, isErrorMessage = true });
+                }
+                else
+                {
+                    // roomCal.Room = roomRepo.GetSingle(roomCal.RoomId);
+                    roomCal.RoomCalendarStatusId = 1; // wait
+                    roomCal.StaffId = WebSecurity.GetUserId(User.Identity.Name);
 
-                // save
-                roomCalRepo.Add(roomCal);
-                roomCalRepo.Save();
+                    // save
+                    roomCalRepo.Add(roomCal);
+                    roomCalRepo.Save();
 
 
-                string message = "Phòng " + roomRepo.GetSingle(roomCal.RoomId).Name + " đã được đăng kí từ tiết " + roomCal.Start + " đến tiết " + (roomCal.Start + roomCal.Length - 1);
-                return RedirectToAction("Create", new { messageConfirm = message});
+                    string message = "Phòng " + roomRepo.GetSingle(roomCal.RoomId).Name + " đã được đăng kí từ tiết " + roomCal.Start + " đến tiết " + (roomCal.Start + roomCal.Length - 1);
+                    return RedirectToAction("Create", new { messageConfirm = message, isErrorMessage = false });
+                }
             }
 
             return View();
@@ -164,7 +223,7 @@ namespace RoomM.WebApp.Controllers
 
             foreach (RoomCalendar rc in calInDate)
             {
-                for (int i = rc.Start; i <= rc.Start + rc.Length; ++i)
+                for (int i = rc.Start; i <= rc.Start + rc.Length - 1; ++i)
                     offsetday[i] = true;
             }
 
@@ -193,11 +252,13 @@ namespace RoomM.WebApp.Controllers
         {
             // init time table
             // 0 is free
-            // 1 is busy
+            // 1 is wait
             // 2 is setup
             List<List<int>> timeTblList = new List<List<int>>();
             timeTblList.Add(new List<int>());
 
+
+            // init slot
             for (int i = 1; i <= 13; ++i)
             {
                 List<int> lst = new List<int>();
@@ -216,7 +277,7 @@ namespace RoomM.WebApp.Controllers
 
                 for (int i = rc.Start; i <= rc.Start + rc.Length - 1; ++i)
                 {
-                    timeTblList[i][dayOfWeek] = 1;
+                    timeTblList[i][dayOfWeek] = (int) rc.RoomCalendarStatusId;
                 }
             }
 

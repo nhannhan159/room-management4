@@ -757,6 +757,15 @@ th {
     margin: 5px;
 }
 
+.confirm {
+    background-color: yellow;
+}
+
+.error {
+    background-color: red;
+    color: white;
+}
+
 .timeline {
     font-size: 12pt;
     padding-left: 20px;
@@ -818,7 +827,7 @@ th {
   position: relative;
   vertical-align: top;
   width: auto;
-  height: 60px;
+  height: 40px;
   padding:0px;
   color: white;
   text-align: center;

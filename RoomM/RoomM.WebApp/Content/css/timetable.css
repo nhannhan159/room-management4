@@ -5,10 +5,10 @@
     
 }
 
-.busy {
+.setup {
     background-color: red;
 }
 
-.selected {
+.wait {
     background-color: blue;
 }

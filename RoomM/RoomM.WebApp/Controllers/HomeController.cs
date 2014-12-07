@@ -17,14 +17,14 @@ namespace RoomM.WebApp.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your app description page.";
+            ViewBag.Message = "Thông tin phần mềm";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Thông tin liên hệ";
 
             return View();
         }
