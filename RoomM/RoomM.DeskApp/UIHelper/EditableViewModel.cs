@@ -20,18 +20,18 @@ namespace RoomM.DeskApp.UIHelper
             Deleted
         }
 
-        private const string currentObjectStatePropertyName = "CurrentObjectState";
-        private const string currentEntityPropertyName = "CurrentEntity";
+        protected const string currentObjectStatePropertyName = "CurrentObjectState";
+        protected const string currentEntityPropertyName = "CurrentEntity";
 
         private ObjectState currentObjectState;
-        private T currentEntity;
+        protected T currentEntity;
         private List<T> entitiesList;
         private ICollectionView entitiesView;
         private string _filterString;
         private bool _allSelected;
-        private bool canExecuteSaveCommand = true;
-        private bool canExecuteNewCommand = true;
-        private bool canExecuteDelCommand = true;
+        protected bool canExecuteSaveCommand = true;
+        protected bool canExecuteNewCommand = true;
+        protected bool canExecuteDelCommand = true;
 
         protected EditableViewModel()
             : base()
@@ -84,7 +84,7 @@ namespace RoomM.DeskApp.UIHelper
             }
         }
 
-        public T CurrentEntity
+        public virtual T CurrentEntity
         {
             get { return this.currentEntity; }
             set

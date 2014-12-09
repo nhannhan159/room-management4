@@ -4,10 +4,13 @@ using RoomM.Business;
 using RoomM.DeskApp.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Data;
+using System.ComponentModel;
 
 namespace RoomM.DeskApp.ViewModels
 {
@@ -76,6 +79,48 @@ namespace RoomM.DeskApp.ViewModels
         private bool canExecute()
         {
             return true;
+        }
+
+        public override Room CurrentEntity
+        {
+            get { return this.currentEntity; }
+            set
+            {
+                if (this.currentEntity != value)
+                {
+                    Console.WriteLine("hit me!");
+
+                    this.currentEntity = value;
+                    this.SetCurrentEntity(value);
+                    this.canExecuteSaveCommand = (this.currentEntity != null);
+                    this.OnPropertyChanged(EditableViewModel<Room>.currentEntityPropertyName);
+                    this.OnPropertyChanged("CurrentRoomCalendarView");
+                    this.OnPropertyChanged("CurrentRoomAssetView");
+                    this.OnPropertyChanged("CurrentRoomHistoryView");
+                }
+                //Console.WriteLine("Number selected: " + GetNumSelected());
+                this.canExecuteDelCommand = GetNumSelected() > 0;
+            }
+        }
+
+        public ICollectionView RoomTypesView
+        {
+            get { return CollectionViewSource.GetDefaultView(RoomService.GetAllRoomType()); }
+        }
+
+        public ICollectionView CurrentRoomCalendarView
+        {
+            get { return CollectionViewSource.GetDefaultView(CurrentEntity.RoomCalendars); }
+        }
+
+        public ICollectionView CurrentRoomAssetView
+        {
+            get { return CollectionViewSource.GetDefaultView(CurrentEntity.RoomAssets); }
+        }
+
+        public ICollectionView CurrentRoomHistoryView
+        {
+            get { return CollectionViewSource.GetDefaultView(CurrentEntity.AssetHistories); }
         }
     }
 }

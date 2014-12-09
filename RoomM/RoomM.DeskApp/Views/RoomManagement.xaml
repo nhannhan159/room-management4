@@ -48,12 +48,13 @@
                     <TextBlock Margin="0,5,5,5" Text="Hiện thị các phòng đã xóa" FontStyle="Italic"/>
                 </WrapPanel> 
             </Grid>
-            <DataGrid Grid.Row="2" VerticalAlignment="Top" Margin="0,7,0,0" AutoGenerateColumns="False" 
+            <DataGrid Grid.Row="2" VerticalAlignment="Stretch" Margin="0,7,0,0" AutoGenerateColumns="False" CanUserAddRows="False"
                       SelectedItem="{Binding Path=CurrentEntity}"
-                      ItemsSource="{Binding Path=EntitiesView}">
+                      ItemsSource="{Binding Path=EntitiesView}"
+                      SelectedIndex="0">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Tên" Width="0.3*" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Ngày tạo" Width="0.2*"/>
+                    <DataGridTextColumn Header="Ngày tạo" Width="0.2*" Binding="{Binding DateCreate, StringFormat=\{0:dd/MM/yyyy \}}"/>
                     <DataGridTextColumn Header="Loại phòng" Width="0.3*" Binding="{Binding RoomType.Name}"/>
                     <DataGridTemplateColumn Width="0.2*" Header="Hành động">
                         <DataGridTemplateColumn.CellTemplate>
@@ -85,7 +86,7 @@
             </Grid.RowDefinitions>
             <WrapPanel Grid.Row="0" Height="27" VerticalAlignment="Top" Background="LightGray">
                 <TextBlock Text="Phòng" Padding="5" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
-                <TextBlock Text="111" Padding="5" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
+                <TextBlock Text="{Binding CurrentEntity.Name}" Padding="5" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
             </WrapPanel> 
             <TabControl Grid.Row="1" Margin="0,10,0,5">
                 <TabItem Header="Thông tin phòng" Width="110">
@@ -107,9 +108,9 @@
                         <Label Grid.Row="1" Grid.Column="0" Content="Ngày tạo:" HorizontalAlignment="Left"/>
                         <Label Grid.Row="2" Grid.Column="0" Content="Loại phòng:" HorizontalAlignment="Left"/>
                         <Label Grid.Row="3" Grid.Column="0" Content="Mô tả:" HorizontalAlignment="Left"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Stretch"/>
-                        <DatePicker Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Stretch"/>
-                        <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Stretch"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Stretch" Text="{Binding CurrentEntity.Name}"/>
+                        <DatePicker Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Stretch" SelectedDate="{Binding CurrentEntity.DateCreate,StringFormat='dd/MM/yyy'}" />
+                        <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=RoomTypesView}" SelectedValue="{Binding Path=CurrentEntity.RoomTypeId}" DisplayMemberPath="Name" SelectedValuePath="ID"/>
                         <RichTextBox Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
                         <Button Grid.Row="4" Grid.ColumnSpan="4" Content="Lưu thay đổi" Height="25" Width="120" Margin="0,6,0,0"/>
                     </Grid>
@@ -151,9 +152,10 @@
                             <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Height="20"/>
                             <ComboBox Grid.Row="3" Grid.Column="4" Margin="3" Height="20"/>
                         </Grid>
-                        <DataGrid Grid.Row="1" VerticalAlignment="Top" Margin="0,7,0,0" AutoGenerateColumns="False" >
+                        <DataGrid Grid.Row="1" VerticalAlignment="Stretch" Margin="0,7,0,0" AutoGenerateColumns="False" CanUserAddRows="False"
+                                  ItemsSource="{Binding Path=CurrentRoomCalendarView}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Ngày đăng ký" Width="0.2*"/>
+                                <DataGridTextColumn Header="Ngày đăng ký" Width="0.2*" Binding="{Binding Date, StringFormat=\{0:dd/MM/yyyy \}}"/>
                                 <DataGridTextColumn Header="Tiết bắt đầu" Width="0.15*"/>
                                 <DataGridTextColumn Header="Số tiết" Width="0.125*"/>
                                 <DataGridTextColumn Header="Người đăng ký" Width="0.25*"/>
@@ -201,10 +203,11 @@
                             <Label Grid.Row="1" Grid.Column="1" Content="Theo tên tài sản:"/>
                             <TextBox Grid.Row="1" Grid.Column="2" Margin="3" Height="20"/>
                         </Grid>
-                        <DataGrid Grid.Row="1" VerticalAlignment="Top" Margin="0,7,0,0" AutoGenerateColumns="False" >
+                        <DataGrid Grid.Row="1" VerticalAlignment="Stretch" Margin="0,7,0,0" AutoGenerateColumns="False" CanUserAddRows="False"
+                                  ItemsSource="{Binding Path=CurrentRoomAssetView}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Tên tài sản" Width="0.65*"/>
-                                <DataGridTextColumn Header="Số lượng" Width="0.35*"/>
+                                <DataGridTextColumn Header="Tên tài sản" Width="0.65*" Binding="{Binding Asset.Name}"/>
+                                <DataGridTextColumn Header="Số lượng" Width="0.35*" Binding="{Binding Amount}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                         <Button Grid.Row="2" Height="25" Width="120" Margin="0,5,0,5">
@@ -247,11 +250,12 @@
                             <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Height="20"/>
                             <ComboBox Grid.Row="2" Grid.Column="4" Margin="3" Height="20"/>
                         </Grid>
-                        <DataGrid Grid.Row="1" VerticalAlignment="Top" Margin="0,7,0,0" AutoGenerateColumns="False" >
+                        <DataGrid Grid.Row="1" VerticalAlignment="Stretch" Margin="0,7,0,0" AutoGenerateColumns="False" CanUserAddRows="False"
+                                  ItemsSource="{Binding Path=CurrentRoomHistoryView}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Phân loại" Width="0.2*"/>
-                                <DataGridTextColumn Header="Ngày" Width="0.2*"/>
-                                <DataGridTextColumn Header="Tài sản" Width="0.225*"/>
+                                <DataGridTextColumn Header="Phân loại" Width="0.2*" Binding="{Binding HistoryType.Name}"/>
+                                <DataGridTextColumn Header="Ngày" Width="0.2*" Binding="{Binding Date, StringFormat=\{0:dd/MM/yyyy \}}"/>
+                                <DataGridTextColumn Header="Tài sản" Width="0.225*" Binding="{Binding Asset.Name}"/>
                                 <DataGridTextColumn Header="Số lượng" Width="0.125*"/>
                                 <DataGridTextColumn Header="Phòng (đến, đi)" Width="0.25*"/>
                             </DataGrid.Columns>
@@ -266,6 +270,6 @@
                 </TabItem>
             </TabControl>
         </Grid>
-        <GridSplitter Grid.Column="1" HorizontalAlignment="Center" Width="2" Background="LightGray"/>
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Center" Width="2" Background="LightGray" />
     </Grid>
 </Page>

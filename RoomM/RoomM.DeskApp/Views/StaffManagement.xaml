@@ -54,7 +54,7 @@
                     <TextBlock Margin="0,5,5,5" Text="Hiện thị các nhân viên đã xóa" FontStyle="Italic"/>
                 </WrapPanel>
             </Grid>
-            <DataGrid Grid.Row="2" VerticalAlignment="Top" Margin="0,7,0,0" AutoGenerateColumns="False" 
+            <DataGrid Grid.Row="2" VerticalAlignment="Stretch" Margin="0,7,0,0" AutoGenerateColumns="False" 
                       SelectedItem="{Binding Path=CurrentEntity}"
                       ItemsSource="{Binding Path=EntitiesView}">
                 <DataGrid.Columns>
@@ -195,7 +195,7 @@
                             <TextBox Grid.Row="3" Grid.Column="1" Margin="3" Height="20"/>
                             <ComboBox Grid.Row="3" Grid.Column="4" Margin="3" Height="20"/>
                         </Grid>
-                        <DataGrid Grid.Row="1" VerticalAlignment="Top" Margin="0,7,0,0" AutoGenerateColumns="False" >
+                        <DataGrid Grid.Row="1" VerticalAlignment="Stretch" Margin="0,7,0,0" AutoGenerateColumns="False" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Ngày đăng ký" Width="0.2*"/>
                                 <DataGridTextColumn Header="Tiết bắt đầu" Width="0.15*"/>
