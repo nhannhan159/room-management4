@@ -3,9 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:RoomM.DeskApp.ViewModels"
         Title="Thêm phòng mới" Height="350" Width="400">
-    <Window.DataContext>
-        <local:RoomManagementViewModel />
-    </Window.DataContext>
     <Grid Margin="5,10,5,5" RenderTransformOrigin="0.725,0.434">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
@@ -25,13 +22,11 @@
         <Label Grid.Row="0" Grid.Column="0" Content="Tên phòng:" HorizontalAlignment="Right"/>
         <Label Grid.Row="1" Grid.Column="0" Content="Ngày tạo:" HorizontalAlignment="Right"/>
         <Label Grid.Row="2" Grid.Column="0" Content="Loại phòng:" HorizontalAlignment="Right"/>
-        <Label Grid.Row="3" Grid.Column="0" Content="Tình trạng:" HorizontalAlignment="Right"/>
-        <Label Grid.Row="4" Grid.Column="0" Content="Mô tả:" HorizontalAlignment="Right"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="250"/>
-        <DatePicker Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="250"/>
-        <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="250"/>
-        <ComboBox Grid.Row="3" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="250"/>
-        <RichTextBox Grid.Row="4" Grid.Column="1" Grid.RowSpan="3" HorizontalAlignment="Left" Width="250"/>
-        <Button Grid.Row="7" Grid.ColumnSpan="3" Content="Thêm" Height="27" Width="130"/>
+        <Label Grid.Row="3" Grid.Column="0" Content="Mô tả:" HorizontalAlignment="Right"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="250" Padding="3" Text="{Binding NewRoom.Name}"/>
+        <DatePicker Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="250" SelectedDate="{Binding NewRoom.DateCreate,StringFormat='dd/MM/yyy'}" />
+        <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="250" Text="--chọn loại phòng--" IsEditable="True" IsReadOnly="True" ItemsSource="{Binding Path=RoomTypesView}" SelectedValue="{Binding Path=NewRoom.RoomTypeId}" DisplayMemberPath="Name" SelectedValuePath="ID"/>
+        <RichTextBox Grid.Row="3" Grid.Column="1" Grid.RowSpan="4" HorizontalAlignment="Left" Width="250"/>
+        <Button Grid.Row="7" Grid.ColumnSpan="3" Content="Thêm" Height="27" Width="130" Command="{Binding NewCommand}"/>
     </Grid>
 </Window>

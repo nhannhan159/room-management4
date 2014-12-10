@@ -33,6 +33,14 @@ namespace RoomM.Models.Rooms
         public virtual ICollection<RoomAssetHistory> AssetHistories { get; set; }
         public virtual ICollection<RoomCalendar> RoomCalendars { get; set; }
 
+        public Room()
+        {
+            this.IsUsing = true;
+            this.DateCreate = DateTime.Now.Date;
+            this.RoomAssets = new List<RoomAsset>();
+            this.AssetHistories = new List<RoomAssetHistory>();
+            this.RoomCalendars = new List<RoomCalendar>();
+        }
 
         public override string ToString()
         {

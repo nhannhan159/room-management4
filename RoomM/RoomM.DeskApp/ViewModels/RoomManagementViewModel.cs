@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Data;
 using System.ComponentModel;
@@ -21,6 +22,9 @@ namespace RoomM.DeskApp.ViewModels
         {
         }
 
+        private NewRoom newRoomDialog;
+        private NewRoomViewModel newRoomViewModel { get; set; }
+
         protected override List<Room> GetEntitiesList()
         {
             return new List<Room>(RoomService.GetAll());
@@ -28,79 +32,50 @@ namespace RoomM.DeskApp.ViewModels
 
         protected override Room BuildNewEntity()
         {
-            return new Room();
+            this.newRoomDialog.Close();
+            return newRoomViewModel.NewRoom;
         }
 
         protected override void SaveCurrentEntity()
         {
-            /*try
+            try
             {
-                BaoTriService.SaveBaoTri(this.CurrentEntity);
+                RoomService.Add(this.CurrentEntity);
+                MessageBox.Show("Tạo phòng mới thành công!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lưu dữ liệu thất bại! \nMã lỗi: " + ex.Message);
+                MessageBox.Show("Tạo phòng mới thất bại! \nMã lỗi: " + ex.Message);
             }
-
-            MessageBox.Show("Lưu dữ liệu thành công!");*/
         }
 
         protected override void SetCurrentEntity(Room entity)
         {
-            // throw new NotImplementedException();
         }
 
         protected override bool EntityFilter(object obj)
         {
             return true;
-            /*Baotri bt = obj as Baotri;
-            if (string.IsNullOrWhiteSpace(this.Filter) || this.Filter.Length == 0)
-            {
-                return true;
-            }
-            else
-            {
-                switch (this._typeFilter)
-                {
-                    case TypeFilter.NgayBT:
-                        return bt.NgayBTString.Equals(_ngayBTFilter.ToShortDateString());
-                    default:
-                        return bt.Mota.Contains(Filter) || bt.Xe.ToString().Contains(Filter);
-                }
-            }*/
         }
 
         public ICommand NewRoomCommand { get { return new RelayCommand(newRoomCommand, canExecute); } }
         private void newRoomCommand()
         {
-            var newRoom = new NewRoom();
-            newRoom.ShowDialog();
+            this.newRoomViewModel = new NewRoomViewModel();
+            this.newRoomViewModel.NewCommand = new RelayCommand(NewCommandHandler, CanExecuteNewCommand);
+            this.newRoomDialog = new NewRoom(this.newRoomViewModel);
+            this.newRoomDialog.ShowDialog();
         }
         private bool canExecute()
         {
             return true;
         }
 
-        public override Room CurrentEntity
+        protected override void EntitySelectionChanged(object sender, EventArgs e)
         {
-            get { return this.currentEntity; }
-            set
-            {
-                if (this.currentEntity != value)
-                {
-                    Console.WriteLine("hit me!");
-
-                    this.currentEntity = value;
-                    this.SetCurrentEntity(value);
-                    this.canExecuteSaveCommand = (this.currentEntity != null);
-                    this.OnPropertyChanged(EditableViewModel<Room>.currentEntityPropertyName);
-                    this.OnPropertyChanged("CurrentRoomCalendarView");
-                    this.OnPropertyChanged("CurrentRoomAssetView");
-                    this.OnPropertyChanged("CurrentRoomHistoryView");
-                }
-                //Console.WriteLine("Number selected: " + GetNumSelected());
-                this.canExecuteDelCommand = GetNumSelected() > 0;
-            }
+            this.OnPropertyChanged("CurrentRoomCalendarView");
+            this.OnPropertyChanged("CurrentRoomAssetView");
+            this.OnPropertyChanged("CurrentRoomHistoryView");
         }
 
         public ICollectionView RoomTypesView
@@ -122,5 +97,6 @@ namespace RoomM.DeskApp.ViewModels
         {
             get { return CollectionViewSource.GetDefaultView(CurrentEntity.AssetHistories); }
         }
+
     }
 }

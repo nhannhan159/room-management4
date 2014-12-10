@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RoomM.DeskApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,12 @@ namespace RoomM.DeskApp.Views
         public NewRoom()
         {
             InitializeComponent();
+        }
+
+        public NewRoom(NewRoomViewModel context)
+            : this()
+        {
+            this.DataContext = context;
         }
 
     }

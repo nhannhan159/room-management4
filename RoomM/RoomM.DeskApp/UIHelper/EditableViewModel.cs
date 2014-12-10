@@ -14,17 +14,10 @@ namespace RoomM.DeskApp.UIHelper
     public abstract class EditableViewModel<T> 
         : ViewModel where T : EntityBase
     {
-        public enum ObjectState { 
-            New,
-            Existing,
-            Deleted
-        }
 
-        protected const string currentObjectStatePropertyName = "CurrentObjectState";
-        protected const string currentEntityPropertyName = "CurrentEntity";
+        private const string currentEntityPropertyName = "CurrentEntity";
 
-        private ObjectState currentObjectState;
-        protected T currentEntity;
+        private T currentEntity;
         private List<T> entitiesList;
         private ICollectionView entitiesView;
         private string _filterString;
@@ -36,7 +29,6 @@ namespace RoomM.DeskApp.UIHelper
         protected EditableViewModel()
             : base()
         {
-            this.currentObjectState = ObjectState.Existing;
             this.currentEntity = default(T);
             this.entitiesList = this.GetEntitiesList();
             this.entitiesView = CollectionViewSource.GetDefaultView(this.entitiesList);
@@ -46,12 +38,31 @@ namespace RoomM.DeskApp.UIHelper
             this.canExecuteDelCommand = false;
         }
 
+        protected abstract T BuildNewEntity();
+        protected abstract List<T> GetEntitiesList();
+        protected abstract void SaveCurrentEntity();
+        protected abstract void SetCurrentEntity(T entity);
         protected abstract bool EntityFilter(object obj);
 
-        private void EntitySelectionChanged(object sender, EventArgs e)
+        public virtual T CurrentEntity
+        {
+            get { return this.currentEntity; }
+            set
+            {
+                if (this.currentEntity != value)
+                {
+                    this.currentEntity = value;
+                    this.SetCurrentEntity(value);
+                    this.canExecuteSaveCommand = (this.currentEntity != null);
+                    this.OnPropertyChanged(EditableViewModel<T>.currentEntityPropertyName);
+                }
+                this.canExecuteDelCommand = GetNumSelected() > 0;
+            }
+        }
+
+        protected virtual void EntitySelectionChanged(object sender, EventArgs e)
         {
             Console.WriteLine("CHANGED...");
-            // throw new NotImplementedException();
         }
 
         public string Filter
@@ -62,45 +73,6 @@ namespace RoomM.DeskApp.UIHelper
                 this._filterString = value;
                 OnPropertyChanged("Filter");
                 this.entitiesView.Refresh();
-            }
-        }
-
-        protected abstract T BuildNewEntity();
-        protected abstract List<T> GetEntitiesList();
-        protected abstract void SaveCurrentEntity();
-        protected abstract void SetCurrentEntity(T entity);
-
-        public ObjectState CurrentObjectState
-        {
-            get { return this.currentObjectState; }
-            set
-            {
-                if (this.currentObjectState != value)
-                {
-                    this.currentObjectState = value;
-                    this.OnPropertyChanged(
-                        EditableViewModel<T>.currentObjectStatePropertyName);
-                }
-            }
-        }
-
-        public virtual T CurrentEntity
-        {
-            get { return this.currentEntity; }
-            set
-            {
-                if (this.currentEntity != value)
-                {
-                    Console.WriteLine("hit me!");
-
-                    this.currentEntity = value;
-                    this.SetCurrentEntity(value);
-                    this.canExecuteSaveCommand = (this.currentEntity != null);
-                    this.OnPropertyChanged(
-                        EditableViewModel<T>.currentEntityPropertyName);
-                }
-                //Console.WriteLine("Number selected: " + GetNumSelected());
-                this.canExecuteDelCommand = GetNumSelected() > 0;
             }
         }
 
@@ -120,12 +92,11 @@ namespace RoomM.DeskApp.UIHelper
         }
 
         public ICommand SaveCommand { get { return new RelayCommand(SaveCommandHandler, CanExecuteSaveCommand); } }
-        public ICommand NewCommand { get { return new RelayCommand(NewCommandHandler, CanExecuteNewCommand); } }
         public ICommand DelCommand { get { return new RelayCommand(DeleteCommandHandler, CanExecuteDelCommand); } }
        
         private bool CanExecuteSaveCommand() { return canExecuteSaveCommand; }
-        private bool CanExecuteNewCommand() { return canExecuteSaveCommand; }
-        private bool CanExecuteDelCommand() { return canExecuteSaveCommand; }
+        protected bool CanExecuteNewCommand() { return canExecuteNewCommand; }
+        private bool CanExecuteDelCommand() { return canExecuteDelCommand; }
 
         public int NumRowRecord
         {
@@ -139,20 +110,15 @@ namespace RoomM.DeskApp.UIHelper
         private void SaveCommandHandler()
         {
             this.SaveCurrentEntity();
-            this.CurrentObjectState = ObjectState.Existing;
         }
 
-        private void NewCommandHandler()
+        protected void NewCommandHandler()
         {
-            this.CurrentObjectState = ObjectState.New;
             this.currentEntity = this.BuildNewEntity();
+            this.SaveCurrentEntity();
             this.entitiesList.Add(this.currentEntity);
-
-            // this.entitiesList.Add(this.BuildNewEntity());
-            // this.currentEntity = null;
             this.entitiesView.Refresh();
             this.entitiesView.MoveCurrentToLast();
-            Console.WriteLine("New: " + this.currentEntity.ID);
         }
 
         private void DeleteCommandHandler()

@@ -29,10 +29,6 @@ namespace RoomM.Repositories.Rooms
                     select p).ToList();
         }
 
-
-
-
-
         public IList<Room> GetRoomListLimitByRegister(int limit)
         {
             return (from p in GetAllWithQuery()

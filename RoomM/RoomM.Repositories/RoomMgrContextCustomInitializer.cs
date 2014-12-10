@@ -17,20 +17,20 @@ namespace RoomM.Repositories
         protected override void Seed(EFDataContext context)
         {
 
-            RoomType roomTH = new RoomType { Name = "Thuc hanh tin hoc" };
-            RoomType roomBi = new RoomType { Name = "Thuc hanh hoa" };
-            RoomType roomPy = new RoomType { Name = "Thuc hanh li" };
-            RoomType roomLi = new RoomType { Name = "Thuc hanh li thuyet" };
+            RoomType roomTH = new RoomType { Name = "Thực hành tin học" };
+            RoomType roomHO = new RoomType { Name = "Thực hành hóa" };
+            RoomType roomLI = new RoomType { Name = "Thực hành lý" };
+            RoomType roomSI = new RoomType { Name = "Thực hành sinh học" };
 
-            HistoryType devicehistorytype1 = new HistoryType { Name = "Chuyen thiet bi" };
-            HistoryType devicehistorytype2 = new HistoryType { Name = "Thanh li thiet bi" };
+            HistoryType devicehistorytype1 = new HistoryType { Name = "Chuyển thiết bị" };
+            HistoryType devicehistorytype2 = new HistoryType { Name = "Thanh lí thiết bị" };
 
-            StaffType usertype1 = new StaffType { Name = "Giang vien" };
-            StaffType usertype2 = new StaffType { Name = "Nhan vien quan li thiet bi" };
+            StaffType usertype1 = new StaffType { Name = "Giảng viên" };
+            StaffType usertype2 = new StaffType { Name = "Nhân viên quản lý thiết bị" };
 
-            RoomCalendarStatus roomcalendarstatus1 = new RoomCalendarStatus { Name = "Cho xac nhan" };
-            RoomCalendarStatus roomcalendarstatus2 = new RoomCalendarStatus { Name = "Da dang ki" };
-            RoomCalendarStatus roomcalendarstatus3 = new RoomCalendarStatus { Name = "Chua dang ki" };
+            RoomCalendarStatus roomcalendarstatus1 = new RoomCalendarStatus { Name = "Chờ xác nhận" };
+            RoomCalendarStatus roomcalendarstatus2 = new RoomCalendarStatus { Name = "Đã đăng ký" };
+            RoomCalendarStatus roomcalendarstatus3 = new RoomCalendarStatus { Name = "Chưa đăng ký" };
 
             Room room1 = new Room
             {
@@ -42,7 +42,7 @@ namespace RoomM.Repositories
             {
                 Name = "B006",
                 DateCreate = new DateTime(2011, 1, 2),
-                RoomType = roomLi
+                RoomType = roomLI
             };
             Room room3 = new Room
             {
@@ -54,19 +54,19 @@ namespace RoomM.Repositories
             {
                 Name = "B005",
                 DateCreate = new DateTime(2011, 1, 5),
-                RoomType = roomPy
+                RoomType = roomHO
             };
             Room room5 = new Room
             {
                 Name = "A142",
                 DateCreate = new DateTime(2011, 1, 7),
-                RoomType = roomBi
+                RoomType = roomHO
             };
             Room room6 = new Room
             {
                 Name = "B008",
                 DateCreate = new DateTime(2011, 1, 8),
-                RoomType = roomLi
+                RoomType = roomLI
             };
 
             Asset device1 = new Asset
@@ -202,14 +202,9 @@ namespace RoomM.Repositories
             };
 
             context.Entry(roomTH).State = EntityState.Added;
-            context.Entry(roomBi).State = EntityState.Added;
-            context.Entry(roomPy).State = EntityState.Added;
-            context.Entry(roomLi).State = EntityState.Added;
-
-
-
-
-            
+            context.Entry(roomHO).State = EntityState.Added;
+            context.Entry(roomLI).State = EntityState.Added;
+            context.Entry(roomSI).State = EntityState.Added;
 
             context.Entry(devicehistorytype1).State = EntityState.Added;
             context.Entry(devicehistorytype2).State = EntityState.Added;

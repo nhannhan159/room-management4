@@ -45,12 +45,14 @@
                     <TextBlock Margin="0,5,5,5" Text="Hiện thị các tài sản đã xóa" FontStyle="Italic"/>
                 </WrapPanel>
             </Grid>
-            <DataGrid Grid.Row="2" VerticalAlignment="Stretch" Margin="0,7,0,0" AutoGenerateColumns="False"
+            <DataGrid Grid.Row="2" VerticalAlignment="Stretch" Margin="0,7,0,0" 
+                      AutoGenerateColumns="False" CanUserAddRows="False"
                       SelectedItem="{Binding Path=CurrentEntity}"
-                      ItemsSource="{Binding Path=EntitiesView}">
+                      ItemsSource="{Binding Path=EntitiesView}"
+                      SelectedIndex="0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Tên tài sản" Width="0.5*" Binding="{Binding Name}"/>
-                    <DataGridTextColumn Header="Số lượng" Width="0.2*"/>
+                    <DataGridTextColumn Header="Tên tài sản" Width="0.5*" Binding="{Binding Name}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Số lượng" Width="0.2*" IsReadOnly="True"/>
                     <DataGridTemplateColumn Width="0.3*" Header="Hành động">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -95,10 +97,12 @@
                         <TextBox Width="80" Height="20" Margin="15,0,15,0"/>
                         <Button Content="Tìm" Width="50" Height="20"/>
                     </WrapPanel>
-                    <DataGrid Grid.Row="1" VerticalAlignment="Stretch" AutoGenerateColumns="False">
+                    <DataGrid Grid.Row="1" VerticalAlignment="Stretch" 
+                              AutoGenerateColumns="False" CanUserAddRows="False"
+                              ItemsSource="{Binding Path=CurrentRoomAssetView}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Tên phòng" Width="0.7*" Binding="{Binding Name}"/>
-                            <DataGridTextColumn Header="Số lượng" Width="0.3*"/>
+                            <DataGridTextColumn Header="Tên phòng" Width="0.7*" Binding="{Binding Room.Name}" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Số lượng" Width="0.3*" Binding="{Binding Amount}" IsReadOnly="True"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

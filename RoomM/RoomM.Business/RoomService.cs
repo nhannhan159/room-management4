@@ -53,6 +53,7 @@ namespace RoomM.Business
         public static void Add(Room r)
         {
             roomRepo.Add(r);
+            roomRepo.Save();
         }
 
         public static void Edit(Room r)

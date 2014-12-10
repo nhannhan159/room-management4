@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Data;
+using System.ComponentModel;
 
 namespace RoomM.DeskApp.ViewModels
 {
@@ -77,6 +79,16 @@ namespace RoomM.DeskApp.ViewModels
         private bool canExecute()
         {
             return true;
+        }
+
+        protected override void EntitySelectionChanged(object sender, EventArgs e)
+        {
+            this.OnPropertyChanged("CurrentRoomAssetView");
+        }
+
+        public ICollectionView CurrentRoomAssetView
+        {
+            get { return CollectionViewSource.GetDefaultView(CurrentEntity.RoomAssets); }
         }
     }
 }
