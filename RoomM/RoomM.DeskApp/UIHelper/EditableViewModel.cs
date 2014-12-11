@@ -6,13 +6,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
 namespace RoomM.DeskApp.UIHelper
 {
     public abstract class EditableViewModel<T> 
-        : ViewModel where T : EntityBase
+        : ViewModel where T : EntityBase, new()
     {
 
         private const string currentEntityPropertyName = "CurrentEntity";
@@ -25,6 +26,7 @@ namespace RoomM.DeskApp.UIHelper
         protected bool canExecuteSaveCommand = true;
         protected bool canExecuteNewCommand = true;
         protected bool canExecuteDelCommand = true;
+        protected NewEntityViewModel<T> newEntityViewModel;
 
         protected EditableViewModel()
             : base()
@@ -38,11 +40,10 @@ namespace RoomM.DeskApp.UIHelper
             this.canExecuteDelCommand = false;
         }
 
-        protected abstract T BuildNewEntity();
         protected abstract List<T> GetEntitiesList();
         protected abstract void SaveCurrentEntity();
-        protected abstract void SetCurrentEntity(T entity);
         protected abstract bool EntityFilter(object obj);
+        protected abstract void CloseNewEntityDialog();
 
         public virtual T CurrentEntity
         {
@@ -52,7 +53,6 @@ namespace RoomM.DeskApp.UIHelper
                 if (this.currentEntity != value)
                 {
                     this.currentEntity = value;
-                    this.SetCurrentEntity(value);
                     this.canExecuteSaveCommand = (this.currentEntity != null);
                     this.OnPropertyChanged(EditableViewModel<T>.currentEntityPropertyName);
                 }
@@ -92,38 +92,47 @@ namespace RoomM.DeskApp.UIHelper
         }
 
         public ICommand SaveCommand { get { return new RelayCommand(SaveCommandHandler, CanExecuteSaveCommand); } }
+        public ICommand NewCommand { get { return new RelayCommand(NewCommandHandler, CanExecuteNewCommand); } }
+        public ICommand NewDialogCommand { get { return new RelayCommand(NewDialogCommandHandler, canExecute); } }
         public ICommand DelCommand { get { return new RelayCommand(DeleteCommandHandler, CanExecuteDelCommand); } }
        
         private bool CanExecuteSaveCommand() { return canExecuteSaveCommand; }
-        protected bool CanExecuteNewCommand() { return canExecuteNewCommand; }
+        private bool CanExecuteNewCommand() { return canExecuteNewCommand; }
         private bool CanExecuteDelCommand() { return canExecuteDelCommand; }
 
         public int NumRowRecord
         {
-            get
-            {
-                return this.entitiesList.Count;
-            }
-
+            get { return this.entitiesList.Count; }
         }
 
         private void SaveCommandHandler()
         {
-            this.SaveCurrentEntity();
+            MessageBoxResult result = MessageBox.Show("Bạn muốn sửa?", "Xác nhận", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+                this.SaveCurrentEntity();
+            this.entitiesView.Refresh();
         }
 
         protected void NewCommandHandler()
         {
-            this.currentEntity = this.BuildNewEntity();
-            this.SaveCurrentEntity();
+            this.CloseNewEntityDialog();
+            this.CurrentEntity = this.newEntityViewModel.NewEntity;
             this.entitiesList.Add(this.currentEntity);
             this.entitiesView.Refresh();
             this.entitiesView.MoveCurrentToLast();
+            this.SaveCurrentEntity();
         }
 
         private void DeleteCommandHandler()
         {
             this.entitiesView.Refresh();
+        }
+
+        protected abstract void NewDialogCommandHandler();
+
+        protected bool canExecute()
+        {
+            return true;
         }
 
     }

@@ -80,7 +80,7 @@
     <Compile Include="UIHelper\RelayCommand.cs" />
     <Compile Include="UIHelper\ViewModel.cs" />
     <Compile Include="ViewModels\AssetManagementViewModel.cs" />
-    <Compile Include="ViewModels\NewRoomViewModel.cs" />
+    <Compile Include="UIHelper\NewEntityViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\RoomManagementViewModel.cs" />
     <Compile Include="ViewModels\StaffManagementViewModel.cs" />

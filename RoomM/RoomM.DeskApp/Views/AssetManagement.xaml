@@ -47,6 +47,7 @@
             </Grid>
             <DataGrid Grid.Row="2" VerticalAlignment="Stretch" Margin="0,7,0,0" 
                       AutoGenerateColumns="False" CanUserAddRows="False"
+                      IsSynchronizedWithCurrentItem="True"
                       SelectedItem="{Binding Path=CurrentEntity}"
                       ItemsSource="{Binding Path=EntitiesView}"
                       SelectedIndex="0">
@@ -62,7 +63,7 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Grid.Row="3" Content="Thêm tài sản" HorizontalAlignment="Center" Height="25" Width="120"  Command="{Binding NewAssetCommand}" />
+            <Button Grid.Row="3" Content="Thêm tài sản" HorizontalAlignment="Center" Height="25" Width="120"  Command="{Binding NewDialogCommand}" />
         </Grid>
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>

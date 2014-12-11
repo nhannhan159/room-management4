@@ -1,4 +1,6 @@
-﻿using RoomM.DeskApp.ViewModels;
+﻿using RoomM.Models.Rooms;
+using RoomM.DeskApp.UIHelper;
+using RoomM.DeskApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +28,7 @@ namespace RoomM.DeskApp.Views
             InitializeComponent();
         }
 
-        public NewRoom(NewRoomViewModel context)
+        public NewRoom(NewEntityViewModel<Room> context)
             : this()
         {
             this.DataContext = context;

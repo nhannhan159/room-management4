@@ -52,6 +52,12 @@ namespace RoomM.Business
             return deviceRepo.GetNameList();
         }
 
+        public static void AddOrEditAsset(Asset asset)
+        {
+            if (asset.ID == 0) deviceRepo.Add(asset);
+            else deviceRepo.Edit(asset);
+        }
+
         public static void Add(RoomAsset roomDevice)
         {
             roomDeviceRepo.Add(roomDevice);
@@ -70,6 +76,7 @@ namespace RoomM.Business
         // commit changes
         public static void Save()
         {
+            deviceRepo.Save();
             roomDeviceRepo.Save();
         }
 

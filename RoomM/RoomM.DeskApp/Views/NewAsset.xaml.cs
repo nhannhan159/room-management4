@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RoomM.Models.Assets;
+using RoomM.DeskApp.UIHelper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +26,13 @@ namespace RoomM.DeskApp.Views
         {
             InitializeComponent();
         }
+
+        public NewAsset(NewEntityViewModel<Asset> context)
+            : this()
+        {
+            this.DataContext = context;
+        }
+
 
     }
 }

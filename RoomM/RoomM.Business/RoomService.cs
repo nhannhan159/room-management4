@@ -50,15 +50,10 @@ namespace RoomM.Business
             return roomRepo.GetSingle(id);
         }
 
-        public static void Add(Room r)
+        public static void AddOrEdit(Room r)
         {
-            roomRepo.Add(r);
-            roomRepo.Save();
-        }
-
-        public static void Edit(Room r)
-        {
-            roomRepo.Edit(r);
+            if (r.ID == 0) roomRepo.Add(r);
+            else roomRepo.Edit(r);
         }
 
         public static void Delete(Room r)

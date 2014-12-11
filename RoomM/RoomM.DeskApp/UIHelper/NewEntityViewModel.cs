@@ -7,31 +7,27 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using RoomM.Models;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Data;
 using System.ComponentModel;
 
-namespace RoomM.DeskApp.ViewModels
+namespace RoomM.DeskApp.UIHelper
 {
-    public class NewRoomViewModel
+    public class NewEntityViewModel<T> where T : EntityBase, new()
     {
-        private Room newRoom;
+        private T newEntity;
 
-        public NewRoomViewModel()
+        public NewEntityViewModel()
         {
-            newRoom = new Room();
+            newEntity = new T();
         }
 
-        public Room NewRoom
+        public T NewEntity
         {
-            get { return this.newRoom; }
-            set { this.newRoom = value; }
-        }
-
-        public ICollectionView RoomTypesView
-        {
-            get { return CollectionViewSource.GetDefaultView(RoomService.GetAllRoomType()); }
+            get { return this.newEntity; }
+            set { this.newEntity = value; }
         }
 
         public ICommand NewCommand { get; set; }

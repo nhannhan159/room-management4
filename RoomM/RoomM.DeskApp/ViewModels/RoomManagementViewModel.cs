@@ -23,34 +23,35 @@ namespace RoomM.DeskApp.ViewModels
         }
 
         private NewRoom newRoomDialog;
-        private NewRoomViewModel newRoomViewModel { get; set; }
+        private CollectionView chatLuongFilters;
+        private CollectionView hangXeFilters;
+
+        private RoomType roomTypeFilter;
+        private RoomFilter roomFilter;
+
+        enum RoomFilter
+        {
+            RoomType,
+            All
+        };
 
         protected override List<Room> GetEntitiesList()
         {
             return new List<Room>(RoomService.GetAll());
         }
 
-        protected override Room BuildNewEntity()
-        {
-            this.newRoomDialog.Close();
-            return newRoomViewModel.NewRoom;
-        }
-
         protected override void SaveCurrentEntity()
         {
             try
             {
-                RoomService.Add(this.CurrentEntity);
-                MessageBox.Show("Tạo phòng mới thành công!");
+                RoomService.AddOrEdit(this.CurrentEntity);
+                RoomService.Save();
+                MessageBox.Show("Cập nhật dữ liệu thành công!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Tạo phòng mới thất bại! \nMã lỗi: " + ex.Message);
+                MessageBox.Show("Cập nhật dữ liệu thất bại! \nMã lỗi: " + ex.Message);
             }
-        }
-
-        protected override void SetCurrentEntity(Room entity)
-        {
         }
 
         protected override bool EntityFilter(object obj)
@@ -58,17 +59,18 @@ namespace RoomM.DeskApp.ViewModels
             return true;
         }
 
-        public ICommand NewRoomCommand { get { return new RelayCommand(newRoomCommand, canExecute); } }
-        private void newRoomCommand()
+        protected override void NewDialogCommandHandler()
         {
-            this.newRoomViewModel = new NewRoomViewModel();
-            this.newRoomViewModel.NewCommand = new RelayCommand(NewCommandHandler, CanExecuteNewCommand);
-            this.newRoomDialog = new NewRoom(this.newRoomViewModel);
+            this.newEntityViewModel = new NewEntityViewModel<Room>();
+            this.newEntityViewModel.NewCommand = this.NewCommand;
+            this.newRoomDialog = new NewRoom(this.newEntityViewModel);
+            this.newRoomDialog.roomTypeCB.ItemsSource = RoomTypesView;
             this.newRoomDialog.ShowDialog();
         }
-        private bool canExecute()
+
+        protected override void CloseNewEntityDialog()
         {
-            return true;
+            this.newRoomDialog.Close();
         }
 
         protected override void EntitySelectionChanged(object sender, EventArgs e)
