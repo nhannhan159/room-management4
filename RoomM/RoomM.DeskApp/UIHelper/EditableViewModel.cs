@@ -33,6 +33,7 @@ namespace RoomM.DeskApp.UIHelper
             this.entitiesList = this.GetEntitiesList();
             this.entitiesView = CollectionViewSource.GetDefaultView(this.entitiesList);
             this.entitiesView.CurrentChanged += EntitySelectionChanged;
+            this.entitiesView.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
             this.NameFilter = "";
             this.allPlusIsCheck = false;
             this.filterIsCheck = false;
@@ -126,7 +127,7 @@ namespace RoomM.DeskApp.UIHelper
 
         private void SaveCommandHandler()
         {
-            MessageBoxResult result = MessageBox.Show("Bạn muốn sửa thong tin phòng?", "Xác nhận sửa thông tin", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("Bạn muốn sửa thông tin phòng?", "Xác nhận sửa thông tin", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
                 this.SaveCurrentEntity();
             this.entitiesView.Refresh();
@@ -136,10 +137,10 @@ namespace RoomM.DeskApp.UIHelper
         {
             this.CloseNewEntityDialog();
             this.CurrentEntity = this.newEntityViewModel.NewEntity;
+            this.SaveCurrentEntity();
             this.entitiesList.Add(this.currentEntity);
             this.entitiesView.Refresh();
             this.entitiesView.MoveCurrentToLast();
-            this.SaveCurrentEntity();
         }
 
         private void DeleteCommandHandler()
