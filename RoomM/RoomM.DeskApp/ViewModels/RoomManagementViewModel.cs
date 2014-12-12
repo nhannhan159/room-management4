@@ -55,6 +55,12 @@ namespace RoomM.DeskApp.ViewModels
             }
         }
 
+        protected override void DeleteCurrentEntity()
+        {
+            this.CurrentEntity.IsUsing = false;
+            this.SaveCurrentEntity();
+        }
+
         protected override bool FilterAll(Room entity)
         {
             return entity.IsUsing;

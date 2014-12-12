@@ -62,11 +62,24 @@
                     <DataGridTemplateColumn Width="0.2*" Header="Hành động">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Xóa" Width="50" Height="20" Command="{Binding DelCommand}"/>
+                                <Button Content="Xóa" Width="50" Height="20" 
+                                        Command="{Binding Path=DataContext.DelCommand,
+                                                          RelativeSource={RelativeSource FindAncestor, 
+                                                                                         AncestorType={x:Type DataGrid}}}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsUsing}" Value="false">
+                                <Setter Property="Background" Value="LightGray"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding IsUsing}" Value="true"/>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.Resources>
             </DataGrid>
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>

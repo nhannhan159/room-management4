@@ -24,7 +24,6 @@ namespace RoomM.DeskApp.UIHelper
         private string namefilter;
         protected bool canExecuteSaveCommand;
         protected bool canExecuteNewCommand;
-        protected bool canExecuteDelCommand;
         protected NewEntityViewModel<T> newEntityViewModel;
 
         protected EditableViewModel()
@@ -40,12 +39,13 @@ namespace RoomM.DeskApp.UIHelper
             this.entitiesView.Filter += EntityFilter;
             this.canExecuteNewCommand = true;
             this.canExecuteSaveCommand = false;
-            this.canExecuteDelCommand = false;
         }
 
         protected abstract List<T> GetEntitiesList();
         protected abstract void SaveCurrentEntity();
+        protected abstract void DeleteCurrentEntity();
         protected abstract void CloseNewEntityDialog();
+
 
         public T CurrentEntity
         {
@@ -110,14 +110,13 @@ namespace RoomM.DeskApp.UIHelper
         public ICommand SaveCommand { get { return new RelayCommand(SaveCommandHandler, CanExecuteSaveCommand); } }
         public ICommand NewCommand { get { return new RelayCommand(NewCommandHandler, CanExecuteNewCommand); } }
         public ICommand NewDialogCommand { get { return new RelayCommand(NewDialogCommandHandler, CanExecute); } }
-        public ICommand DelCommand { get { return new RelayCommand(DeleteCommandHandler, CanExecuteDelCommand); } }
+        public ICommand DelCommand { get { return new RelayCommand(DeleteCommandHandler, CanExecute); } }
         public ICommand FilterCommand { get { return new RelayCommand(FilterCommandHandler, CanExecute); } }
         public ICommand FilterAllCommand { get { return new RelayCommand(FilterAllCommandHandler, CanExecute); } }
         public ICommand FilterAllPlusCommand { get { return new RelayCommand(FilterAllPlusCommandHandler, CanExecute); } }
        
         private bool CanExecuteSaveCommand() { return canExecuteSaveCommand; }
         private bool CanExecuteNewCommand() { return canExecuteNewCommand; }
-        private bool CanExecuteDelCommand() { return canExecuteDelCommand; }
         private bool CanExecute() { return true; }
 
         public int NumRowRecord
@@ -145,6 +144,9 @@ namespace RoomM.DeskApp.UIHelper
 
         private void DeleteCommandHandler()
         {
+            MessageBoxResult result = MessageBox.Show("Bạn muốn xóa phòng này à?", "Xác nhận xóa phòng", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+                this.DeleteCurrentEntity();
             this.entitiesView.Refresh();
         }
 

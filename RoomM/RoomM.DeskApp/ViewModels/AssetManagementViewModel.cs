@@ -43,6 +43,12 @@ namespace RoomM.DeskApp.ViewModels
             }
         }
 
+        protected override void DeleteCurrentEntity()
+        {
+            this.CurrentEntity.IsUsing = false;
+            this.SaveCurrentEntity();
+        }
+
         protected override void NewDialogCommandHandler()
         {
             this.newEntityViewModel = new NewEntityViewModel<Asset>();
