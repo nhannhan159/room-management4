@@ -38,14 +38,14 @@
                     <ColumnDefinition Width="0.25*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.RowSpan="2" Grid.Column="0" Content="Lọc nội dung:"/>
-                <Button Grid.Row="0" Grid.Column="3" Content="Lọc" Width="80" Height="20"/>
-                <Button Grid.Row="1" Grid.Column="3" Content="Hiển thị hết" Width="80" Height="20" ToolTip="Không lọc"/>
+                <Button Grid.Row="0" Grid.Column="3" Content="Lọc" Width="80" Height="20" Command="{Binding FilterCommand}"/>
+                <Button Grid.Row="1" Grid.Column="3" Content="Hiển thị hết" Width="80" Height="20" ToolTip="Không lọc" Command="{Binding FilterAllCommand}"/>
                 <Label Grid.Row="0" Grid.Column="1" Content="theo tên:"/>
                 <Label Grid.Row="1" Grid.Column="1" Content="theo loại phòng:"/>
-                <TextBox Grid.Row="0" Grid.Column="2" Margin="3" Height="20"/>
-                <ComboBox Grid.Row="1" Grid.Column="2" Margin="3" Height="20"/>
+                <TextBox Grid.Row="0" Grid.Column="2" Margin="3" Height="20" Text="{Binding NameFilter}"/>
+                <ComboBox Grid.Row="1" Grid.Column="2" Margin="3" Height="20" ItemsSource="{Binding RoomTypeFilters}" SelectedItem="{Binding RoomTypeFilter}" DisplayMemberPath="Name"/>
                 <WrapPanel Grid.Row="2" Grid.ColumnSpan="4">
-                    <CheckBox Margin="10,5,5,5"/>
+                    <CheckBox Margin="10,5,5,5" Command="{Binding FilterAllPlusCommand}" IsChecked="{Binding AllPlusIsCheck}"/>
                     <TextBlock Margin="0,5,5,5" Text="Hiện thị các phòng đã xóa" FontStyle="Italic"/>
                 </WrapPanel> 
             </Grid>

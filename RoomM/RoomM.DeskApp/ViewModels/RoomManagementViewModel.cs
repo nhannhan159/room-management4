@@ -1,5 +1,6 @@
 ﻿using RoomM.DeskApp.UIHelper;
 using RoomM.Models.Rooms;
+using RoomM.Models.Assets;
 using RoomM.Business;
 using RoomM.DeskApp.Views;
 using System;
@@ -20,20 +21,20 @@ namespace RoomM.DeskApp.ViewModels
         public RoomManagementViewModel()
             : base()
         {
+            List<RoomType> roomTypeList = new List<RoomType>(RoomService.GetAllRoomType());
+            roomTypeList.Add(new RoomType("Tất cả"));
+            this.roomTypeFilters = new CollectionView(roomTypeList);
+            this.RoomTypeFilter = roomTypeList[roomTypeList.Count - 1];
         }
 
         private NewRoom newRoomDialog;
-        private CollectionView chatLuongFilters;
-        private CollectionView hangXeFilters;
-
         private RoomType roomTypeFilter;
-        private RoomFilter roomFilter;
+        private CollectionView roomTypeFilters;
 
-        enum RoomFilter
+        public CollectionView RoomTypeFilters
         {
-            RoomType,
-            All
-        };
+            get { return this.roomTypeFilters; }
+        }
 
         protected override List<Room> GetEntitiesList()
         {
@@ -54,9 +55,24 @@ namespace RoomM.DeskApp.ViewModels
             }
         }
 
-        protected override bool EntityFilter(object obj)
+        protected override bool FilterAll(Room entity)
         {
-            return true;
+            return entity.IsUsing;
+        }
+
+        protected override bool FilterNormal(Room entity)
+        {
+            bool filter = true;
+            filter = filter && (entity.Name.Contains(this.NameFilter));
+            if (this.RoomTypeFilter.Name != "Tất cả")
+                filter = filter && (entity.RoomType.Name == this.RoomTypeFilter.Name);
+            return filter;
+        }
+
+        public RoomType RoomTypeFilter
+        {
+            get { return this.roomTypeFilter; }
+            set { this.roomTypeFilter = value; }
         }
 
         protected override void NewDialogCommandHandler()
@@ -87,17 +103,32 @@ namespace RoomM.DeskApp.ViewModels
 
         public ICollectionView CurrentRoomCalendarView
         {
-            get { return CollectionViewSource.GetDefaultView(CurrentEntity.RoomCalendars); }
+            get
+            {
+                if (CurrentEntity == null)
+                    return CollectionViewSource.GetDefaultView(new List<RoomCalendar>());
+                return CollectionViewSource.GetDefaultView(CurrentEntity.RoomCalendars);
+            }
         }
 
         public ICollectionView CurrentRoomAssetView
         {
-            get { return CollectionViewSource.GetDefaultView(CurrentEntity.RoomAssets); }
+            get
+            {
+                if (CurrentEntity == null)
+                    return CollectionViewSource.GetDefaultView(new List<RoomAsset>());
+                return CollectionViewSource.GetDefaultView(CurrentEntity.RoomAssets);
+            }
         }
 
         public ICollectionView CurrentRoomHistoryView
         {
-            get { return CollectionViewSource.GetDefaultView(CurrentEntity.AssetHistories); }
+            get
+            {
+                if (CurrentEntity == null)
+                    return CollectionViewSource.GetDefaultView(new List<RoomAssetHistory>());
+                return CollectionViewSource.GetDefaultView(CurrentEntity.AssetHistories);
+            }
         }
 
     }

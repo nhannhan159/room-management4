@@ -16,16 +16,15 @@ namespace RoomM.DeskApp.UIHelper
         : ViewModel where T : EntityBase, new()
     {
 
-        private const string currentEntityPropertyName = "CurrentEntity";
-
+        private bool allPlusIsCheck;
+        private bool filterIsCheck;
         private T currentEntity;
         private List<T> entitiesList;
         private ICollectionView entitiesView;
-        private string _filterString;
-        private bool _allSelected;
-        protected bool canExecuteSaveCommand = true;
-        protected bool canExecuteNewCommand = true;
-        protected bool canExecuteDelCommand = true;
+        private string namefilter;
+        protected bool canExecuteSaveCommand;
+        protected bool canExecuteNewCommand;
+        protected bool canExecuteDelCommand;
         protected NewEntityViewModel<T> newEntityViewModel;
 
         protected EditableViewModel()
@@ -35,17 +34,20 @@ namespace RoomM.DeskApp.UIHelper
             this.entitiesList = this.GetEntitiesList();
             this.entitiesView = CollectionViewSource.GetDefaultView(this.entitiesList);
             this.entitiesView.CurrentChanged += EntitySelectionChanged;
+            this.NameFilter = "";
+            this.allPlusIsCheck = false;
+            this.filterIsCheck = false;
             this.entitiesView.Filter += EntityFilter;
+            this.canExecuteNewCommand = true;
             this.canExecuteSaveCommand = false;
             this.canExecuteDelCommand = false;
         }
 
         protected abstract List<T> GetEntitiesList();
         protected abstract void SaveCurrentEntity();
-        protected abstract bool EntityFilter(object obj);
         protected abstract void CloseNewEntityDialog();
 
-        public virtual T CurrentEntity
+        public T CurrentEntity
         {
             get { return this.currentEntity; }
             set
@@ -54,9 +56,8 @@ namespace RoomM.DeskApp.UIHelper
                 {
                     this.currentEntity = value;
                     this.canExecuteSaveCommand = (this.currentEntity != null);
-                    this.OnPropertyChanged(EditableViewModel<T>.currentEntityPropertyName);
+                    this.OnPropertyChanged("CurrentEntity");
                 }
-                this.canExecuteDelCommand = GetNumSelected() > 0;
             }
         }
 
@@ -65,19 +66,34 @@ namespace RoomM.DeskApp.UIHelper
             Console.WriteLine("CHANGED...");
         }
 
-        public string Filter
+        protected virtual bool FilterAll(T entity) { return true; }
+        protected virtual bool FilterNormal(T entity) { return true; }
+
+        private bool EntityFilter(object obj)
         {
-            get { return this._filterString; }
+            T entity = obj as T;
+            bool filter=true;
+            if (!this.allPlusIsCheck)
+                filter = filter && this.FilterAll(entity);
+            if (this.filterIsCheck)
+                filter = filter && this.FilterNormal(entity);
+            return filter;
+        }
+
+        public bool AllPlusIsCheck
+        {
+            get { return this.allPlusIsCheck; }
             set
             {
-                this._filterString = value;
-                OnPropertyChanged("Filter");
-                this.entitiesView.Refresh();
+                this.allPlusIsCheck = value;
+                OnPropertyChanged("AllPlusIsCheck");
             }
         }
 
-        protected virtual int GetNumSelected() {
-            return 0;
+        public string NameFilter
+        {
+            get { return this.namefilter; }
+            set { this.namefilter = value; }
         }
 
         protected List<T> EntitiesList
@@ -93,12 +109,16 @@ namespace RoomM.DeskApp.UIHelper
 
         public ICommand SaveCommand { get { return new RelayCommand(SaveCommandHandler, CanExecuteSaveCommand); } }
         public ICommand NewCommand { get { return new RelayCommand(NewCommandHandler, CanExecuteNewCommand); } }
-        public ICommand NewDialogCommand { get { return new RelayCommand(NewDialogCommandHandler, canExecute); } }
+        public ICommand NewDialogCommand { get { return new RelayCommand(NewDialogCommandHandler, CanExecute); } }
         public ICommand DelCommand { get { return new RelayCommand(DeleteCommandHandler, CanExecuteDelCommand); } }
+        public ICommand FilterCommand { get { return new RelayCommand(FilterCommandHandler, CanExecute); } }
+        public ICommand FilterAllCommand { get { return new RelayCommand(FilterAllCommandHandler, CanExecute); } }
+        public ICommand FilterAllPlusCommand { get { return new RelayCommand(FilterAllPlusCommandHandler, CanExecute); } }
        
         private bool CanExecuteSaveCommand() { return canExecuteSaveCommand; }
         private bool CanExecuteNewCommand() { return canExecuteNewCommand; }
         private bool CanExecuteDelCommand() { return canExecuteDelCommand; }
+        private bool CanExecute() { return true; }
 
         public int NumRowRecord
         {
@@ -107,13 +127,13 @@ namespace RoomM.DeskApp.UIHelper
 
         private void SaveCommandHandler()
         {
-            MessageBoxResult result = MessageBox.Show("Bạn muốn sửa?", "Xác nhận", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("Bạn muốn sửa thong tin phòng?", "Xác nhận sửa thông tin", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
                 this.SaveCurrentEntity();
             this.entitiesView.Refresh();
         }
 
-        protected void NewCommandHandler()
+        private void NewCommandHandler()
         {
             this.CloseNewEntityDialog();
             this.CurrentEntity = this.newEntityViewModel.NewEntity;
@@ -128,11 +148,23 @@ namespace RoomM.DeskApp.UIHelper
             this.entitiesView.Refresh();
         }
 
-        protected abstract void NewDialogCommandHandler();
+        protected virtual void NewDialogCommandHandler() { }
 
-        protected bool canExecute()
+        private void FilterCommandHandler()
         {
-            return true;
+            this.filterIsCheck = true;
+            this.entitiesView.Refresh();
+        }
+
+        private void FilterAllCommandHandler()
+        {
+            this.filterIsCheck = false;
+            this.entitiesView.Refresh();
+        }
+
+        private void FilterAllPlusCommandHandler()
+        {
+            this.entitiesView.Refresh();
         }
 
     }

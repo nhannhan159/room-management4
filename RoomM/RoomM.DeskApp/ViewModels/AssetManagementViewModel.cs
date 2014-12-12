@@ -43,11 +43,6 @@ namespace RoomM.DeskApp.ViewModels
             }
         }
 
-        protected override bool EntityFilter(object obj)
-        {
-            return true;
-        }
-
         protected override void NewDialogCommandHandler()
         {
             this.newEntityViewModel = new NewEntityViewModel<Asset>();

@@ -12,5 +12,16 @@ namespace RoomM.Models.Rooms
     {
         public string Name { get; set; }
         public virtual ICollection<Room> Rooms { get; set; }
+
+        public RoomType()
+        {
+            this.Rooms = new List<Room>();
+        }
+
+        public RoomType(string name)
+        {
+            this.Name = name;
+            this.Rooms = new List<Room>();
+        }
     }
 }
