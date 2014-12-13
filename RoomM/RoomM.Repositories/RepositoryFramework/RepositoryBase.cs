@@ -86,7 +86,7 @@ namespace RoomM.Repositories.RepositoryFramework
             {
                 throw new ArgumentException("Cannot add a null entity.");
             }
-
+            
             var entry = _entities.Entry<T>(entity);
 
             if (entry.State == EntityState.Detached)

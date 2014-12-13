@@ -211,6 +211,7 @@ namespace RoomM.Repositories
 
             context.Entry(roomcalendarstatus1).State = EntityState.Added;
             context.Entry(roomcalendarstatus2).State = EntityState.Added;
+            context.Entry(roomcalendarstatus3).State = EntityState.Added;
 
             context.Entry(device1).State = EntityState.Added;
             context.Entry(device2).State = EntityState.Added;

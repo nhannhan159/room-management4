@@ -180,18 +180,28 @@
                         </Grid>
                         <DataGrid Grid.Row="1" VerticalAlignment="Stretch" Margin="0,7,0,0" 
                                   AutoGenerateColumns="False" CanUserAddRows="False"
-                                  ItemsSource="{Binding Path=CurrentRoomCalendarView}">
+                                  ItemsSource="{Binding Path=CurrentRoomCalendarView}"
+                                  SelectedItem="{Binding Path=CurrentRoomCalendar}"
+                                  SelectedIndex="0">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Ngày đăng ký" Width="0.2*" Binding="{Binding Date, StringFormat=\{0:dd/MM/yyyy \}}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Tiết bắt đầu" Width="0.15*" IsReadOnly="True" Binding="{Binding Start}"/>
+                                <DataGridTextColumn Header="Ngày" Width="0.15*" Binding="{Binding Date, StringFormat=\{0:dd/MM/yyyy \}}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Tiết đầu" Width="0.125*" IsReadOnly="True" Binding="{Binding Start}"/>
                                 <DataGridTextColumn Header="Số tiết" Width="0.125*" IsReadOnly="True" Binding="{Binding Length}"/>
-                                <DataGridTextColumn Header="Người đăng ký" Width="0.25*" IsReadOnly="True" Binding="{Binding Staff.Name}"/>
-                                <DataGridTemplateColumn Header="Trạng thái" Width="0.3*">
+                                <DataGridTextColumn Header="Người đăng ký" Width="0.175*" IsReadOnly="True" Binding="{Binding Staff.Name}"/>
+                                <DataGridTextColumn Header="Trạng thái" Width="0.15*" IsReadOnly="True" Binding="{Binding RoomCalendarStatus.Name}"/>
+                                <DataGridTemplateColumn Header="Đổi trạng thái" Width="0.3*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <WrapPanel>
-                                                <TextBlock Height="20" Width="70"/>
-                                                <Button Height="20" Width="50" Content="Sửa"/>
+                                                <ComboBox Height="20" Width="100" Margin="3,0,3,0" 
+                                                          ItemsSource="{Binding Path=DataContext.RoomCalendarStatusView,
+                                                                                RelativeSource={RelativeSource FindAncestor, 
+                                                                                                               AncestorType={x:Type DataGrid}}}" 
+                                                          SelectedValue="{Binding RoomCalendarStatusId, Mode=TwoWay}" SelectedValuePath="ID" DisplayMemberPath="Name" Padding="5,0,0,0"/>
+                                                <Button Height="20" Width="40" Content="Đổi"
+                                                        Command="{Binding Path=DataContext.ChangeCalendarStatusCommand,
+                                                                          RelativeSource={RelativeSource FindAncestor, 
+                                                                                                         AncestorType={x:Type DataGrid}}}"/>
                                             </WrapPanel>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>

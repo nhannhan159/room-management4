@@ -46,11 +46,13 @@ namespace RoomM.DeskApp.ViewModels
             rhvTypeList.Add(new HistoryType("Tất cả"));
             this.rhvTypeFilters=new CollectionView(rhvTypeList);
             this.rhvTypeFilter=rhvTypeList[rhvTypeList.Count-1];
+            this.currentRoomCalendar = default(RoomCalendar);
         }
 
         private NewRoom newRoomDialog;
         private RoomType roomTypeFilter;
         private CollectionView roomTypeFilters;
+        private RoomCalendar currentRoomCalendar;
         private ICollectionView currentRoomCalendarView;
         private ICollectionView currentRoomAssetView;
         private ICollectionView currentRoomHistoryView;
@@ -166,6 +168,24 @@ namespace RoomM.DeskApp.ViewModels
             get { return CollectionViewSource.GetDefaultView(RoomService.GetAllRoomType()); }
         }
 
+        public ICollectionView RoomCalendarStatusView
+        {
+            get { return CollectionViewSource.GetDefaultView(RoomCalendarService.GetAllStatus()); }
+        }
+
+        public RoomCalendar CurrentRoomCalendar
+        {
+            get { return this.currentRoomCalendar; }
+            set
+            {
+                if (this.currentRoomCalendar != value)
+                {
+                    this.currentRoomCalendar = value;
+                    this.OnPropertyChanged("CurrentRoomCalendar");
+                }
+            }
+        }
+
         public ICollectionView CurrentRoomCalendarView
         {
             get { return this.currentRoomCalendarView; }
@@ -232,6 +252,7 @@ namespace RoomM.DeskApp.ViewModels
         public ICommand RoomCalendarViewFilterAllCommand { get { return new RelayCommand(RoomCalendarViewFilterAllCommandHandler, CanExecute); } }
         public ICommand RoomAssetViewFilterAllCommand { get { return new RelayCommand(RoomAssetViewFilterAllCommandHandler, CanExecute); } }
         public ICommand RoomHistoryViewFilterAllCommand { get { return new RelayCommand(RoomHistoryViewFilterAllCommandHandler, CanExecute); } }
+        public ICommand ChangeCalendarStatusCommand { get { return new RelayCommand(ChangeCalendarStatusCommandHandler, CanExecute); } }
 
         private void RoomCalendarViewFilterCommandHandler()
         {
@@ -267,6 +288,26 @@ namespace RoomM.DeskApp.ViewModels
         {
             this.roomHistoryViewFilterIsCheck = false;
             this.currentRoomHistoryView.Refresh();
+        }
+
+        private void ChangeCalendarStatusCommandHandler()
+        {
+            MessageBoxResult result = System.Windows.MessageBox.Show("Bạn muốn đổi trạng thái đăng ký?", "Đổi trạng thái đăng ký", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                //try
+                {
+                    RoomCalendarService.Edit(this.CurrentRoomCalendar);
+                    RoomCalendarService.Save();
+                    this.OnPropertyChanged("CurrentRoomCalendar");
+                    //System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thành công!");
+                }
+                //catch (Exception ex)
+                {
+                    //System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thất bại! \nMã lỗi: " + ex.Message);
+                }
+            }
+            this.currentRoomCalendarView.Refresh();
         }
 
         public DateTime RcvDateFromFilter
