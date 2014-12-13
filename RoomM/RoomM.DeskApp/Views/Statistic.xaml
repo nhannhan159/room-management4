@@ -31,14 +31,14 @@
 
                     </StackPanel>
                     <chartingToolkit:Chart Grid.Row="1" Height="450" 
-		             Margin="5,10,5,10" Name="fusingBChart" Title="Tần xuất sử dụng phòng" 
+		             Margin="5,10,5,10" Name="fusingBChart" Title="Tần xuất đăng ký phòng" 
 		            VerticalAlignment="Bottom" FontSize="12pt" >
                         <chartingToolkit:ColumnSeries DependentValuePath="Value" 
 		        IndependentValuePath="Name" ItemsSource="{Binding GetRegisterStatistic}" Title="Số lần đăng kí" />
                     </chartingToolkit:Chart>
                 </Grid>
             </TabItem>
-            <TabItem Header="Tần xuất phòng sử dụng" Width="200">
+            <TabItem Header="Tần xuất sử dụng phòng" Width="200">
                 <Grid Margin="40,40,40,40">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
@@ -55,10 +55,10 @@
                         
                     </StackPanel>
                     <chartingToolkit:Chart Grid.Row="1" Height="450" 
-		             Margin="5,10,5,10" Name="fusingChart" Title="Tần xuất đăng kí phòng" 
+		             Margin="5,10,5,10" Name="fusingChart" Title="Tần xuất sử dụng phòng" 
 		            VerticalAlignment="Bottom" FontSize="12pt" >
                         <chartingToolkit:ColumnSeries DependentValuePath="Value" 
-		        IndependentValuePath="Name" ItemsSource="{Binding GetStaffStatistic}" Title="Số lần đăng kí" />
+		        IndependentValuePath="Name" ItemsSource="{Binding GetStaffStatistic}" Title="Số lần sử dụng" />
                     </chartingToolkit:Chart>
                 </Grid>
             </TabItem>

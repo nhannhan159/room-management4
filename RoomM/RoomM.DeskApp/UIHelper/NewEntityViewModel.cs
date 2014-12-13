@@ -1,6 +1,5 @@
 ﻿using RoomM.DeskApp.UIHelper;
 using RoomM.Models.Rooms;
-using RoomM.Business;
 using RoomM.DeskApp.Views;
 using System;
 using System.Collections.Generic;

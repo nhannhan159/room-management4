@@ -308,7 +308,7 @@
                             <Label Grid.Row="2" Grid.Column="3" Content="phân loại:"/>
                             <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding RhvDateFromFilter,StringFormat='dd/MM/yyy'}"/>
                             <DatePicker Grid.Row="1" Grid.Column="4" SelectedDate="{Binding RhvDateToFilter,StringFormat='dd/MM/yyy'}"/>
-                            <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Height="20" Text="{Binding RavAssetNameFilter}"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" Margin="3" Height="20" Text="{Binding RhvAssetNameFilter}"/>
                             <ComboBox Grid.Row="2" Grid.Column="4" Margin="3" Height="20" ItemsSource="{Binding RhvTypeFilters}" SelectedItem="{Binding RhvTypeFilter}" DisplayMemberPath="Name"/>
                         </Grid>
                         <DataGrid Grid.Row="1" VerticalAlignment="Stretch" Margin="0,7,0,0" 

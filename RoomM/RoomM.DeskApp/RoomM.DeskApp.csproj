@@ -178,10 +178,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RoomM.Business\RoomM.Business.csproj">
-      <Project>{81d8ecc8-a067-49b2-b061-c1d08b99fbfc}</Project>
-      <Name>RoomM.Business</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RoomM.Models\RoomM.Models.csproj">
       <Project>{a2cd9ea0-9e0c-4b0a-87f5-9baddc4f9422}</Project>
       <Name>RoomM.Models</Name>

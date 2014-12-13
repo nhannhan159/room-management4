@@ -14,8 +14,8 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" IsMainMenu="True" FontSize="12pt" HorizontalAlignment="Left" VerticalAlignment="Top" Background="WhiteSmoke">
-            <MenuItem Header="Tài khoản"/>
+        <Menu Grid.Row="0" IsMainMenu="True" FontSize="12pt" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="WhiteSmoke">
+            <MenuItem Header="Cài đặt"/>
             <MenuItem Header="Trợ giúp"/>
         </Menu>
         <TabControl Grid.Row="1" TabStripPlacement="Left" Margin="0,5,0,0">
@@ -65,7 +65,7 @@
                 <Frame NavigationUIVisibility="Hidden" Content="Frame" Margin="5" Grid.Column="2" Source="Statistic.xaml"/>
             </TabItem>
         </TabControl>
-        <StatusBar Grid.Row="2" Background="#9ACFE3"/>
+        <StatusBar Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
     </Grid>
 </Window>
