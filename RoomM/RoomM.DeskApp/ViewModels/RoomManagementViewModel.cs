@@ -15,15 +15,10 @@ using System.Windows.Data;
 using System.ComponentModel;
 using System.Windows.Forms;
 
-
-
-
 namespace RoomM.DeskApp.ViewModels
 {
     class RoomManagementViewModel : EditableViewModel<Room>
     {
-        
-
         public RoomManagementViewModel()
             : base()
         {
@@ -31,11 +26,50 @@ namespace RoomM.DeskApp.ViewModels
             roomTypeList.Add(new RoomType("Tất cả"));
             this.roomTypeFilters = new CollectionView(roomTypeList);
             this.RoomTypeFilter = roomTypeList[roomTypeList.Count - 1];
+            this.roomCalendarViewFilterIsCheck = false;
+            this.roomAssetViewFilterIsCheck = false;
+            this.roomHistoryViewFilterIsCheck = false;
+            this.rcvDateFromFilter=new DateTime(2000,1,1);
+            this.rcvDateToFilter=DateTime.Now;
+            this.rcvPeriodsFilter=0;
+            this.rcvBeginTimeFilter=0;
+            this.rcvRegistrantFilter="";
+            List<RoomCalendarStatus> rcvStatusList=new List<RoomCalendarStatus>(RoomCalendarService.GetAllStatus());
+            rcvStatusList.Add(new RoomCalendarStatus("Tất cả"));
+            this.rcvStatusFilters=new CollectionView(rcvStatusList);
+            this.rcvStatusFilter=rcvStatusList[rcvStatusList.Count-1];
+            this.ravAssetNameFilter="";
+            this.rhvDateFromFilter=new DateTime(2000,1,1);
+            this.rhvDateToFilter=DateTime.Now;
+            this.rhvAssetNameFilter = "";
+            List<HistoryType> rhvTypeList=new List<HistoryType>(RoomAssetService.GetAllAssetHistoryType());
+            rhvTypeList.Add(new HistoryType("Tất cả"));
+            this.rhvTypeFilters=new CollectionView(rhvTypeList);
+            this.rhvTypeFilter=rhvTypeList[rhvTypeList.Count-1];
         }
 
         private NewRoom newRoomDialog;
         private RoomType roomTypeFilter;
         private CollectionView roomTypeFilters;
+        private ICollectionView currentRoomCalendarView;
+        private ICollectionView currentRoomAssetView;
+        private ICollectionView currentRoomHistoryView;
+        private bool roomCalendarViewFilterIsCheck;
+        private bool roomAssetViewFilterIsCheck;
+        private bool roomHistoryViewFilterIsCheck;
+        private DateTime rcvDateFromFilter;
+        private DateTime rcvDateToFilter;
+        private int rcvPeriodsFilter;
+        private string rcvRegistrantFilter;
+        private int rcvBeginTimeFilter;
+        private RoomCalendarStatus rcvStatusFilter;
+        private CollectionView rcvStatusFilters;
+        private string ravAssetNameFilter;
+        private DateTime rhvDateFromFilter;
+        private DateTime rhvDateToFilter;
+        private string rhvAssetNameFilter;
+        private HistoryType rhvTypeFilter;
+        private CollectionView rhvTypeFilters;
 
         public CollectionView RoomTypeFilters
         {
@@ -67,12 +101,12 @@ namespace RoomM.DeskApp.ViewModels
             this.SaveCurrentEntity();
         }
 
-        protected override bool FilterAll(Room entity)
+        protected override bool IsUsing(Room entity) 
         {
             return entity.IsUsing;
         }
 
-        protected override bool FilterNormal(Room entity)
+        protected override bool GeneralFilter(Room entity)
         {
             bool filter = true;
             filter = filter && (entity.Name.Contains(this.NameFilter));
@@ -108,6 +142,25 @@ namespace RoomM.DeskApp.ViewModels
             this.OnPropertyChanged("CurrentRoomHistoryView");
         }
 
+        protected override void SetAdditionViewChange()
+        {
+            if (this.CurrentEntity == null)
+            {
+                this.currentRoomCalendarView = CollectionViewSource.GetDefaultView(new List<RoomCalendar>());
+                this.currentRoomAssetView = CollectionViewSource.GetDefaultView(new List<RoomAsset>());
+                this.currentRoomHistoryView = CollectionViewSource.GetDefaultView(new List<RoomAssetHistory>());
+            }
+            else
+            {
+                this.currentRoomCalendarView = CollectionViewSource.GetDefaultView(this.CurrentEntity.RoomCalendars);
+                this.currentRoomAssetView = CollectionViewSource.GetDefaultView(this.CurrentEntity.RoomAssets);
+                this.currentRoomHistoryView = CollectionViewSource.GetDefaultView(this.CurrentEntity.AssetHistories);
+            }
+            this.currentRoomCalendarView.Filter += RoomCalendarViewFilter;
+            this.currentRoomAssetView.Filter += RoomAssetViewFilter;
+            this.currentRoomHistoryView.Filter += RoomHistoryViewFilter;
+        }
+
         public ICollectionView RoomTypesView
         {
             get { return CollectionViewSource.GetDefaultView(RoomService.GetAllRoomType()); }
@@ -115,35 +168,182 @@ namespace RoomM.DeskApp.ViewModels
 
         public ICollectionView CurrentRoomCalendarView
         {
-            get
-            {
-                if (CurrentEntity == null)
-                    return CollectionViewSource.GetDefaultView(new List<RoomCalendar>());
-                return CollectionViewSource.GetDefaultView(CurrentEntity.RoomCalendars);
-            }
+            get { return this.currentRoomCalendarView; }
         }
 
         public ICollectionView CurrentRoomAssetView
         {
-            get
-            {
-                if (CurrentEntity == null)
-                    return CollectionViewSource.GetDefaultView(new List<RoomAsset>());
-                return CollectionViewSource.GetDefaultView(CurrentEntity.RoomAssets);
-            }
+            get { return this.currentRoomAssetView; }
         }
 
         public ICollectionView CurrentRoomHistoryView
         {
-            get
-            {
-                if (CurrentEntity == null)
-                    return CollectionViewSource.GetDefaultView(new List<RoomAssetHistory>());
-                return CollectionViewSource.GetDefaultView(CurrentEntity.AssetHistories);
-            }
+            get { return this.currentRoomHistoryView; }
         }
 
+        private bool RoomCalendarViewFilter(object obj)
+        {
+            RoomCalendar entity = obj as RoomCalendar;
+            bool filter = true;
+            if (this.roomCalendarViewFilterIsCheck)
+            {
+                filter = filter && (entity.Date >= this.RcvDateFromFilter);
+                filter = filter && (entity.Date <= this.RcvDateToFilter);
+                filter = filter && entity.Staff.Name.Contains(this.RcvRegistrantFilter);
+                if (this.RcvPeriodsFilter > 0)
+                    filter = filter && (entity.Length == this.RcvPeriodsFilter);
+                if (this.RcvBeginTimeFilter > 0)
+                    filter = filter && (entity.Start == this.RcvBeginTimeFilter);
+                if (this.RcvStatusFilter.Name != "Tất cả")
+                    filter = filter && (entity.RoomCalendarStatus.Name == this.RcvStatusFilter.Name);
+            }
+            return filter;
+        }
 
+        private bool RoomAssetViewFilter(object obj)
+        {
+            RoomAsset entity = obj as RoomAsset;
+            bool filter = true;
+            if (this.roomAssetViewFilterIsCheck)
+            {
+                filter = filter && entity.Asset.Name.Contains(this.RavAssetNameFilter);
+            }
+            return filter;
+        }
+
+        private bool RoomHistoryViewFilter(object obj)
+        {
+            RoomAssetHistory entity = obj as RoomAssetHistory;
+            bool filter = true;
+            if (this.roomHistoryViewFilterIsCheck)
+            {
+                filter = filter && (entity.Date >= this.RhvDateFromFilter);
+                filter = filter && (entity.Date <= this.RhvDateToFilter);
+                filter = filter && entity.Asset.Name.Contains(this.RhvAssetNameFilter);
+                if (this.RhvTypeFilter.Name != "Tất cả")
+                    filter = filter && (entity.HistoryType.Name == this.RhvTypeFilter.Name);
+            }
+            return filter;
+        }
+
+        public ICommand RoomCalendarViewFilterCommand { get { return new RelayCommand(RoomCalendarViewFilterCommandHandler, CanExecute); } }
+        public ICommand RoomAssetViewFilterCommand { get { return new RelayCommand(RoomAssetViewFilterCommandHandler, CanExecute); } }
+        public ICommand RoomHistoryViewFilterCommand { get { return new RelayCommand(RoomHistoryViewFilterCommandHandler, CanExecute); } }
+        public ICommand RoomCalendarViewFilterAllCommand { get { return new RelayCommand(RoomCalendarViewFilterAllCommandHandler, CanExecute); } }
+        public ICommand RoomAssetViewFilterAllCommand { get { return new RelayCommand(RoomAssetViewFilterAllCommandHandler, CanExecute); } }
+        public ICommand RoomHistoryViewFilterAllCommand { get { return new RelayCommand(RoomHistoryViewFilterAllCommandHandler, CanExecute); } }
+
+        private void RoomCalendarViewFilterCommandHandler()
+        {
+            this.roomCalendarViewFilterIsCheck = true;
+            this.currentRoomCalendarView.Refresh();
+        }
+
+        private void RoomAssetViewFilterCommandHandler()
+        {
+            this.roomAssetViewFilterIsCheck = true;
+            this.currentRoomAssetView.Refresh();
+        }
+
+        private void RoomHistoryViewFilterCommandHandler()
+        {
+            this.roomHistoryViewFilterIsCheck = true;
+            this.currentRoomHistoryView.Refresh();
+        }
+
+        private void RoomCalendarViewFilterAllCommandHandler()
+        {
+            this.roomCalendarViewFilterIsCheck = false;
+            this.currentRoomCalendarView.Refresh();
+        }
+
+        private void RoomAssetViewFilterAllCommandHandler()
+        {
+            this.roomAssetViewFilterIsCheck = false;
+            this.currentRoomAssetView.Refresh();
+        }
+
+        private void RoomHistoryViewFilterAllCommandHandler()
+        {
+            this.roomHistoryViewFilterIsCheck = false;
+            this.currentRoomHistoryView.Refresh();
+        }
+
+        public DateTime RcvDateFromFilter
+        {
+            get { return this.rcvDateFromFilter; }
+            set { this.rcvDateFromFilter = value; }
+        }
+
+        public DateTime RcvDateToFilter
+        {
+            get { return this.rcvDateToFilter; }
+            set { this.rcvDateToFilter = value; }
+        }
+
+        public int RcvPeriodsFilter
+        {
+            get { return this.rcvPeriodsFilter; }
+            set { this.rcvPeriodsFilter = value; }
+        }
+
+        public int RcvBeginTimeFilter
+        {
+            get { return this.rcvBeginTimeFilter; }
+            set { this.rcvBeginTimeFilter = value; }
+        }
+
+        public string RcvRegistrantFilter
+        {
+            get { return this.rcvRegistrantFilter; }
+            set { this.rcvRegistrantFilter = value; }
+        }
+
+        public RoomCalendarStatus RcvStatusFilter
+        {
+            get { return this.rcvStatusFilter; }
+            set { this.rcvStatusFilter = value; }
+        }
+
+        public string RavAssetNameFilter
+        {
+            get { return this.ravAssetNameFilter; }
+            set { this.ravAssetNameFilter = value; }
+        }
+
+        public string RhvAssetNameFilter
+        {
+            get { return this.rhvAssetNameFilter; }
+            set { this.rhvAssetNameFilter = value; }
+        }
+
+        public DateTime RhvDateFromFilter
+        {
+            get { return this.rhvDateFromFilter; }
+            set { this.rhvDateFromFilter= value; }
+        }
+
+        public DateTime RhvDateToFilter
+        {
+            get { return this.rhvDateToFilter; }
+            set { this.rhvDateToFilter = value; }
+        }
+
+        public HistoryType RhvTypeFilter
+        {
+            get { return this.rhvTypeFilter; }
+            set { this.rhvTypeFilter = value; }
+        }
+
+        public CollectionView RcvStatusFilters
+        {
+            get { return this.rcvStatusFilters; }
+        }
+
+        public CollectionView RhvTypeFilters
+        {
+            get { return this.rhvTypeFilters; }
+        }
 
         // commands
         public ICommand ExportToExcelCommand { get { return new RelayCommand(ExportToExcelCommandHandler, CanExecute); } }

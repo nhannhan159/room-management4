@@ -14,16 +14,11 @@ namespace RoomM.Repositories
     {
         // connection string:
         private const string connectionString =
-            "Data Source=QUOCVU\\SQLEXPRESS;Initial Catalog=room_mgr;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False";
-            // "Data Source=.\\SQLEXPRESS;Initial Catalog=room_mgr;Integrated Security=True";
+            //"Data Source=QUOCVU\\SQLEXPRESS;Initial Catalog=room_mgr;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False";
+            "Data Source=.\\SQLEXPRESS;Initial Catalog=room_mgr;Integrated Security=True";
         public EFDataContext() : base(connectionString) {
         
         }
-
-        public DbSet<Room> Rooms { get; set; }
-        public DbSet<RoomAsset> RoomDevices { get; set; }
-
-
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

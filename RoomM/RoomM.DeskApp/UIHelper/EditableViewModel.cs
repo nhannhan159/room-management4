@@ -58,6 +58,7 @@ namespace RoomM.DeskApp.UIHelper
                     this.currentEntity = value;
                     this.canExecuteSaveCommand = (this.currentEntity != null);
                     this.OnPropertyChanged("CurrentEntity");
+                    this.SetAdditionViewChange();
                 }
             }
         }
@@ -67,17 +68,18 @@ namespace RoomM.DeskApp.UIHelper
             Console.WriteLine("CHANGED...");
         }
 
-        protected virtual bool FilterAll(T entity) { return true; }
-        protected virtual bool FilterNormal(T entity) { return true; }
+        protected virtual bool IsUsing(T entity) { return true; }
+        protected virtual bool GeneralFilter(T entity) { return true; }
+        protected virtual void SetAdditionViewChange() { }
 
         private bool EntityFilter(object obj)
         {
             T entity = obj as T;
             bool filter=true;
             if (!this.allPlusIsCheck)
-                filter = filter && this.FilterAll(entity);
+                filter = filter && this.IsUsing(entity);
             if (this.filterIsCheck)
-                filter = filter && this.FilterNormal(entity);
+                filter = filter && this.GeneralFilter(entity);
             return filter;
         }
 
@@ -88,6 +90,15 @@ namespace RoomM.DeskApp.UIHelper
             {
                 this.allPlusIsCheck = value;
                 OnPropertyChanged("AllPlusIsCheck");
+            }
+        }
+
+        public bool CanModify
+        {
+            get
+            {
+                if (this.currentEntity == null) return false;
+                return this.IsUsing(this.currentEntity);
             }
         }
 
@@ -145,10 +156,14 @@ namespace RoomM.DeskApp.UIHelper
 
         private void DeleteCommandHandler()
         {
-            MessageBoxResult result = MessageBox.Show("Bạn muốn xóa phòng này à?", "Xác nhận xóa phòng", MessageBoxButton.YesNo);
-            if (result == MessageBoxResult.Yes)
-                this.DeleteCurrentEntity();
-            this.entitiesView.Refresh();
+            if (this.IsUsing(this.currentEntity))
+            {
+                MessageBoxResult result = MessageBox.Show("Bạn muốn xóa phòng này à?", "Xác nhận xóa phòng", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                    this.DeleteCurrentEntity();
+                this.entitiesView.Refresh();
+            }
+            else MessageBox.Show("Phòng đã bị xoá, không thể xoá tiếp!");
         }
 
         protected virtual void NewDialogCommandHandler() { }

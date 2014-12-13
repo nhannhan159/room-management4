@@ -12,5 +12,16 @@ namespace RoomM.Models.Assets
     {
         public string Name { get; set; }
         public virtual ICollection<RoomAssetHistory> AssetHistories { get; set; }
+
+        public HistoryType()
+        {
+            this.AssetHistories = new List<RoomAssetHistory>();
+        }
+
+        public HistoryType(string name)
+        {
+            this.Name = name;
+            this.AssetHistories = new List<RoomAssetHistory>();
+        }
     }
 }

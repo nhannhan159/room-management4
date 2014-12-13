@@ -12,5 +12,16 @@ namespace RoomM.Models.Rooms
     {
         public string Name { get; set; }
         public virtual ICollection<RoomCalendar> RoomCalendars { get; set; }
+
+        public RoomCalendarStatus()
+        {
+            this.RoomCalendars = new List<RoomCalendar>();
+        }
+
+        public RoomCalendarStatus(string name)
+        {
+            this.Name = name;
+            this.RoomCalendars = new List<RoomCalendar>();
+        }
     }
 }

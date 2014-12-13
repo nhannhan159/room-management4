@@ -14,12 +14,16 @@ namespace RoomM.Business
     public class RoomAssetService
     {
         public static IRoomAssetRepository roomDeviceRepo;
+        public static IRoomAssetHistoryRepository assHistoryRepo;
+        public static IRoomAssetHistoryTypeRepository assHistoryTypeRepo;
         public static IAssetRepository deviceRepo;
 
         static RoomAssetService()
         {
             roomDeviceRepo = RepositoryFactory.GetRepository<IRoomAssetRepository, RoomAsset>();
             deviceRepo = RepositoryFactory.GetRepository<IAssetRepository, Asset>();
+            assHistoryRepo = RepositoryFactory.GetRepository<IRoomAssetHistoryRepository, RoomAssetHistory>();
+            assHistoryTypeRepo = RepositoryFactory.GetRepository<IRoomAssetHistoryTypeRepository, HistoryType>();
         }
 
         // get all room device list
@@ -44,6 +48,11 @@ namespace RoomM.Business
         public static IList<Asset> GetAllAsset()
         {
             return deviceRepo.GetAll();
+        }
+
+        public static IList<HistoryType> GetAllAssetHistoryType()
+        {
+            return assHistoryTypeRepo.GetAll();
         }
 
         // get all device label

@@ -16,6 +16,8 @@ namespace RoomM.Repositories.RepositoryFramework
                 {"IRoomTypeRepository" , "RoomM.Repositories.Rooms.RoomTypeRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
                 {"IRoomAssetRepository" , "RoomM.Repositories.Rooms.RoomAssetRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
                 {"IAssetRepository" , "RoomM.Repositories.Assets.AssetRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
+                {"IRoomAssetHistoryRepository" , "RoomM.Repositories.Assets.RoomAssetHistoryRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
+                {"IRoomAssetHistoryTypeRepository" , "RoomM.Repositories.Assets.RoomAssetHistoryTypeRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
                 {"IRoomCalendarRepository" , "RoomM.Repositories.Rooms.RoomCalendarRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
                 {"IRoomCalendarStatusRepository" , "RoomM.Repositories.Rooms.RoomCalendarStatusRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
                 {"IStaffRepository" , "RoomM.Repositories.Staffs.StaffRepository, RoomM.Repositories, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"},
