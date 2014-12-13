@@ -1,5 +1,4 @@
-﻿using RoomM.Business;
-using RoomM.Models.Rooms;
+﻿using RoomM.Models.Rooms;
 using RoomM.Repositories.RepositoryFramework;
 using RoomM.Repositories.Rooms;
 using RoomM.WebApp.Models.RoomM;
