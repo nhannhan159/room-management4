@@ -56,6 +56,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\RoomAssetHistoryRepository.cs" />
+    <Compile Include="Assets\IRoomAssetHistoryRepository.cs" />
     <Compile Include="EFDataContext.cs" />
     <Compile Include="Mapping\RoomCalendarMap.cs" />
     <Compile Include="Mapping\RoomCalendarStatusMap.cs" />

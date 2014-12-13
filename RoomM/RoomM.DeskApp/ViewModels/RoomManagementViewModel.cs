@@ -13,11 +13,17 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Data;
 using System.ComponentModel;
+using System.Windows.Forms;
+
+
+
 
 namespace RoomM.DeskApp.ViewModels
 {
     class RoomManagementViewModel : EditableViewModel<Room>
     {
+        
+
         public RoomManagementViewModel()
             : base()
         {
@@ -47,11 +53,11 @@ namespace RoomM.DeskApp.ViewModels
             {
                 RoomService.AddOrEdit(this.CurrentEntity);
                 RoomService.Save();
-                MessageBox.Show("Cập nhật dữ liệu thành công!");
+                System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thành công!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Cập nhật dữ liệu thất bại! \nMã lỗi: " + ex.Message);
+                System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thất bại! \nMã lỗi: " + ex.Message);
             }
         }
 
@@ -135,6 +141,71 @@ namespace RoomM.DeskApp.ViewModels
                     return CollectionViewSource.GetDefaultView(new List<RoomAssetHistory>());
                 return CollectionViewSource.GetDefaultView(CurrentEntity.AssetHistories);
             }
+        }
+
+
+
+        // commands
+        public ICommand ExportToExcelCommand { get { return new RelayCommand(ExportToExcelCommandHandler, CanExecute); } }
+
+        private void ExportToExcelCommandHandler()
+        {
+            RoomsReportToExcel report = new RoomsReportToExcel("sgu university", "roomM", "templates/roomlist_tmp.xls");
+
+            List<Room> dataList = new List<Room>();
+            if (AllPlusIsCheck)
+                dataList = EntitiesList;
+            else
+            {
+                foreach (Room r in EntitiesList)
+                    if (r.IsUsing)
+                        dataList.Add(r);
+            }
+
+            report.setupExport(dataList);
+            report.save();
+        }
+
+        public ICommand ExportCalRegisterToExcelCommand { get { return new RelayCommand(ExportCalRegisterToExcelCommandHandler, CanExecute); } }
+
+        private void ExportCalRegisterToExcelCommandHandler()
+        {
+            List<RoomCalendar> dataList = new List<RoomCalendar>();
+            dataList = CurrentEntity.RoomCalendars.ToList();
+
+            RoomCalendarsReportToExcel report = new RoomCalendarsReportToExcel("sgu university", "roomM", "templates/roomcalendar_tmp.xls");
+
+            report.setupExport(dataList, CurrentEntity);
+            report.save();
+        }
+
+
+        public ICommand ExportAssetsToExcelCommand { get { return new RelayCommand(ExportAssetsToExcelCommandHandler, CanExecute); } }
+
+        private void ExportAssetsToExcelCommandHandler()
+        {
+            List<RoomAsset> dataList = new List<RoomAsset>();
+            dataList = CurrentEntity.RoomAssets.ToList();
+
+            AssetsReportToExcel report = new AssetsReportToExcel("sgu university", "roomM", "templates/roomasset_tmp.xls");
+
+            report.setupExport(dataList, CurrentEntity);
+            report.save();
+        }
+
+        public ICommand ExportHistoriesToExcelCommand { get { return new RelayCommand(ExportHistoriesToExcelCommandHandler, CanExecute); } }
+
+        private void ExportHistoriesToExcelCommandHandler()
+        {
+            
+
+            List<RoomAssetHistory> dataList = new List<RoomAssetHistory>();
+            dataList = CurrentEntity.AssetHistories.ToList();
+
+            RoomHistoriesReportToExcel report = new RoomHistoriesReportToExcel("sgu university", "roomM", "templates/roomhistory_tmp.xls");
+
+            report.setupExport(dataList, CurrentEntity);
+            report.save();
         }
 
     }

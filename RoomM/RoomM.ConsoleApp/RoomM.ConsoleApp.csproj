@@ -60,6 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssetsReportToExcel.cs" />
+    <Compile Include="RoomCalendarsReportToExcel.cs" />
+    <Compile Include="RoomHistoriesReportToExcel.cs" />
+    <Compile Include="RoomsReportToExcel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportToExcel.cs" />

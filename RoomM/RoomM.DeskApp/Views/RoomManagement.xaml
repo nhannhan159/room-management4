@@ -95,7 +95,7 @@
                     <TextBlock Text="100" Padding="2.5"/>
                 </WrapPanel>
                 <Button Grid.Row="1" Grid.Column="0" Content="Thêm phòng mới" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,15,0" Height="25" Width="120"  Command="{Binding NewDialogCommand}" />
-                <Button Grid.Row="1" Grid.Column="1" Height="25" Width="120" VerticalAlignment="Top" Margin="15,0,0,0" HorizontalAlignment="Left">
+                <Button Grid.Row="1" Grid.Column="1" Height="25" Width="120" VerticalAlignment="Top" Margin="15,0,0,0" HorizontalAlignment="Left" Command="{Binding ExportToExcelCommand}">
                     <WrapPanel>
                         <Image Source="/Icon/page_excel.png"/>
                         <TextBlock Text="Xuất ra Excel" Margin="3"/>
@@ -181,9 +181,9 @@
                                   ItemsSource="{Binding Path=CurrentRoomCalendarView}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Ngày đăng ký" Width="0.2*" Binding="{Binding Date, StringFormat=\{0:dd/MM/yyyy \}}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Tiết bắt đầu" Width="0.15*" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Số tiết" Width="0.125*" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Người đăng ký" Width="0.25*" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Tiết bắt đầu" Width="0.15*" IsReadOnly="True" Binding="{Binding Start}"/>
+                                <DataGridTextColumn Header="Số tiết" Width="0.125*" IsReadOnly="True" Binding="{Binding Length}"/>
+                                <DataGridTextColumn Header="Người đăng ký" Width="0.25*" IsReadOnly="True" Binding="{Binding Staff.Name}"/>
                                 <DataGridTemplateColumn Header="Trạng thái" Width="0.3*">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -196,7 +196,7 @@
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Grid.Row="2" Height="25" Width="120" Margin="0,5,0,5">
+                        <Button Grid.Row="2" Height="25" Width="120" Margin="0,5,0,5" Command="{Binding ExportCalRegisterToExcelCommand}">
                             <WrapPanel>
                                 <Image Source="/Icon/page_excel.png"/>
                                 <TextBlock Text="Xuất ra Excel" Margin="3"/>
@@ -236,7 +236,7 @@
                                 <DataGridTextColumn Header="Số lượng" Width="0.35*" Binding="{Binding Amount}" IsReadOnly="True"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Grid.Row="2" Height="25" Width="120" Margin="0,5,0,5">
+                        <Button Grid.Row="2" Height="25" Width="120" Margin="0,5,0,5" Command="{Binding ExportAssetsToExcelCommand}">
                             <WrapPanel>
                                 <Image Source="/Icon/page_excel.png"/>
                                 <TextBlock Text="Xuất ra Excel" Margin="3"/>
@@ -287,7 +287,7 @@
                                 <DataGridTextColumn Header="Phòng (đến, đi)" Width="0.25*" IsReadOnly="True"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Grid.Row="2" Height="25" Width="120" Margin="0,5,0,5">
+                        <Button Grid.Row="2" Height="25" Width="120" Margin="0,5,0,5" Command="{Binding ExportHistoriesToExcelCommand}">
                             <WrapPanel>
                                 <Image Source="/Icon/page_excel.png"/>
                                 <TextBlock Text="Xuất ra Excel" Margin="3"/>

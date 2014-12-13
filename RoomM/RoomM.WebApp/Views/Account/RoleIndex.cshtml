@@ -1,26 +1,31 @@
 ﻿@{
-    ViewBag.Title = "Role Listing";
+    ViewBag.Title = "Danh mục quyền";
     // Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <p>&nbsp;</p>
-<div class="spacerBody">
-    @Html.ActionLink("Create New Role", "RoleCreate") | @Html.ActionLink("Add Role to User", "RoleAddToUser")
-<h2>Role Index</h2>
-    <div class="table">
-        
+<tr class="spacerBody">
+    @Html.ActionLink("Tạo quyền mới", "RoleCreate") | @Html.ActionLink("Thêm quyền cho người dùng", "RoleAddToUser")
+<h2>Danh mục quyền</h2>
+
+<br/>
+<table>
+      <tr>
+        <th>Tên tài khoản</th>
+        <th></th>
+      </tr>
     
 @foreach (string s in Model)
 {
-    <div class="tr">
-        <div class="td">
+    <tr>
+        <th>
             @s
-        </div>
-        <div class="td">
-            <span onclick="return confirm('Are you sure to delete?')">
+        </th>
+        <td>
+            <span onclick="return confirm('Bạn có chắc muốn xóa?')">
                 <a href="/Account/RoleDelete?RoleName=@s" class="delLink"><img src="/Images/delete.png" alt="Delete" class="imgBorder0" /> Delete</a>
             </span>
-        </div>
-    </div>
+        </td>
+    </tr>
 }
         </div>
-</div>
+</table>

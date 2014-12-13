@@ -41,6 +41,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\Libs\NPOI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -55,6 +58,7 @@
     <Reference Include="System.Windows.Controls.Layout.Toolkit">
       <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -75,6 +79,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ReportUtils\AssetsReportToExcel.cs" />
+    <Compile Include="ReportUtils\ReportToExcel.cs" />
+    <Compile Include="ReportUtils\RoomCalendarsReportToExcel.cs" />
+    <Compile Include="ReportUtils\RoomHistoriesReportToExcel.cs" />
+    <Compile Include="ReportUtils\RoomsReportToExcel.cs" />
     <Compile Include="UIHelper\EditableViewModel.cs" />
     <Compile Include="UIHelper\PropertySupport.cs" />
     <Compile Include="UIHelper\RelayCommand.cs" />

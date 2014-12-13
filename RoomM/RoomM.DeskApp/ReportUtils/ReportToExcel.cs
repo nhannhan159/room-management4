@@ -1,17 +1,22 @@
 ﻿using NPOI.HPSF;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using RoomM.Models.Rooms;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
-namespace RoomM.ConsoleApp
+namespace RoomM.DeskApp
 {
-    public abstract class ReportToExcel
+    public abstract class ReportToExcel<T>
     {
+
+        SaveFileDialog saveFileDialog = new SaveFileDialog();
         protected HSSFWorkbook hssfworkbook;
         protected Sheet activeSheet;
 
@@ -27,8 +32,6 @@ namespace RoomM.ConsoleApp
                 hssfworkbook = new HSSFWorkbook();
             }
 
-
-            
             //Create a entry of DocumentSummaryInformation
             DocumentSummaryInformation dsi = PropertySetFactory.CreateDocumentSummaryInformation();
             dsi.Company = comanyName;
@@ -40,18 +43,29 @@ namespace RoomM.ConsoleApp
             hssfworkbook.SummaryInformation = si;
         }
 
-        public void save(String filename) {
-            //Write the stream data of workbook to the root directory
-            FileStream file = new FileStream(@filename, FileMode.Create);
-            hssfworkbook.Write(file);
-            file.Close();
+        public void save() {
+
+            saveFileDialog.InitialDirectory = Convert.ToString(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog.Filter = "Phần mở rộng (*.xls)|*.xls|Tất cả files (*.*)|*.*";
+            saveFileDialog.FilterIndex = 1;
+
+
+            if (saveFileDialog.ShowDialog().Equals(DialogResult.OK))
+            {
+                string filename = saveFileDialog.FileName;
+
+                //Write the stream data of workbook to the root directory
+                FileStream file = new FileStream(@filename, FileMode.Create);
+                hssfworkbook.Write(file);
+                file.Close();
+
+                Process.Start(filename);
+
+                // Console.WriteLine(saveFileDialog.FileName); //Do what you want here
+            } 
         }
 
-
-        public abstract void setupExport();
-
-        
-             
+        public abstract void setupExport(List<T> data, Room room = null);
 
     }
 }

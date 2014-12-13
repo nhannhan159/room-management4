@@ -22,6 +22,7 @@ namespace RoomM.Models.Assets
         public Int64 RoomId { get; set; }
         public virtual Room Room { get; set; }
 
+        public int Amount { get; set; }
 
         public override string ToString()
         {

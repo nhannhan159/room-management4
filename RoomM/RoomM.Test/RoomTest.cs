@@ -28,7 +28,7 @@ namespace RoomM.Test
             Room rm = RoomService.GetByID(5);
             rm.IsUsing = true;
 
-            RoomService.Edit(rm);
+            // RoomService.Edit(rm);
             RoomService.Save();
 
             showRoomList();
@@ -46,7 +46,7 @@ namespace RoomM.Test
             };
 
 
-            RoomService.Add(rm);
+            // RoomService.Add(rm);
             RoomService.Save();
 
             showRoomList();

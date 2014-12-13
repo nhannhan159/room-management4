@@ -4,9 +4,9 @@
 }
 <div class="spacerBody">
     <p>&nbsp;</p>
-    @Html.ActionLink("Create New Role", "RoleCreate") | @Html.ActionLink("Roles", "RoleIndex")
+    @Html.ActionLink("Tạo quyền mới", "RoleCreate") | @Html.ActionLink("Danh mục quyền", "RoleIndex")
         
-<h2>Role Add to User</h2>
+<h2>Thêm quyền cho người dùng</h2>
 
 @using(Html.BeginForm("RoleAddToUser", "Account")){
     @Html.AntiForgeryToken()
@@ -14,12 +14,12 @@
 
     <div class="message-success">@ViewBag.ResultMessage</div>
     <p>
-        Username : @Html.TextBox("UserName")
-        Role Name: @Html.DropDownList("RoleName", ViewBag.Roles as SelectList)
+        Tên tài khoản : @Html.TextBox("UserName")
+        Tên quyền: @Html.DropDownList("RoleName", ViewBag.Roles as SelectList)
         
     </p>
     
-    <input type="submit" value="Save" />
+    <input type="submit" value="Lưu" />
 }
 
 
@@ -27,14 +27,14 @@
 <div class="hr"></div>
 @using(Html.BeginForm("GetRoles", "Account")){
     @Html.AntiForgeryToken()
-    <p>Username : @Html.TextBox("UserName") 
-        <input type="submit" value="Get Roles for this User" />
+    <p>Tên tài khoản : @Html.TextBox("UserName") 
+        <input type="submit" value="Lấy quyền của người dùng" />
     </p>
 }
        
 @if(ViewBag.RolesForThisUser != null) {
     <text>
-    <h3>Roles for this user </h3>
+    <h3>Quyền của người dùng </h3>
     <ol>
 @foreach (string s in ViewBag.RolesForThisUser){
     <li>@s</li>   

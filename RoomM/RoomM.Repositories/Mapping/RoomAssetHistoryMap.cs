@@ -22,6 +22,7 @@ namespace RoomM.Model.Mapping
             Property(t => t.AssetHistoryTypeId).IsOptional();
             Property(t => t.AssetId).IsOptional();
             Property(t => t.RoomId).IsOptional();
+            Property(t => t.Amount).IsOptional();
 
             // table
             ToTable("RoomAssetHistorys");

@@ -13,9 +13,9 @@ namespace RoomM.ConsoleApp
     {
         static void Main(string[] args)
         {
-            AssetsReportToExcel reportDemo = new AssetsReportToExcel("sgu university", "roomM", "templates/book1.xls");
+            RoomCalendarsReportToExcel reportDemo = new RoomCalendarsReportToExcel("sgu university", "roomM", "templates/roomcalendar_tmp.xls");
             reportDemo.setupExport();
-            reportDemo.save("reports/myreport.xls");
+            reportDemo.save("reports/roomcalendar_" + DateTime.Now.Ticks + ".xls");
         }
     }
 }

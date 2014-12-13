@@ -456,6 +456,11 @@ namespace RoomM.WebApp.Controllers
                 SelectList list = new SelectList(Roles.GetAllRoles());
                 ViewBag.Roles = list;
             }
+            else
+            {
+                ViewBag.Roles = new SelectList(new List<String>());
+            }
+
             return View("RoleAddToUser");
         }
 

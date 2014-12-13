@@ -705,8 +705,8 @@ input[type="checkbox"].input-validation-error {
 /* time table design */
 table {
     width="90%";
-     align="center";
-     font-size: 12pt;
+    align="center";
+    font-size: 12pt;
 }
 
 th, td {
@@ -736,9 +736,7 @@ th {
     min-width: 75px;
 }
 
-.wide {
-    width: 200px;
-}
+
 
 .float-left {
     float: left;
@@ -878,4 +876,9 @@ th {
     text-align: center;
     font-size: 15pt;
     
+}
+
+#room_assets_table  {
+    float:left;
+
 }

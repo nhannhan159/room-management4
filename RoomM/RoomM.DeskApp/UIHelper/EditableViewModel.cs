@@ -118,7 +118,7 @@ namespace RoomM.DeskApp.UIHelper
        
         private bool CanExecuteSaveCommand() { return canExecuteSaveCommand; }
         private bool CanExecuteNewCommand() { return canExecuteNewCommand; }
-        private bool CanExecute() { return true; }
+        protected bool CanExecute() { return true; }
 
         public int NumRowRecord
         {
