@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace RoomM.Repositories.Staffs
 {
@@ -13,6 +14,7 @@ namespace RoomM.Repositories.Staffs
         Staff GetSingle(int staffId);
         Boolean CheckPassword(Staff staff, string password);
         Boolean CheckUserExists(string username);
-        IList<Staff> GetStaffLimitByRegister(int limit); 
+        IList<Staff> GetStaffLimitByRegister(int limit);
+        List<DictionaryEntry> GetStaffLimitByRegister(int limit, DateTime from, DateTime to);
     }
 }

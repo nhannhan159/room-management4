@@ -42,11 +42,6 @@ namespace RoomM.ConsoleApp
                 row.CreateCell(3).SetCellValue(rAsset.Asset.Name);
                 row.CreateCell(4).SetCellValue(rAsset.Room.Name);
 
-                // setValueForCell(startRow, 11, index);
-                // setValueForCell(startRow, 12, rAsset.ID);
-                // setValueForCell(startRow, 13, rAsset.Asset.Name);
-                // setValueForCell(startRow, 14, rAsset.Room.Name);
-
                 startRow++;
                 index++;
             }

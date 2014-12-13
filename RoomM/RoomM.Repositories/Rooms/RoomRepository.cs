@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using RoomM.Models.Rooms;
 using RoomM.Model;
+using System.Collections;
 
 namespace RoomM.Repositories.Rooms
 {
@@ -34,6 +35,28 @@ namespace RoomM.Repositories.Rooms
             return (from p in GetAllWithQuery()
                     orderby p.RoomCalendars.Count descending
                     select p).Take(limit).ToList();
+        }
+
+
+        public List<DictionaryEntry> GetRoomLimitByRegister(int limit, DateTime from, DateTime to)
+        {
+            IList<Room> roomList = GetAll();
+            Hashtable hm = new Hashtable();
+
+            int c;
+            foreach (Room s in roomList)
+            {
+                c = 0;
+                foreach (RoomCalendar rc in s.RoomCalendars)
+                    if (rc.Date.Date >= from.Date && rc.Date.Date <= to.Date)
+                        c++;
+
+                hm.Add(s, c);
+            }
+
+            List<DictionaryEntry> dic = hm.Cast<DictionaryEntry>().OrderBy(entry => entry.Value).Take(limit).ToList();
+
+            return dic;
         }
     }
 }

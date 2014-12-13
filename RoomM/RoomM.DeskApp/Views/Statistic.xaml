@@ -3,28 +3,64 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RoomM.DeskApp.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="639" d:DesignWidth="1100"
       xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
 	  Title="Statictis">
+    <Page.DataContext>
+        <local:StatisticViewModel />
+    </Page.DataContext>
 
     <Grid>
-        <TabControl Margin="-10,10,10,5">
+        <TabControl >
             <TabItem Header="Tần xuất đăng kí phòng" Width="200">
-                <chartingToolkit:Chart Height="519" 
-		            Margin="42,0,43,41" Name="fregisterChart" Title="Tần xuất đăng kí phòng" 
-		            VerticalAlignment="Bottom">
-                    <chartingToolkit:ColumnSeries DependentValuePath="Value" 
-		        IndependentValuePath="Key" ItemsSource="{Binding}" Title="So lan dang ki" />
-                </chartingToolkit:Chart>
+                <Grid Margin="40,40,40,40">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,10">
+                        <Label   Content="Từ ngày:"/>
+                        <DatePicker   SelectedDate="{Binding FromTimeRegister,StringFormat='dd/MM/yyy'}"/>
+
+                        <Label   Content="Đến ngày:" Margin="100,0,0,0"/>
+                        <DatePicker   SelectedDate="{Binding ToTimeStaffRegister,StringFormat='dd/MM/yyy'}"/>
+
+                    </StackPanel>
+                    <chartingToolkit:Chart Grid.Row="1" Height="450" 
+		             Margin="5,10,5,10" Name="fusingBChart" Title="Tần xuất sử dụng phòng" 
+		            VerticalAlignment="Bottom" FontSize="12pt" >
+                        <chartingToolkit:ColumnSeries DependentValuePath="Value" 
+		        IndependentValuePath="Name" ItemsSource="{Binding GetRegisterStatistic}" Title="Số lần đăng kí" />
+                    </chartingToolkit:Chart>
+                </Grid>
             </TabItem>
             <TabItem Header="Tần xuất phòng sử dụng" Width="200">
-                <chartingToolkit:Chart Height="519" 
-		            Margin="42,0,43,41" Name="fusingChart" Title="Tần xuất đăng kí phòng" 
-		            VerticalAlignment="Bottom">
-                    <chartingToolkit:ColumnSeries DependentValuePath="Value" 
-		        IndependentValuePath="Key" ItemsSource="{Binding}" Title="So lan dang ki" />
-                </chartingToolkit:Chart>
+                <Grid Margin="40,40,40,40">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                        
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10,10">
+                        <Label   Content="Từ ngày:"/>
+                        <DatePicker   SelectedDate="{Binding FromTimeStaff,StringFormat='dd/MM/yyy'}"/>
+
+                        <Label   Content="Đến ngày:" Margin="100,0,0,0"/>
+                        <DatePicker   SelectedDate="{Binding ToTimeStaff,StringFormat='dd/MM/yyy'}"/>
+                        
+                    </StackPanel>
+                    <chartingToolkit:Chart Grid.Row="1" Height="450" 
+		             Margin="5,10,5,10" Name="fusingChart" Title="Tần xuất đăng kí phòng" 
+		            VerticalAlignment="Bottom" FontSize="12pt" >
+                        <chartingToolkit:ColumnSeries DependentValuePath="Value" 
+		        IndependentValuePath="Name" ItemsSource="{Binding GetStaffStatistic}" Title="Số lần đăng kí" />
+                    </chartingToolkit:Chart>
+                </Grid>
             </TabItem>
         </TabControl>
 

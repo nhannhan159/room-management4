@@ -18,16 +18,8 @@
             <MenuItem Header="Tài khoản"/>
             <MenuItem Header="Trợ giúp"/>
         </Menu>
-        <TabControl Grid.Row="1" TabStripPlacement="Left">
-            <TabItem IsEnabled="False">
-                <TabItem.HeaderTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="Thực đơn" FontSize="18pt" FontWeight="Bold"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </TabItem.HeaderTemplate>
-            </TabItem>
+        <TabControl Grid.Row="1" TabStripPlacement="Left" Margin="0,5,0,0">
+            
             <TabItem Selector.IsSelected="True">
                 <TabItem.HeaderTemplate>
                     <DataTemplate>
@@ -73,7 +65,7 @@
                 <Frame NavigationUIVisibility="Hidden" Content="Frame" Margin="5" Grid.Column="2" Source="Statistic.xaml"/>
             </TabItem>
         </TabControl>
-        <StatusBar Grid.Row="2"/>
+        <StatusBar Grid.Row="2" Background="#9ACFE3"/>
 
     </Grid>
 </Window>

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RoomM.Models.Rooms;
+using System.Collections;
 
 namespace RoomM.Repositories.Staffs
 {
@@ -41,6 +43,30 @@ namespace RoomM.Repositories.Staffs
             return (from p in GetAllWithQuery()
                     orderby p.RoomCalendars.Count descending
                     select p).Take(limit).ToList();
+        }
+
+
+        public List<DictionaryEntry> GetStaffLimitByRegister(int limit, DateTime from, DateTime to)
+        {
+            IList<Staff>  staffList = GetAll();
+            
+            IList<KeyValuePair<Staff, int>> result = new List<KeyValuePair<Staff, int>>();
+            Hashtable hm = new Hashtable();
+            
+            int c;
+            foreach (Staff s in staffList) 
+            {
+                c = 0;
+                foreach (RoomCalendar rc in s.RoomCalendars)
+                    if (rc.Date.Date >= from.Date && rc.Date.Date <= to.Date)
+                        c++;
+
+                hm.Add(s, c);
+            }
+
+            List<DictionaryEntry> dic = hm.Cast<DictionaryEntry>().OrderBy(entry => entry.Value).Take(limit).ToList();
+
+            return dic;
         }
     }
 }

@@ -178,9 +178,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\MyDatabaseContext.cs" />
-    <Compile Include="Models\MyDatabaseInit.cs" />
     <Compile Include="Models\RoomM\JsonRegisterViewModel.cs" />
     <Compile Include="Models\RoomM\RoomAssetViewModel.cs" />
     <Compile Include="Models\RoomM\RoomViewModel.cs" />
@@ -303,7 +302,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\RoomRegister\RegisterByStaff.cshtml" />
     <Content Include="Views\RoomRegister\Index.cshtml" />
     <Content Include="Views\RoomRegister\Create.cshtml" />
     <Content Include="Views\RoomRegister\RoomRegistered.cshtml" />

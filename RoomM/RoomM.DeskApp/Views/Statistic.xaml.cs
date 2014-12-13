@@ -34,10 +34,10 @@ namespace RoomM.DeskApp.Views
         {
             InitializeComponent();
 
-            showColumnChar();
+            // showColumnChar();
         }
 
-        private void showColumnChar()
+        /*private void showColumnChar()
         {
 
             IList<Staff> staffList = staffRep.GetStaffLimitByRegister(10);
@@ -64,7 +64,7 @@ namespace RoomM.DeskApp.Views
             // Setting data for fusing column chart
             fusingChart.DataContext = valueList2;
 
-        }
+        }*/
 
     }
 }

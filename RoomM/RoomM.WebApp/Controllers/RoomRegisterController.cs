@@ -114,17 +114,33 @@ namespace RoomM.WebApp.Controllers
 
         // create with params date time vs room
         [Authorize(Roles = "Teacher")]
-        public ActionResult Create(string messageConfirm = "", bool isErrorMessage = false)
+        public ActionResult Create(string messageConfirm = "", bool isErrorMessage = false, int roomIdBefore = -1)
         {
-            IList<RoomType> allRoomType = roomTypeRepo.GetAll();
+            // IList<RoomType> allRoomType = roomTypeRepo.GetAll();
             IList<Room> allRoom = roomRepo.GetAll();
 
-            ViewBag.RoomTypeId = new SelectList(allRoomType, "ID", "Name", allRoomType.Count > 0 ? allRoomType[0].ID : 0);
-            ViewBag.RoomId = new SelectList(allRoom, "ID", "Name", allRoom.Count > 0 ? allRoom[0].ID : 0);
+            // ViewBag.RoomTypeId = new SelectList(allRoomType, "ID", "Name", allRoomType.Count > 0 ? allRoomType[0].ID : 0);
 
             // default day 1/5/2011
-            IList<RoomCalendar> calInDate = roomCalRepo.GetByDateAndRoomId(DateTime.Now, allRoom.Count > 0 ? allRoom[0].ID : -1);
-            IList<RoomCalendar> calInWeek = roomCalRepo.GetByWeekAndRoomId(DateTime.Now, allRoom.Count > 0 ? allRoom[0].ID : -1);
+            IList<RoomCalendar> calInDate;
+            IList<RoomCalendar> calInWeek;
+
+            if (roomIdBefore > 0)
+            {
+                ViewBag.RoomId = new SelectList(allRoom, "ID", "Name", roomIdBefore);
+                calInDate = roomCalRepo.GetByDateAndRoomId(DateTime.Now, roomIdBefore);
+                calInWeek = roomCalRepo.GetByWeekAndRoomId(DateTime.Now, roomIdBefore);
+            }
+            else
+            {
+                ViewBag.RoomId = new SelectList(allRoom, "ID", "Name", allRoom.Count > 0 ? allRoom[0].ID : 0);
+                calInDate = roomCalRepo.GetByDateAndRoomId(DateTime.Now, allRoom.Count > 0 ? allRoom[0].ID : -1);
+                calInWeek = roomCalRepo.GetByWeekAndRoomId(DateTime.Now, allRoom.Count > 0 ? allRoom[0].ID : -1);
+            }
+
+            // default day 1/5/2011
+            // IList<RoomCalendar> calInDate = roomCalRepo.GetByDateAndRoomId(DateTime.Now, allRoom.Count > 0 ? allRoom[0].ID : -1);
+            // IList<RoomCalendar> calInWeek = roomCalRepo.GetByWeekAndRoomId(DateTime.Now, allRoom.Count > 0 ? allRoom[0].ID : -1);
 
             DateTime currentDate = DateTime.Now;
             DateTime startDateOfWeek = getStartDayOfWeek(currentDate);
@@ -166,7 +182,7 @@ namespace RoomM.WebApp.Controllers
                 if (roomCal.Date < DateTime.Now.Date)
                 {
                     string message = "Bạn không thể đăng kí phòng trước ngày hiện tại " + DateTime.Now.ToShortDateString();
-                    return RedirectToAction("Create", new { messageConfirm = message, isErrorMessage = true });
+                    return RedirectToAction("Create", new { messageConfirm = message, isErrorMessage = true, roomIdBefore = roomCal.RoomId });
                 }
                 else
                 {
@@ -180,7 +196,7 @@ namespace RoomM.WebApp.Controllers
 
 
                     string message = "Phòng " + roomRepo.GetSingle(roomCal.RoomId).Name + " đã được đăng kí từ tiết " + roomCal.Start + " đến tiết " + (roomCal.Start + roomCal.Length - 1);
-                    return RedirectToAction("Create", new { messageConfirm = message, isErrorMessage = false });
+                    return RedirectToAction("Create", new { messageConfirm = message, isErrorMessage = false, roomIdBefore = roomCal.RoomId });
                 }
             }
 

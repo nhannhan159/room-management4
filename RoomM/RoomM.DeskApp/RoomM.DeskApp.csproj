@@ -93,6 +93,7 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\RoomManagementViewModel.cs" />
     <Compile Include="ViewModels\StaffManagementViewModel.cs" />
+    <Compile Include="ViewModels\StatisticViewModel.cs" />
     <Compile Include="Views\AssetManagement.xaml.cs">
       <DependentUpon>AssetManagement.xaml</DependentUpon>
     </Compile>

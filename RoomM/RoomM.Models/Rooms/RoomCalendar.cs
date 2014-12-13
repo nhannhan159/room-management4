@@ -37,7 +37,7 @@ namespace RoomM.Models.Rooms
 
         public override string ToString()
         {
-            return ID + " #room " + RoomId + " #user " + StaffId + " #start " + Start + " #len " + Length + " #cal " + RoomCalendarStatus.Name;
+            return ID + " #room " + RoomId + " #user " + StaffId + " #start " + Start + " #len " + Length;
         }
     }
 }
