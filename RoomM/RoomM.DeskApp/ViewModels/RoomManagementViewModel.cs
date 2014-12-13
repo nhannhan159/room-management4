@@ -14,15 +14,26 @@ using System.Windows.Input;
 using System.Windows.Data;
 using System.ComponentModel;
 using System.Windows.Forms;
+using RoomM.Repositories.Rooms;
+using RoomM.Repositories.RepositoryFramework;
+using RoomM.Repositories.Assets;
 
 namespace RoomM.DeskApp.ViewModels
 {
     class RoomManagementViewModel : EditableViewModel<Room>
     {
+        private IRoomRepository roomRepo = RepositoryFactory.GetRepository<IRoomRepository, Room>();
+        private IRoomCalendarRepository roomCalRepo = RepositoryFactory.GetRepository<IRoomCalendarRepository, RoomCalendar>();
+        private IRoomTypeRepository roomTypeRepo = RepositoryFactory.GetRepository<IRoomTypeRepository, RoomType>();
+        // private IRoomCalendarRepository roomCalRepo = RepositoryFactory.GetRepository<IRoomCalendarRepository, RoomCalendar>();
+        private IRoomCalendarStatusRepository roomCalStatusRepo = RepositoryFactory.GetRepository<IRoomCalendarStatusRepository, RoomCalendarStatus>();
+        // private IRoomAssetHistoryRepository assHistoryRepo = RepositoryFactory.GetRepository<IRoomAssetHistoryRepository, RoomAssetHistory>();
+        private IRoomAssetHistoryTypeRepository assHistoryTypeRepo = RepositoryFactory.GetRepository<IRoomAssetHistoryTypeRepository, HistoryType>();  
+
         public RoomManagementViewModel()
             : base()
         {
-            List<RoomType> roomTypeList = new List<RoomType>(RoomService.GetAllRoomType());
+            List<RoomType> roomTypeList = new List<RoomType>(roomTypeRepo.GetAll());
             roomTypeList.Add(new RoomType("Tất cả"));
             this.roomTypeFilters = new CollectionView(roomTypeList);
             this.RoomTypeFilter = roomTypeList[roomTypeList.Count - 1];
@@ -34,7 +45,8 @@ namespace RoomM.DeskApp.ViewModels
             this.rcvPeriodsFilter=0;
             this.rcvBeginTimeFilter=0;
             this.rcvRegistrantFilter="";
-            List<RoomCalendarStatus> rcvStatusList=new List<RoomCalendarStatus>(RoomCalendarService.GetAllStatus());
+
+            List<RoomCalendarStatus> rcvStatusList=new List<RoomCalendarStatus>(roomCalStatusRepo.GetAll());
             rcvStatusList.Add(new RoomCalendarStatus("Tất cả"));
             this.rcvStatusFilters=new CollectionView(rcvStatusList);
             this.rcvStatusFilter=rcvStatusList[rcvStatusList.Count-1];
@@ -42,7 +54,8 @@ namespace RoomM.DeskApp.ViewModels
             this.rhvDateFromFilter=new DateTime(2000,1,1);
             this.rhvDateToFilter=DateTime.Now;
             this.rhvAssetNameFilter = "";
-            List<HistoryType> rhvTypeList=new List<HistoryType>(RoomAssetService.GetAllAssetHistoryType());
+
+            List<HistoryType> rhvTypeList=new List<HistoryType>(assHistoryTypeRepo.GetAll());
             rhvTypeList.Add(new HistoryType("Tất cả"));
             this.rhvTypeFilters=new CollectionView(rhvTypeList);
             this.rhvTypeFilter=rhvTypeList[rhvTypeList.Count-1];
@@ -80,7 +93,7 @@ namespace RoomM.DeskApp.ViewModels
 
         protected override List<Room> GetEntitiesList()
         {
-            return new List<Room>(RoomService.GetAll());
+            return new List<Room>(roomRepo.GetAll());
         }
 
         protected override void SaveCurrentEntity()
@@ -165,12 +178,12 @@ namespace RoomM.DeskApp.ViewModels
 
         public ICollectionView RoomTypesView
         {
-            get { return CollectionViewSource.GetDefaultView(RoomService.GetAllRoomType()); }
+            get { return CollectionViewSource.GetDefaultView(roomTypeRepo.GetAll()); }
         }
 
         public ICollectionView RoomCalendarStatusView
         {
-            get { return CollectionViewSource.GetDefaultView(RoomCalendarService.GetAllStatus()); }
+            get { return CollectionViewSource.GetDefaultView(roomCalStatusRepo.GetAll()); }
         }
 
         public RoomCalendar CurrentRoomCalendar
@@ -297,8 +310,12 @@ namespace RoomM.DeskApp.ViewModels
             {
                 //try
                 {
-                    RoomCalendarService.Edit(this.CurrentRoomCalendar);
-                    RoomCalendarService.Save();
+                    // this.CurrentRoomCalendar.Start = 5;
+                    roomCalRepo.Edit(this.CurrentRoomCalendar);
+                    roomCalRepo.Save();
+                    // RoomCalendarService.Edit(this.CurrentRoomCalendar);
+                    // RoomCalendarService.Save();
+
                     this.OnPropertyChanged("CurrentRoomCalendar");
                     //System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thành công!");
                 }

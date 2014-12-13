@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 namespace RoomM.Repositories.RepositoryFramework
 {
     public abstract class  RepositoryBase<C, T> : 
-        IRepository<T> where T : EntityBase where C : DbContext, new() 
+        IRepository<T> where T : EntityBase, new() 
     {
 
-        private C _entities = new C();
-        public C Context {
+        private EFDataContext _entities = EFDataContext.instance;
+        public EFDataContext Context {
             get { return _entities; }
             set { _entities = value; }
         }
@@ -91,9 +91,6 @@ namespace RoomM.Repositories.RepositoryFramework
 
             if (entry.State == EntityState.Detached)
             {
-
-                
-
                 var set = _entities.Set<T>();
                 T attachedEntity = set.Local.SingleOrDefault(e => e.ID == entity.ID);  // You need to have access to key
 

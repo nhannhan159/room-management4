@@ -12,6 +12,8 @@ namespace RoomM.Repositories
 {
     public class EFDataContext : DbContext
     {
+        public static EFDataContext instance = new EFDataContext();
+
         // connection string:
         private const string connectionString =
             //"Data Source=QUOCVU\\SQLEXPRESS;Initial Catalog=room_mgr;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False";
@@ -38,10 +40,6 @@ namespace RoomM.Repositories
             base.OnModelCreating(modelBuilder);
         }
     }
-
-   
-
-
 
     public static class StaticRoomContext
     {
