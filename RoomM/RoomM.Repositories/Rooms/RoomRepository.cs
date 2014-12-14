@@ -54,7 +54,7 @@ namespace RoomM.Repositories.Rooms
                 hm.Add(s, c);
             }
 
-            List<DictionaryEntry> dic = hm.Cast<DictionaryEntry>().OrderBy(entry => entry.Value).Take(limit).ToList();
+            List<DictionaryEntry> dic = hm.Cast<DictionaryEntry>().OrderByDescending(entry => entry.Value).Take(limit).ToList();
 
             return dic;
         }

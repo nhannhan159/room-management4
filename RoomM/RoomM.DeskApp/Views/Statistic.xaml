@@ -34,7 +34,7 @@
 		             Margin="5,10,5,10" Name="fusingBChart" Title="Tần xuất đăng ký phòng" 
 		            VerticalAlignment="Bottom" FontSize="12pt" >
                         <chartingToolkit:ColumnSeries DependentValuePath="Value" 
-		        IndependentValuePath="Name" ItemsSource="{Binding GetRegisterStatistic}" Title="Số lần đăng kí" />
+		            IndependentValuePath="Name" ItemsSource="{Binding GetRegisterStatistic}" Title="Số lần đăng kí" />
                     </chartingToolkit:Chart>
                 </Grid>
             </TabItem>

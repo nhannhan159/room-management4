@@ -162,7 +162,7 @@
                                 <Label Grid.Row="0" Grid.Column="0" Content="Tên tài sản:"/>
                                 <Label Grid.Row="1" Grid.Column="0" Content="Mô tả:"/>
                                 <TextBox Grid.Row="0" Grid.Column="1" Margin="0,3,0,3" Padding="7,0,0,0" Text="{Binding Name}" IsEnabled="{Binding IsUsing}"/>
-                                <RichTextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" Padding="7,3,0,0" IsEnabled="{Binding IsUsing}"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" Padding="7,3,0,0" IsEnabled="{Binding IsUsing}" Text="{Binding Description}" TextWrapping="Wrap"  />
                                 <Button Grid.Column="2" Grid.RowSpan="2" Content="Sửa" Width="50" Height="20" IsEnabled="{Binding IsUsing}"/>
                             </Grid>
                         </Border>

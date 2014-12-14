@@ -31,18 +31,15 @@ namespace RoomM.DeskApp.ViewModels
         public StatisticViewModel()
             //: base()
         {
-            DateTime now = DateTime.Now;
-            FromTimeStaff = new DateTime(now.Date.Year - 1, now.Date.Month, now.Date.Day);
-            ToTimeStaff = now;
+            // DateTime now = new DateTime(DateTime.);
+            fromTimeStaff = new DateTime(DateTime.Now.Year - 1, 1, 1);
+            toTimeStaff = DateTime.Now;
 
-            FromTimeRegister = new DateTime(now.Date.Year - 1, now.Date.Month, now.Date.Day);
-            ToTimeRegister = now;
+            fromTimeRegister = new DateTime(DateTime.Now.Year - 1, 1, 1);
+            toTimeRegister = DateTime.Now;
 
-            rebuildStaffData(FromTimeStaff, ToTimeStaff);
-            rebuildRegisterData(FromTimeStaff, ToTimeStaff);
-
-
-            
+            rebuildStaffData(fromTimeStaff, toTimeStaff);
+            rebuildRegisterData(fromTimeRegister, toTimeRegister);
         }
 
 
