@@ -10,6 +10,81 @@
     <Page.DataContext>
         <local:AssetManagementViewModel />
     </Page.DataContext>
+    <Page.Resources>
+        <Style TargetType="ToggleButton">
+            <Setter Property="Padding" Value="3" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="MouseOver">
+                                        <Storyboard>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="DefaultPath" Storyboard.TargetProperty="(Path.Fill).(SolidColorBrush.Color)">
+                                                <SplineColorKeyFrame KeyTime="0:0:0.2" Value="#AA0000" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed" />
+                                    <VisualState x:Name="Disabled" />
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Duration="0"
+										                               Storyboard.TargetName="DefaultPath"
+										                               Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Collapsed</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Duration="0"
+										                               Storyboard.TargetName="CheckedPath"
+										                               Storyboard.TargetProperty="Visibility">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ColorAnimationUsingKeyFrames Storyboard.TargetName="CheckedPath" Storyboard.TargetProperty="(Path.Fill).(SolidColorBrush.Color)">
+                                                <SplineColorKeyFrame KeyTime="0:0:0.2" Value="#CCAA000F" />
+                                            </ColorAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <ContentPresenter x:Name="contentPresenter"
+						                  Margin="{TemplateBinding Padding}"
+						                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+						                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+						                  Content="{TemplateBinding Content}"
+						                  ContentTemplate="{TemplateBinding ContentTemplate}" />
+                            <Path x:Name="DefaultPath"
+						      VerticalAlignment="Top"
+						      Data="M0,0 14,7 0,14 Z"
+						      Fill="Gray"
+						      Stretch="Fill" />
+                            <Path x:Name="CheckedPath"
+						      VerticalAlignment="Top"
+						      Data="M0,0 14,0 7,14 Z"
+						      Fill="LightGray"
+						      Stretch="Fill"
+						      Visibility="Collapsed" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />
+        </Style>
+    </Page.Resources>
     <Grid Margin="20,0,0,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.8*"/>
@@ -54,14 +129,17 @@
                       IsSynchronizedWithCurrentItem="True"
                       SelectedItem="{Binding Path=CurrentEntity}"
                       ItemsSource="{Binding Path=EntitiesView}"
-                      SelectedIndex="0">
+                      SelectedIndex="0"
+                      Loaded="dataGrid1_Loaded"
+		              RowDetailsVisibilityChanged="dataGrid1_RowDetailsVisibilityChanged">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Tên tài sản" Width="0.5*" Binding="{Binding Name}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Tên tài sản" Width="0.55*" Binding="{Binding Name}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Số lượng" Width="0.2*" IsReadOnly="True" Binding="{Binding Amount}"/>
-                    <DataGridTemplateColumn Width="0.3*" Header="Hành động">
+                    <DataGridTemplateColumn Width="0.25*" Header="Hành động">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Xóa" Width="50" Height="20"
+                                        IsEnabled="{Binding IsUsing}"
                                         Command="{Binding Path=DataContext.DelCommand,
                                                           RelativeSource={RelativeSource FindAncestor, 
                                                                                          AncestorType={x:Type DataGrid}}}"/>
@@ -69,6 +147,36 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="3" BorderBrush="Gainsboro">
+                            <Grid Height="90">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="28"/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.2*"/>
+                                    <ColumnDefinition Width="0.55*"/>
+                                    <ColumnDefinition Width="0.25*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Content="Tên tài sản:"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="Mô tả:"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Margin="0,3,0,3" Padding="7,0,0,0" Text="{Binding Name}" IsEnabled="{Binding IsUsing}"/>
+                                <RichTextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" Padding="7,3,0,0" IsEnabled="{Binding IsUsing}"/>
+                                <Button Grid.Column="2" Grid.RowSpan="2" Content="Sửa" Width="50" Height="20" IsEnabled="{Binding IsUsing}"/>
+                            </Grid>
+                        </Border>
+                        
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+                <DataGrid.RowHeaderTemplate>
+                    <DataTemplate>
+                        <ToggleButton x:Name="RowHeaderToggleButton"
+					                  Click="ToggleButton_Click"
+					                  Cursor="Hand" />
+                    </DataTemplate>
+                </DataGrid.RowHeaderTemplate>
                 <DataGrid.Resources>
                     <Style TargetType="DataGridRow">
                         <Style.Triggers>
