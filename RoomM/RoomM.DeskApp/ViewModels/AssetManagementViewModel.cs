@@ -24,12 +24,17 @@ namespace RoomM.DeskApp.ViewModels
 
         public AssetManagementViewModel()
             : base() 
-        { 
+        {
+            this.roomFilter = "";
+            this.roomAssetViewFilterIsCheck = false;
+            this.ravRoomNameFilter = "";
         }
 
         private NewAsset newAssetDialog;
         private string roomFilter;
         private ICollectionView currentRoomAssetView;
+        private bool roomAssetViewFilterIsCheck;
+        private string ravRoomNameFilter;
 
         protected override List<Asset> GetEntitiesList()
         {
@@ -113,11 +118,32 @@ namespace RoomM.DeskApp.ViewModels
         {
             RoomAsset entity = obj as RoomAsset;
             bool filter = true;
-            //if (this.roomAssetViewFilterIsCheck)
+            if (this.roomAssetViewFilterIsCheck)
             {
-                //filter = filter && entity.Asset.Name.Contains(this.RavAssetNameFilter);
+                filter = filter && entity.Room.Name.Contains(this.RavRoomNameFilter);
             }
             return filter;
+        }
+
+        public ICommand RoomAssetViewFilterCommand { get { return new RelayCommand(RoomAssetViewFilterCommandHandler, CanExecute); } }
+        public ICommand RoomAssetViewFilterAllCommand { get { return new RelayCommand(RoomAssetViewFilterAllCommandHandler, CanExecute); } }
+
+        private void RoomAssetViewFilterCommandHandler()
+        {
+            this.roomAssetViewFilterIsCheck = true;
+            this.currentRoomAssetView.Refresh();
+        }
+
+        private void RoomAssetViewFilterAllCommandHandler()
+        {
+            this.roomAssetViewFilterIsCheck = false;
+            this.currentRoomAssetView.Refresh();
+        }
+
+        public string RavRoomNameFilter
+        {
+            get { return this.ravRoomNameFilter; }
+            set { this.ravRoomNameFilter = value; }
         }
     }
 }
