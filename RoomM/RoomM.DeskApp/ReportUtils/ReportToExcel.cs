@@ -1,6 +1,7 @@
 ﻿using NPOI.HPSF;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using RoomM.DeskApp.ViewModels;
 using RoomM.Models.Rooms;
 using System;
 using System.Collections.Generic;
@@ -44,6 +45,7 @@ namespace RoomM.DeskApp
         }
 
         public void save() {
+            MainWindowViewModel.instance.ChangeStateToWait();
 
             saveFileDialog.InitialDirectory = Convert.ToString(Environment.SpecialFolder.MyDocuments);
             saveFileDialog.Filter = "Phần mở rộng (*.xls)|*.xls|Tất cả files (*.*)|*.*";
@@ -60,8 +62,7 @@ namespace RoomM.DeskApp
                 file.Close();
 
                 Process.Start(filename);
-
-                // Console.WriteLine(saveFileDialog.FileName); //Do what you want here
+                MainWindowViewModel.instance.ChangeStateToComplete("Đã lưu tại " + filename);
             } 
         }
 

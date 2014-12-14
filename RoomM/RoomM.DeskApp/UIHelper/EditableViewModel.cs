@@ -1,4 +1,5 @@
-﻿using RoomM.Models;
+﻿using RoomM.DeskApp.ViewModels;
+using RoomM.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -138,9 +139,13 @@ namespace RoomM.DeskApp.UIHelper
 
         private void SaveCommandHandler()
         {
+            MainWindowViewModel.instance.ChangeStateToReady();
             MessageBoxResult result = MessageBox.Show("Bạn muốn sửa thông tin phòng?", "Xác nhận sửa thông tin", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
+            {
                 this.SaveCurrentEntity();
+                MainWindowViewModel.instance.ChangeStateToComplete("Cập nhật thành công");
+            }
             this.entitiesView.Refresh();
         }
 
@@ -156,14 +161,23 @@ namespace RoomM.DeskApp.UIHelper
 
         private void DeleteCommandHandler()
         {
+            MainWindowViewModel.instance.ChangeStateToReady();
+
             if (this.IsUsing(this.currentEntity))
             {
                 MessageBoxResult result = MessageBox.Show("Bạn muốn xóa phòng này à?", "Xác nhận xóa phòng", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
+                {
                     this.DeleteCurrentEntity();
+                    MainWindowViewModel.instance.ChangeStateToComplete("Xóa thành công");
+                }
                 this.entitiesView.Refresh();
+
             }
-            else MessageBox.Show("Phòng đã bị xoá, không thể xoá tiếp!");
+            else
+            {
+                MessageBox.Show("Phòng đã bị xoá, không thể xoá tiếp!");
+            }
         }
 
         protected virtual void NewDialogCommandHandler() { }

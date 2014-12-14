@@ -8,17 +8,24 @@
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
-    <Grid Background="WhiteSmoke">
+    <Grid Background="WhiteSmoke" Margin="0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="25"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" IsMainMenu="True" FontSize="12pt" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="WhiteSmoke">
-            <MenuItem Header="Cài đặt"/>
+        <Menu Grid.Row="0" IsMainMenu="True" FontSize="11pt" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="WhiteSmoke">
+            <MenuItem Header="Cài đặt" Command="{Binding FakeCommand}">
+                <MenuItem Header="Màu nền">
+                    <MenuItem Header="Xám" />
+                    <MenuItem Header="Xanh dương" />
+                    <MenuItem Header="Cam" />
+                    
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="Trợ giúp"/>
         </Menu>
-        <TabControl Grid.Row="1" TabStripPlacement="Left" Margin="0,5,0,0">
+        <TabControl Grid.Row="1" TabStripPlacement="Left" Margin="0,0,0,0">
             
             <TabItem Selector.IsSelected="True">
                 <TabItem.HeaderTemplate>
@@ -65,7 +72,16 @@
                 <Frame NavigationUIVisibility="Hidden" Content="Frame" Margin="5" Grid.Column="2" Source="Statistic.xaml"/>
             </TabItem>
         </TabControl>
-        <StatusBar Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"  Background="LightGray" Margin="0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="{Binding StatusState, Mode=TwoWay}"  FontSize="10.5pt" Margin="10,0"/>
+            <TextBlock Grid.Column="1" Text="{Binding StatusExpend, Mode=TwoWay}"  FontSize="10.5pt" TextAlignment="Right" Margin="10,0"/>
+            
+        </Grid>
 
     </Grid>
 </Window>

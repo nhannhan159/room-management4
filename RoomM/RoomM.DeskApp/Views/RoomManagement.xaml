@@ -39,7 +39,7 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.RowSpan="2" Grid.Column="0" Content="Lọc nội dung:"/>
                 <Button Grid.Row="0" Grid.Column="3" Content="Lọc" Width="80" Height="20" Command="{Binding FilterCommand}"/>
-                <Button Grid.Row="1" Grid.Column="3" Content="Hiển thị hết" Width="80" Height="20" ToolTip="Không lọc" Command="{Binding FilterAllCommand}"/>
+                <Button Grid.Row="1" Grid.Column="3" Content="Hiện tất cả" Width="80" Height="20" ToolTip="Không lọc" Command="{Binding FilterAllCommand}"/>
                 <Label Grid.Row="0" Grid.Column="1" Content="theo tên:"/>
                 <Label Grid.Row="1" Grid.Column="1" Content="theo loại phòng:"/>
                 <TextBox Grid.Row="0" Grid.Column="2" Margin="3" Height="20" Text="{Binding NameFilter}"/>
@@ -62,8 +62,8 @@
                     <DataGridTemplateColumn Width="0.2*" Header="Hành động">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Xoá" Width="50" Height="20" 
-                                        IsEnabled="{Binding IsUsing}"
+                                <Button Content="Xoá" Width="50" Height="20"  IsEnabled="{Binding IsUsing}"
+                                   
                                         Command="{Binding Path=DataContext.DelCommand,
                                                           RelativeSource={RelativeSource FindAncestor, 
                                                                                          AncestorType={x:Type DataGrid}}}"/>
@@ -165,7 +165,7 @@
                             </Grid.ColumnDefinitions>
                             <Label Grid.Row="0"  Grid.ColumnSpan="5" Content="Lọc nội dung:"/>
                             <Button Grid.Row="1" Grid.Column="5" Content="Lọc" Width="80" Height="20" Command="{Binding RoomCalendarViewFilterCommand}" />
-                            <Button Grid.Row="2" Grid.Column="5" Content="Hiển thị hết" Width="80" Height="20" Command="{Binding RoomCalendarViewFilterAllCommand}"/>
+                            <Button Grid.Row="2" Grid.Column="5" Content="Hiện tất cả" Width="80" Height="20" Command="{Binding RoomCalendarViewFilterAllCommand}"/>
                             <Label Grid.Row="1" Grid.Column="0" Content="ngày (từ):"/>
                             <Label Grid.Row="1" Grid.Column="3" Content="ngày (đến):"/>
                             <Label Grid.Row="2" Grid.Column="0" Content="số tiết:"/>
@@ -248,7 +248,7 @@
                             </Grid.ColumnDefinitions>
                             <Label Grid.Row="0" Grid.Column="0" Content="Lọc nội dung:" />
                             <Button Grid.Row="0" Grid.Column="3" Content="Lọc" Width="80" Height="20" VerticalAlignment="Bottom" Margin="20,0,0,0" HorizontalAlignment="Left" Command="{Binding RoomAssetViewFilterCommand}"/>
-                            <Button Grid.Row="1" Grid.Column="3" Content="Hiển thị hết" Width="80" Height="20" Margin="20,0,0,0" HorizontalAlignment="Left" Command="{Binding RoomAssetViewFilterAllCommand}"/>
+                            <Button Grid.Row="1" Grid.Column="3" Content="Hiển tất cả" Width="80" Height="20" Margin="20,0,0,0" HorizontalAlignment="Left" Command="{Binding RoomAssetViewFilterAllCommand}"/>
                             <Label Grid.Row="1" Grid.Column="1" Content="Theo tên tài sản:"/>
                             <TextBox Grid.Row="1" Grid.Column="2" Margin="3" Height="20" Text="{Binding RavAssetNameFilter}"/>
                         </Grid>
@@ -302,7 +302,7 @@
                             </Grid.ColumnDefinitions>
                             <Label Grid.Row="0"  Grid.ColumnSpan="5" Content="Lọc nội dung:"/>
                             <Button Grid.Row="1" Grid.Column="5" Content="Lọc" Width="80" Height="20" Command="{Binding RoomHistoryViewFilterCommand}"/>
-                            <Button Grid.Row="2" Grid.Column="5" Content="Hiện thị hết" Width="80" Height="20" VerticalAlignment="Top" Command="{Binding RoomHistoryViewFilterAllCommand}"/>
+                            <Button Grid.Row="2" Grid.Column="5" Content="Hiện tất cả" Width="80" Height="20" VerticalAlignment="Top" Command="{Binding RoomHistoryViewFilterAllCommand}"/>
                             <Label Grid.Row="1" Grid.Column="0" Content="ngày (từ):"/>
                             <Label Grid.Row="1" Grid.Column="3" Content="ngày (đến):"/>
                             <Label Grid.Row="2" Grid.Column="0" Content="tài sản:"/>

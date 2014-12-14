@@ -16,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Data;
 using System.ComponentModel;
 using System.Windows.Forms;
+using RoomM.Repositories;
 
 namespace RoomM.DeskApp.ViewModels
 {
@@ -402,8 +403,20 @@ namespace RoomM.DeskApp.ViewModels
         // commands
         public ICommand ExportToExcelCommand { get { return new RelayCommand(ExportToExcelCommandHandler, CanExecute); } }
 
+        private void abc() {
+            Console.WriteLine("Cont");
+        }
+
         private void ExportToExcelCommandHandler()
         {
+
+            // Task task = Task.Delay(2000).ContinueWith(t => abc());
+            // task.Wait();
+
+            // Console.WriteLine("##");
+            // MainWindowViewModel.instance.ChangeStateToComplete("this is google");
+            
+
             RoomsReportToExcel report = new RoomsReportToExcel("sgu university", "roomM", "templates/roomlist_tmp.xls");
 
             List<Room> dataList = new List<Room>();
@@ -418,6 +431,11 @@ namespace RoomM.DeskApp.ViewModels
 
             report.setupExport(dataList);
             report.save();
+
+
+            /*(Task.Delay(2000).ContinueWith(t => 
+                (){MainWindowViewModel.instance.StatusExpend = MainWindowViewModel.COMPLETE}).Wait();
+            MainWindowViewModel.instance.StatusExpend = MainWindowViewModel.COMPLETE;*/
         }
 
         public ICommand ExportCalRegisterToExcelCommand { get { return new RelayCommand(ExportCalRegisterToExcelCommandHandler, CanExecute); } }
