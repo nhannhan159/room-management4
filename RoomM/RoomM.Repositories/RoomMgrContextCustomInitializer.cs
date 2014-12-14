@@ -21,92 +21,316 @@ namespace RoomM.Repositories
             RoomType roomHO = new RoomType { Name = "Thực hành hóa" };
             RoomType roomLI = new RoomType { Name = "Thực hành lý" };
             RoomType roomSI = new RoomType { Name = "Thực hành sinh học" };
+            RoomType roomDT = new RoomType { Name = "Thực hành điện tử" };
+            RoomType roomVM = new RoomType { Name = "Thực hành vi mạch" };
+            RoomType roomCK = new RoomType { Name = "Thực hành cơ khí" };
+            RoomType roomCD = new RoomType { Name = "Thực hành cơ điện" };
 
             HistoryType devicehistorytype1 = new HistoryType { Name = "Chuyển thiết bị" };
             HistoryType devicehistorytype2 = new HistoryType { Name = "Thanh lí thiết bị" };
 
+            StaffType usertype0 = new StaffType { Name = "Quản trị viên" };
             StaffType usertype1 = new StaffType { Name = "Giảng viên" };
             StaffType usertype2 = new StaffType { Name = "Nhân viên quản lý thiết bị" };
 
             RoomCalendarStatus roomcalendarstatus1 = new RoomCalendarStatus { Name = "Chờ xác nhận" };
             RoomCalendarStatus roomcalendarstatus2 = new RoomCalendarStatus { Name = "Đã đăng ký" };
-            RoomCalendarStatus roomcalendarstatus3 = new RoomCalendarStatus { Name = "Chưa đăng ký" };
+            RoomCalendarStatus roomcalendarstatus3 = new RoomCalendarStatus { Name = "Hủy đăng ký" };
 
-            Room room1 = new Room
+            #region room tin hoc
+            Room room0 = new Room
             {
-                Name = "A111",
+                Name = "A100",
                 DateCreate = new DateTime(2011, 1, 1),
                 RoomType = roomTH
             };
+
+            Room room1 = new Room
+            {
+                Name = "A101",
+                DateCreate = new DateTime(2011, 1, 1),
+                RoomType = roomTH
+            };
+
             Room room2 = new Room
             {
-                Name = "B006",
+                Name = "A102",
+                DateCreate = new DateTime(2011, 1, 1),
+                RoomType = roomTH
+            };
+
+            Room room3 = new Room
+            {
+                Name = "A103",
+                DateCreate = new DateTime(2011, 1, 1),
+                RoomType = roomTH
+            };
+
+            Room room4 = new Room
+            {
+                Name = "A104",
+                DateCreate = new DateTime(2011, 1, 1),
+                RoomType = roomTH
+            };
+
+            Room room5 = new Room
+            {
+                Name = "A105",
+                DateCreate = new DateTime(2011, 1, 1),
+                RoomType = roomTH
+            };
+
+            Room room6 = new Room
+            {
+                Name = "A106",
+                DateCreate = new DateTime(2011, 1, 1),
+                RoomType = roomTH
+            };
+
+            Room room7 = new Room
+            {
+                Name = "A107",
+                DateCreate = new DateTime(2011, 1, 1),
+                RoomType = roomTH
+            };
+
+            Room room8 = new Room
+            {
+                Name = "A108",
+                DateCreate = new DateTime(2011, 1, 1),
+                RoomType = roomTH
+            };
+
+            Room room9 = new Room
+            {
+                Name = "A109",
+                DateCreate = new DateTime(2011, 1, 1),
+                RoomType = roomTH
+            };
+
+            #endregion
+
+
+            #region vat li
+            Room room10 = new Room
+            {
+                Name = "B000",
                 DateCreate = new DateTime(2011, 1, 2),
                 RoomType = roomLI
             };
-            Room room3 = new Room
+
+            Room room11 = new Room
+            {
+                Name = "B001",
+                DateCreate = new DateTime(2011, 1, 2),
+                RoomType = roomLI
+            };
+
+            Room room12 = new Room
+            {
+                Name = "B002",
+                DateCreate = new DateTime(2011, 1, 2),
+                RoomType = roomLI
+            };
+
+            Room room13 = new Room
+            {
+                Name = "B003",
+                DateCreate = new DateTime(2011, 1, 2),
+                RoomType = roomLI
+            };
+
+            Room room14 = new Room
+            {
+                Name = "B004",
+                DateCreate = new DateTime(2011, 1, 2),
+                RoomType = roomLI
+            };
+
+            Room room15 = new Room
+            {
+                Name = "B005",
+                DateCreate = new DateTime(2011, 1, 2),
+                RoomType = roomLI
+            };
+
+            #endregion
+
+            #region mix room
+            Room room16 = new Room
             {
                 Name = "A112",
                 DateCreate = new DateTime(2011, 1, 3),
                 RoomType = roomTH
             };
-            Room room4 = new Room
+            Room room17 = new Room
             {
-                Name = "B005",
+                Name = "B015",
                 DateCreate = new DateTime(2011, 1, 5),
                 RoomType = roomHO
             };
-            Room room5 = new Room
+            Room room18 = new Room
             {
-                Name = "A142",
+                Name = "A112",
                 DateCreate = new DateTime(2011, 1, 7),
-                RoomType = roomHO
+                RoomType = roomVM
             };
-            Room room6 = new Room
+            Room room19 = new Room
             {
-                Name = "B008",
+                Name = "B016",
                 DateCreate = new DateTime(2011, 1, 8),
-                RoomType = roomLI
+                RoomType = roomCK
             };
 
+            #endregion
+
+
+            #region init asset
             Asset device1 = new Asset
             {
-                Name = "DV001",
+                Name = "Quạt trần 4M",
             };
+
             Asset device2 = new Asset
             {
-                Name = "DV002",
+                Name = "Quạt trần 2M",
             };
             Asset device3 = new Asset
             {
-                Name = "DV003",
+                Name = "Đèn huỳnh quang 4m",
             };
             Asset device4 = new Asset
             {
-                Name = "DV004",
+                Name = "Đèn huỳnh quang 12m",
+            };
+            Asset device5 = new Asset
+            {
+                Name = "Bàn học gỗ",
+            };
+            Asset device6 = new Asset
+            {
+                Name = "Ghế MH4",
+            };
+            Asset device7 = new Asset
+            {
+                Name = "Khăn trải bàn GV",
+            };
+            Asset device8 = new Asset
+            {
+                Name = "Khăn trải bàn GV",
+            };
+            Asset device9 = new Asset
+            {
+                Name = "Giá treo",
+            };
+            Asset device10 = new Asset
+            {
+                Name = "Máy chiếu KH0103",
+            };
+            Asset device11 = new Asset
+            {
+                Name = "Màn chiếu",
+            };
+            Asset device12 = new Asset
+            {
+                Name = "Phấn ABC",
+            };
+            Asset device13 = new Asset
+            {
+                Name = "Ghế nhựa đơn",
+            };
+            Asset device14 = new Asset
+            {
+                Name = "Ghế thép",
+            };
+            Asset device15 = new Asset
+            {
+                Name = "PC corei3",
             };
 
+            Asset device16 = new Asset
+            {
+                Name = "PC corei5",
+            };
 
+            Asset device17 = new Asset
+            {
+                Name = "PC Server 8Ghz",
+            };
+
+            Asset device18 = new Asset
+            {
+                Name = "Switch 28port",
+            };
+
+            Asset device19 = new Asset
+            {
+                Name = "Swith 32port",
+            };
+
+            Asset device20 = new Asset
+            {
+                Name = "Cáp nối mạng 4M",
+            };
+
+            #endregion
+
+
+
+            #region room A100
             RoomAsset roomD1 = new RoomAsset
+            {
+                Asset = device17,
+                Amount = 1,
+                Room = room1
+            };
+
+            RoomAsset roomD2 = new RoomAsset
+            {
+                Asset = device16,
+                Amount = 30,
+                Room = room1
+            };
+
+            RoomAsset roomD3 = new RoomAsset
             {
                 Asset = device1,
                 Amount = 10,
                 Room = room1
             };
 
-            RoomAsset roomD2 = new RoomAsset
+            RoomAsset roomD4 = new RoomAsset
+            {
+                Asset = device11,
+                Amount = 1,
+                Room = room1
+            };
+
+            RoomAsset roomD5 = new RoomAsset
+            {
+                Asset = device10,
+                Amount = 1,
+                Room = room1
+            };
+
+            #endregion
+
+
+            #region mix
+            RoomAsset roomD6 = new RoomAsset
             {
                 Asset = device3,
                 Amount = 5,
                 Room = room1
             };
 
-            RoomAsset roomD3 = new RoomAsset
+            RoomAsset roomD7 = new RoomAsset
             {
                 Asset = device4,
                 Amount = 100,
                 Room = room2
             };
+            #endregion 
 
             RoomAssetHistory devicehistory1 = new RoomAssetHistory
             {
@@ -196,7 +420,7 @@ namespace RoomM.Repositories
                 Date = new DateTime(2011, 1, 8),
                 Start = 4,
                 Length = 2,
-                RoomCalendarStatus = roomcalendarstatus2,
+                RoomCalendarStatus = roomcalendarstatus3,
                 Room = room4,
                 Staff = user1
             };
@@ -213,21 +437,63 @@ namespace RoomM.Repositories
             context.Entry(roomcalendarstatus2).State = EntityState.Added;
             context.Entry(roomcalendarstatus3).State = EntityState.Added;
 
+            #region add device
             context.Entry(device1).State = EntityState.Added;
             context.Entry(device2).State = EntityState.Added;
             context.Entry(device3).State = EntityState.Added;
             context.Entry(device4).State = EntityState.Added;
+            context.Entry(device5).State = EntityState.Added;
+            context.Entry(device6).State = EntityState.Added;
+            context.Entry(device7).State = EntityState.Added;
+            context.Entry(device8).State = EntityState.Added;
+            context.Entry(device9).State = EntityState.Added;
+            context.Entry(device10).State = EntityState.Added;
+            context.Entry(device11).State = EntityState.Added;
+            context.Entry(device12).State = EntityState.Added;
+            context.Entry(device13).State = EntityState.Added;
+            context.Entry(device14).State = EntityState.Added;
+            context.Entry(device15).State = EntityState.Added;
+            context.Entry(device16).State = EntityState.Added;
+            context.Entry(device17).State = EntityState.Added;
+            context.Entry(device18).State = EntityState.Added;
+            context.Entry(device19).State = EntityState.Added;
+            context.Entry(device20).State = EntityState.Added;
 
+            #endregion
+
+            #region addroom
+            context.Entry(room0).State = EntityState.Added;
             context.Entry(room1).State = EntityState.Added;
             context.Entry(room2).State = EntityState.Added;
             context.Entry(room3).State = EntityState.Added;
             context.Entry(room4).State = EntityState.Added;
             context.Entry(room5).State = EntityState.Added;
             context.Entry(room6).State = EntityState.Added;
+            context.Entry(room7).State = EntityState.Added;
+            context.Entry(room8).State = EntityState.Added;
+            context.Entry(room9).State = EntityState.Added;
+            context.Entry(room10).State = EntityState.Added;
+            context.Entry(room11).State = EntityState.Added;
+            context.Entry(room12).State = EntityState.Added;
+            context.Entry(room13).State = EntityState.Added;
+            context.Entry(room14).State = EntityState.Added;
+            context.Entry(room15).State = EntityState.Added;
+            context.Entry(room16).State = EntityState.Added;
+            context.Entry(room17).State = EntityState.Added;
+            context.Entry(room18).State = EntityState.Added;
+            context.Entry(room19).State = EntityState.Added;
+            #endregion
 
+            #region add room assets
             context.Entry(roomD1).State = EntityState.Added;
             context.Entry(roomD2).State = EntityState.Added;
             context.Entry(roomD3).State = EntityState.Added;
+            context.Entry(roomD4).State = EntityState.Added;
+            context.Entry(roomD5).State = EntityState.Added;
+            context.Entry(roomD6).State = EntityState.Added;
+            context.Entry(roomD7).State = EntityState.Added;
+            #endregion
+
 
             context.Entry(devicehistory1).State = EntityState.Added;
             context.Entry(devicehistory2).State = EntityState.Added;

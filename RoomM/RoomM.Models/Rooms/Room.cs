@@ -13,21 +13,23 @@ namespace RoomM.Models.Rooms
     public class Room : EntityBase
     {
         [Required]
-        [Display(Name = "Ten phong")]
+        [Display(Name = "Tên phòng")]
         [StringLength(120)]
         public string Name { get; set; }
 
-        [Display(Name = "Ngay tao")]
+        [Display(Name = "Ngày tạo")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DateCreate { get; set; }
 
-        [Display(Name = "Loai phong")]
+        [Display(Name = "Loại phòng")]
         public Int64 RoomTypeId { get; set; }
 
         public virtual RoomType RoomType { get; set; }
 
         public Boolean IsUsing { get; set; }
+
+        public string Description { get; set; }
 
         public virtual ICollection<RoomAsset> RoomAssets { get; set; }
         public virtual ICollection<RoomAssetHistory> AssetHistories { get; set; }
