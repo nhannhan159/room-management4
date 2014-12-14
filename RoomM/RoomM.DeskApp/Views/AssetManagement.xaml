@@ -114,7 +114,7 @@
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="0" Grid.Column="0" Content="Lọc nội dung:"/>
                 <Button Grid.Row="0" Grid.Column="3" Content="Lọc" Width="80" Height="20" Command="{Binding FilterCommand}"/>
-                <Button Grid.Row="1" Grid.Column="3" Content="Hiển thị hết" Width="80" Height="20" ToolTip="Không lọc" Command="{Binding FilterAllCommand}"/>
+                <Button Grid.Row="1" Grid.Column="3" Content="Hiển tất cả" Width="80" Height="20" ToolTip="Không lọc" Command="{Binding FilterAllCommand}"/>
                 <Label Grid.Row="0" Grid.Column="1" Content="theo tên:"/>
                 <Label Grid.Row="1" Grid.Column="1" Content="theo phòng chứa:"/>
                 <TextBox Grid.Row="0" Grid.Column="2" Margin="3" Height="20" Text="{Binding NameFilter}"/>
@@ -255,7 +255,7 @@
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="Tìm phòng:"/>
                         <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="3" HorizontalAlignment="Stretch" Text="{Binding RavRoomNameFilter}"/>
                         <Button Grid.Row="1" Grid.Column="1" Content="Tìm" Height="20" Margin="3,0,3,0" VerticalAlignment="Top" Command="{Binding RoomAssetViewFilterCommand}"/>
-                        <Button Grid.Row="1" Grid.Column="2" Content="Xem Tất cả" Height="20" Margin="3,0,3,0" VerticalAlignment="Top" Command="{Binding RoomAssetViewFilterAllCommand}"/>
+                        <Button Grid.Row="1" Grid.Column="2" Content="Hiện Tất cả" Height="20" Margin="3,0,3,0" VerticalAlignment="Top" Command="{Binding RoomAssetViewFilterAllCommand}"/>
                     </Grid>
                     <DataGrid Grid.Row="2" VerticalAlignment="Stretch" 
                               AutoGenerateColumns="False" CanUserAddRows="False"

@@ -16,6 +16,11 @@ namespace RoomM.Models.Staffs
 
         public bool Sex { get; set; }
 
+        public string SexName
+        {
+            get { return this.Sex ? "Nữ" : "Nam"; }
+        }
+
         [StringLength(15)]
         public string Phone { get; set; }
 
@@ -48,6 +53,12 @@ namespace RoomM.Models.Staffs
         public override string ToString()
         {
             return ID + " #name " + Name + " #username " + UserName + " #pass " + PasswordStored + "#realpass " + Password;
+        }
+
+        public Staff()
+        {
+            this.IsWorking = true;
+            this.RoomCalendars = new List<RoomCalendar>();
         }
     }
 }

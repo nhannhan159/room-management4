@@ -97,6 +97,9 @@
     <Compile Include="Views\AssetManagement.xaml.cs">
       <DependentUpon>AssetManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NewStaff.xaml.cs">
+      <DependentUpon>NewStaff.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NewAsset.xaml.cs">
       <DependentUpon>NewAsset.xaml</DependentUpon>
     </Compile>
@@ -115,6 +118,10 @@
     <Page Include="Views\AssetManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NewStaff.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\NewAsset.xaml">
       <Generator>MSBuild:Compile</Generator>
