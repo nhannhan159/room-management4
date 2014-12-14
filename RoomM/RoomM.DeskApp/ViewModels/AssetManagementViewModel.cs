@@ -21,6 +21,9 @@ namespace RoomM.DeskApp.ViewModels
     {
 
         private IAssetRepository assRepo = RepositoryFactory.GetRepository<IAssetRepository, Asset>();
+        private IRoomRepository roomRepo = RepositoryFactory.GetRepository<IRoomRepository, Room>();
+        private IRoomTypeRepository roomTypeRepo = RepositoryFactory.GetRepository<IRoomTypeRepository, RoomType>();
+        private IRoomAssetRepository roomAssRepo = RepositoryFactory.GetRepository<IRoomAssetRepository, RoomAsset>();
 
         public AssetManagementViewModel()
             : base() 
@@ -28,6 +31,11 @@ namespace RoomM.DeskApp.ViewModels
             this.roomFilter = "";
             this.roomAssetViewFilterIsCheck = false;
             this.ravRoomNameFilter = "";
+            List<RoomType> roomTypeList = new List<RoomType>(this.roomTypeRepo.GetAll());
+            roomTypeList.Add(new RoomType("Tất cả"));
+            this.roomTypeFilters = new CollectionView(roomTypeList);
+            this.roomTypeFilter1 = roomTypeList[roomTypeList.Count - 1];
+            this.roomTypeFilter2 = roomTypeList[roomTypeList.Count - 1];
         }
 
         private NewAsset newAssetDialog;
@@ -35,6 +43,9 @@ namespace RoomM.DeskApp.ViewModels
         private ICollectionView currentRoomAssetView;
         private bool roomAssetViewFilterIsCheck;
         private string ravRoomNameFilter;
+        private RoomType roomTypeFilter1;
+        private RoomType roomTypeFilter2;
+        private CollectionView roomTypeFilters;
 
         protected override List<Asset> GetEntitiesList()
         {
@@ -80,6 +91,23 @@ namespace RoomM.DeskApp.ViewModels
         {
             get { return this.roomFilter; }
             set { this.roomFilter = value; }
+        }
+
+        public CollectionView RoomTypeFilters
+        {
+            get { return this.roomTypeFilters; }
+        }
+
+        public RoomType RoomTypeFilter1
+        {
+            get { return this.roomTypeFilter1; }
+            set { this.roomTypeFilter1 = value; }
+        }
+
+        public RoomType RoomTypeFilter2
+        {
+            get { return this.roomTypeFilter2; }
+            set { this.roomTypeFilter2 = value; }
         }
 
         protected override void NewDialogCommandHandler()

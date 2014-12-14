@@ -221,17 +221,16 @@
             </WrapPanel>
             <Grid Grid.Row="1" Background="#FFE5E5E5">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="170"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="83"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="6*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="60"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Row="0" Grid.Column="1" Source="/Icon/icon-undo.png"/>
+                <Image Grid.Row="1" Grid.Column="1" Source="/Icon/icon-undo.png" VerticalAlignment="Top" Margin="0,40,0,0"/>
                 <Image Grid.Row="2" Grid.Column="1" Grid.RowSpan="2" Source="/Icon/icon-redo.png"/>
                 <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Margin="5">
                     <Grid.RowDefinitions>
@@ -270,28 +269,31 @@
                         <Label Content="Phòng" Padding="2" Margin="0,0,5,0"/>
                     </WrapPanel>
                 </Grid>
-                <Border Grid.Row="0" Grid.Column="2" BorderBrush="Black" BorderThickness="2" Background="WhiteSmoke" Margin="5,35,5,5">
-                    <Grid>
+                <Border Grid.Row="1" Grid.Column="2" BorderBrush="Black" BorderThickness="2" Background="WhiteSmoke" Margin="5" VerticalAlignment="Top">
+                    <Grid Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30"/>
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.35*"/>
-                            <ColumnDefinition Width="0.65*"/>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.7*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Nhập vào" Margin="3" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15"/>
-                        <Label Grid.Row="1" Grid.Column="0" Content="Phòng:" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-                        <Label Grid.Row="2" Grid.Column="0" Content="Số lượng:" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-                        <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="110"/>
-                        <TextBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="110"/>
-                        <Button Grid.Row="3" Grid.Column="1" Content="Chuyển vào" HorizontalAlignment="Left" Height="25" Width="100"/>
+                        <Label Grid.Row="1" Grid.Column="0" Content="Loại phòng:" HorizontalAlignment="Left" Padding="0,3,0,0"/>
+                        <Label Grid.Row="2" Grid.Column="0" Content="Phòng:" HorizontalAlignment="Left" Padding="0,3,0,0"/>
+                        <Label Grid.Row="3" Grid.Column="0" Content="Số lượng:" HorizontalAlignment="Left" Padding="0,3,0,0"/>
+                        <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="140" Height="23"  ItemsSource="{Binding RoomTypeFilters}" SelectedItem="{Binding RoomTypeFilter1}" DisplayMemberPath="Name"/>
+                        <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="140" Height="23"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="140" Height="23"/>
+                        <Button Grid.Row="4" Grid.Column="1" Content="Chuyển vào" HorizontalAlignment="Left" Height="25" Width="100"/>
                     </Grid>
                 </Border>
-                <Border Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" BorderBrush="Black" BorderThickness="2" Background="WhiteSmoke" Margin="5" Height="225">
-                    <Grid>
+                <Border Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" BorderBrush="Black" BorderThickness="2" Background="WhiteSmoke" Margin="5,5,5,30" VerticalAlignment="Bottom">
+                    <Grid Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.41*"/>
                             <RowDefinition Height="0.59*"/>
@@ -303,12 +305,12 @@
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.35*"/>
-                                <ColumnDefinition Width="0.65*"/>
+                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="0.7*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Thanh lý" Margin="3" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15"/>
-                            <Label Grid.Row="1" Grid.Column="0" Content="Số lượng:" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-                            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="140"/>
+                            <Label Grid.Row="1" Grid.Column="0" Content="Số lượng:" HorizontalAlignment="Left" Padding="0,3,0,0"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="140" Height="23"/>
                             <Button Grid.Row="4" Grid.Column="1" Content="Thanh lý" HorizontalAlignment="Left" Height="25" Width="100"/>
                         </Grid>
                         <Grid Grid.Row="1" Margin="0,10,0,0">
@@ -317,17 +319,20 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                                 <RowDefinition/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.35*"/>
-                                <ColumnDefinition Width="0.65*"/>
+                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition Width="0.7*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Chuyển đến phòng khác" Margin="3" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="15"/>
-                            <Label Grid.Row="1" Grid.Column="0" Content="Đến phòng:" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-                            <Label Grid.Row="2" Grid.Column="0" Content="Số lượng:" HorizontalAlignment="Left" Margin="10,0,0,0"/>
-                            <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="140"/>
-                            <TextBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="140"/>
-                            <Button Grid.Row="3" Grid.Column="1" Content="Chuyển đi" HorizontalAlignment="Left" Height="25" Width="100"/>
+                            <Label Grid.Row="1" Grid.Column="0" Content="Loại phòng:" HorizontalAlignment="Left" Padding="0,3,0,0"/>
+                            <Label Grid.Row="2" Grid.Column="0" Content="Đến phòng:" HorizontalAlignment="Left" Padding="0,3,0,0"/>
+                            <Label Grid.Row="3" Grid.Column="0" Content="Số lượng:" HorizontalAlignment="Left" Padding="0,3,0,0"/>
+                            <ComboBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="140" Height="23"  ItemsSource="{Binding RoomTypeFilters}" SelectedItem="{Binding RoomTypeFilter2}" DisplayMemberPath="Name"/>
+                            <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="140" Height="23"/>
+                            <TextBox Grid.Row="3" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Left" Width="140" Height="23"/>
+                            <Button Grid.Row="4" Grid.Column="1" Content="Chuyển đi" HorizontalAlignment="Left" Height="25" Width="100"/>
                         </Grid>
                     </Grid>
                 </Border>

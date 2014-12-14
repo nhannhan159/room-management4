@@ -34,7 +34,7 @@ namespace RoomM.DeskApp.ViewModels
             List<RoomType> roomTypeList = new List<RoomType>(this.roomTypeRepo.GetAll());
             roomTypeList.Add(new RoomType("Tất cả"));
             this.roomTypeFilters = new CollectionView(roomTypeList);
-            this.RoomTypeFilter = roomTypeList[roomTypeList.Count - 1];
+            this.roomTypeFilter = roomTypeList[roomTypeList.Count - 1];
             this.roomCalendarViewFilterIsCheck = false;
             this.roomAssetViewFilterIsCheck = false;
             this.roomHistoryViewFilterIsCheck = false;
