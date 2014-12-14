@@ -21,6 +21,7 @@ namespace RoomM.DeskApp.ViewModels
     {
 
         private IStaffRepository staffRepo = RepositoryFactory.GetRepository<IStaffRepository, Staff>();
+        private IStaffTypeRepository staffTypeRepo = RepositoryFactory.GetRepository<IStaffTypeRepository, StaffType>();
         private IRoomCalendarStatusRepository roomCalStatusRepo = RepositoryFactory.GetRepository<IRoomCalendarStatusRepository, RoomCalendarStatus>();
 
         public StaffManagementViewModel()
@@ -54,6 +55,11 @@ namespace RoomM.DeskApp.ViewModels
         protected override List<Staff> GetEntitiesList()
         {
             return new List<Staff>(this.staffRepo.GetAll());
+        }
+
+        public ICollectionView StaffTypesView
+        {
+            get { return CollectionViewSource.GetDefaultView(staffTypeRepo.GetAll()); }
         }
 
         protected override void SaveCurrentEntity()
@@ -96,6 +102,11 @@ namespace RoomM.DeskApp.ViewModels
         {
             get { return this.sexFilter; }
             set { this.sexFilter = value; }
+        }
+
+        protected override PropertyGroupDescription Grouping()
+        {
+            return new PropertyGroupDescription("StaffType");
         }
 
         protected override void NewDialogCommandHandler()

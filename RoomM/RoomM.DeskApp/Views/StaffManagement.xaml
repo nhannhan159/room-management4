@@ -55,15 +55,16 @@
             </Grid>
             <DataGrid Grid.Row="2" VerticalAlignment="Stretch" Margin="0,7,0,0" 
                       AutoGenerateColumns="False" CanUserAddRows="False"
+                      CanUserResizeColumns="False"
                       IsSynchronizedWithCurrentItem="True"
                       SelectedItem="{Binding Path=CurrentEntity}"
                       ItemsSource="{Binding Path=EntitiesView}"
                       SelectedIndex="0">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Tên" Width="0.35*" Binding="{Binding Name}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Giới tính" Width="0.15*" Binding="{Binding SexName}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Lần đăng nhập cuối" Width="0.3*" Binding="{Binding LastLogin, StringFormat=\{0:dd/MM/yyyy hh:mm\}}" IsReadOnly="True"/>
-                    <DataGridTemplateColumn Width="0.2*" Header="Hành động">
+                    <DataGridTextColumn Header="Tên" Width="*" Binding="{Binding Name}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Giới tính" Width="Auto" Binding="{Binding SexName}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Lần đăng nhập cuối" Width="Auto" Binding="{Binding LastLogin, StringFormat=\{0:dd/MM/yyyy hh:mm\}}" IsReadOnly="True"/>
+                    <DataGridTemplateColumn Header="Hành động" Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="Xoá" Width="50" Height="20"/>
@@ -71,6 +72,48 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
+                <DataGrid.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Path=Name}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </GroupStyle.HeaderTemplate>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="{x:Type GroupItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type GroupItem}">
+                                            <Expander IsExpanded="True" Background="Silver">
+                                                <Expander.Header>
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="80"/>
+                                                            <ColumnDefinition Width="130"/>
+                                                            <ColumnDefinition Width="55"/>
+                                                            <ColumnDefinition/>
+                                                            <ColumnDefinition/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0" Text="Chức quyền:" />
+                                                        <TextBlock Grid.Column="1" Text="{Binding Path=Name.Name}" Margin="0,0,10,0" FontWeight="Bold"/>
+                                                        <TextBlock Grid.Column="2" Text="Số lượng:" />
+                                                        <TextBlock Grid.Column="3" Text="{Binding Path=ItemCount}" Margin="0,0,3,0"/>
+                                                        <TextBlock Grid.Column="4" Text="người" />
+                                                    </Grid>
+                                                </Expander.Header>
+                                                <Expander.Content>
+                                                    <ItemsPresenter />
+                                                </Expander.Content>
+                                            </Expander>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </DataGrid.GroupStyle>
             </DataGrid>
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>
@@ -84,7 +127,7 @@
                 <WrapPanel>
                     <Label Content="Tổng số: " Padding="2" Margin="10,0,5,0"/>
                     <TextBlock Padding="2.5" Text="{Binding EntitiesView.Count}"/>
-                    <Label Content="Nhân viên" Padding="2" Margin="0,0,5,0"/>
+                    <Label Content="người" Padding="2" Margin="0,0,5,0"/>
                 </WrapPanel>
                 <Button Grid.Row="1" Grid.Column="0" Content="Thêm nhân viên" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,15,0" Height="25" Width="120"  Command="{Binding NewDialogCommand}" />
                 <Button Grid.Row="1" Grid.Column="1" Height="25" Width="120" VerticalAlignment="Top" Margin="15,0,0,0" HorizontalAlignment="Left" Command="{Binding ExportToExcelCommand}">
@@ -128,9 +171,9 @@
                                 <Label Grid.Row="1" Grid.Column="0" Content="Tên đăng nhập:" HorizontalAlignment="Left"/>
                                 <Label Grid.Row="2" Grid.Column="0" Content="Mật khẩu:" HorizontalAlignment="Left"/>
                                 <Label Grid.Row="3" Grid.Column="0" Content="Lần đăng nhập cuối:" HorizontalAlignment="Left"/>
-                                <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" Text="admin" Padding="0,4,0,0" HorizontalAlignment="Stretch" FontWeight="Bold"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" Text="{Binding CurrentEntity.UserName}" Padding="0,4,0,0" HorizontalAlignment="Stretch" FontWeight="Bold"/>
                                 <Button Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" Content="Đổi mật khẩu" HorizontalAlignment="Left" Width="150"/>
-                                <TextBlock Grid.Row="3" Grid.Column="1" Margin="0,0,0,5" Text="01/01/2015 15:30" Padding="0,4,0,0" HorizontalAlignment="Stretch"/>
+                                <TextBlock Grid.Row="3" Grid.Column="1" Margin="0,0,0,5" Text="{Binding CurrentEntity.LastLogin, StringFormat=\{0:dd/MM/yyyy hh:mm\}}" Padding="0,4,0,0" HorizontalAlignment="Stretch"/>
                             </Grid>
                         </Border>
                         <Border Grid.Row="1" BorderBrush="LightGray" BorderThickness="2" Margin="5,5,5,10">
@@ -155,16 +198,17 @@
                                 <Label Grid.Row="1" Grid.Column="0" Content="Tên nhân viên:" HorizontalAlignment="Left"/>
                                 <Label Grid.Row="2" Grid.Column="0" Content="Giới tính:" HorizontalAlignment="Left"/>
                                 <Label Grid.Row="3" Grid.Column="0" Content="Chức quyền:" HorizontalAlignment="Left"/>
-                                <Label Grid.Row="4" Grid.Column="0" Content="Tình trạng:" HorizontalAlignment="Left"/>
-                                <Label Grid.Row="5" Grid.Column="0" Content="Số điện thoại:" HorizontalAlignment="Left"/>
-                                <Label Grid.Row="6" Grid.Column="0" Content="Mô tả:" HorizontalAlignment="Left"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Stretch"/>
-                                <DatePicker Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Stretch"/>
-                                <ComboBox Grid.Row="3" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Stretch"/>
-                                <ComboBox Grid.Row="4" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Stretch"/>
-                                <TextBox Grid.Row="5" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Stretch"/>
-                                <RichTextBox Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
-                                <Button Grid.Row="7" Grid.ColumnSpan="4" Content="Lưu thay đổi" Height="25" Width="120" Margin="0,6,0,0"/>
+                                <Label Grid.Row="4" Grid.Column="0" Content="Số điện thoại:" HorizontalAlignment="Left"/>
+                                <Label Grid.Row="5" Grid.Column="0" Content="Mô tả:" HorizontalAlignment="Left"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" Padding="3" HorizontalAlignment="Stretch" Text="{Binding CurrentEntity.Name}"/>
+                                <WrapPanel Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Stretch">
+                                    <Label Content="Là nữ: "/>
+                                    <CheckBox IsChecked="{Binding CurrentEntity.Sex}" Margin="0,5,5,5"/>
+                                </WrapPanel>
+                                <ComboBox Grid.Row="3" Grid.Column="1" Margin="0,0,0,5" Padding="3" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=StaffTypesView}" SelectedValue="{Binding Path=CurrentEntity.StaffTypeId}" DisplayMemberPath="Name" SelectedValuePath="ID"/>
+                                <TextBox Grid.Row="4" Grid.Column="1" Margin="0,0,0,5" Padding="3" HorizontalAlignment="Stretch" Text="{Binding CurrentEntity.Phone}"/>
+                                <RichTextBox Grid.Row="5" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
+                                <Button Grid.Row="7" Grid.ColumnSpan="4" Content="Lưu thay đổi" Height="25" Width="120" Margin="0,6,0,0" Command="{Binding SaveCommand}"/>
                             </Grid>
                         </Border>
                     </Grid>

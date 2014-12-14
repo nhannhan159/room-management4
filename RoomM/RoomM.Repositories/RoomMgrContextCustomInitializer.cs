@@ -31,7 +31,7 @@ namespace RoomM.Repositories
 
             StaffType usertype0 = new StaffType { Name = "Quản trị viên" };
             StaffType usertype1 = new StaffType { Name = "Giảng viên" };
-            StaffType usertype2 = new StaffType { Name = "Nhân viên quản lý thiết bị" };
+            StaffType usertype2 = new StaffType { Name = "Nhân viên quản lý" };
 
             RoomCalendarStatus roomcalendarstatus1 = new RoomCalendarStatus { Name = "Chờ xác nhận" };
             RoomCalendarStatus roomcalendarstatus2 = new RoomCalendarStatus { Name = "Đã đăng ký" };
@@ -110,7 +110,6 @@ namespace RoomM.Repositories
 
             #endregion
 
-
             #region vat li
             Room room10 = new Room
             {
@@ -183,7 +182,6 @@ namespace RoomM.Repositories
             };
 
             #endregion
-
 
             #region init asset
             Asset device1 = new Asset
@@ -275,8 +273,6 @@ namespace RoomM.Repositories
 
             #endregion
 
-
-
             #region room A100
             RoomAsset roomD1 = new RoomAsset
             {
@@ -314,7 +310,6 @@ namespace RoomM.Repositories
             };
 
             #endregion
-
 
             #region mix
             RoomAsset roomD6 = new RoomAsset
@@ -354,26 +349,119 @@ namespace RoomM.Repositories
                 Room = room2,
             };
 
-            Staff user1 = new Staff
+            #region staff
+
+            Staff user0 = new Staff
             {
-                Name = "adminname",
-                Sex = false,
+                Name = "Triệu Linh Nhi",
+                Sex = true,
                 Phone = "0123456789",
-                StaffType = usertype2,
+                StaffType = usertype0,
                 UserName = "admin",
                 PasswordStored = CryptorEngine.Encrypt("admin", true),
                 LastLogin = new DateTime(2011, 1, 5),
             };
-            Staff user2 = new Staff
+
+            Staff user1 = new Staff
             {
-                Name = "user2name",
-                Sex = true,
+                Name = "Lý Tiêu Diêu",
+                Sex = false,
                 Phone = "0123456790",
                 StaffType = usertype1,
-                UserName = "user",
+                UserName = "user1",
                 PasswordStored = CryptorEngine.Encrypt("user", true),
                 LastLogin = new DateTime(2011, 1, 7),
             };
+
+            Staff user2 = new Staff
+            {
+                Name = "Điền Bá Quang",
+                Sex = false,
+                Phone = "0123456790",
+                StaffType = usertype1,
+                UserName = "user2",
+                PasswordStored = CryptorEngine.Encrypt("user", true),
+                LastLogin = new DateTime(2011, 1, 8),
+            };
+
+            Staff user3 = new Staff
+            {
+                Name = "Đổng Lợi Văn",
+                Sex = true,
+                Phone = "0123456790",
+                StaffType = usertype1,
+                UserName = "user3",
+                PasswordStored = CryptorEngine.Encrypt("user", true),
+                LastLogin = new DateTime(2011, 1, 9),
+            };
+
+            Staff user4 = new Staff
+            {
+                Name = "Cao Long",
+                Sex = false,
+                Phone = "0123456790",
+                StaffType = usertype1,
+                UserName = "user4",
+                PasswordStored = CryptorEngine.Encrypt("user", true),
+                LastLogin = new DateTime(2011, 1, 11),
+            };
+
+            Staff user5 = new Staff
+            {
+                Name = "Bạch Ngọc Đường",
+                Sex = false,
+                Phone = "0123456790",
+                StaffType = usertype1,
+                UserName = "user5",
+                PasswordStored = CryptorEngine.Encrypt("user", true),
+                LastLogin = new DateTime(2011, 1, 12),
+            };
+
+            Staff user6 = new Staff
+            {
+                Name = "Lý Mạc Sầu",
+                Sex = true,
+                Phone = "0123456790",
+                StaffType = usertype1,
+                UserName = "user6",
+                PasswordStored = CryptorEngine.Encrypt("user", true),
+                LastLogin = new DateTime(2011, 1, 13),
+            };
+
+            Staff user7 = new Staff
+            {
+                Name = "Đinh Tiểu Gia",
+                Sex = true,
+                Phone = "0123456790",
+                StaffType = usertype2,
+                UserName = "user7",
+                PasswordStored = CryptorEngine.Encrypt("user", true),
+                LastLogin = new DateTime(2011, 1, 17),
+            };
+
+            Staff user8 = new Staff
+            {
+                Name = "Tiết Gia Cường",
+                Sex = false,
+                Phone = "0123456790",
+                StaffType = usertype2,
+                UserName = "user8",
+                PasswordStored = CryptorEngine.Encrypt("user", true),
+                LastLogin = new DateTime(2011, 1, 27),
+            };
+
+            Staff user9 = new Staff
+            {
+                Name = "Lý Bạch",
+                Sex = false,
+                Phone = "0123456790",
+                StaffType = usertype2,
+                UserName = "user9",
+                PasswordStored = CryptorEngine.Encrypt("user", true),
+                LastLogin = new DateTime(2011, 1, 6),
+            };
+
+            #endregion
 
             RoomCalendar roomcalendar1 = new RoomCalendar
             {
@@ -494,16 +582,28 @@ namespace RoomM.Repositories
             context.Entry(roomD7).State = EntityState.Added;
             #endregion
 
-
             context.Entry(devicehistory1).State = EntityState.Added;
             context.Entry(devicehistory2).State = EntityState.Added;
             context.Entry(devicehistory3).State = EntityState.Added;
 
+            context.Entry(usertype0).State = EntityState.Added;
             context.Entry(usertype1).State = EntityState.Added;
             context.Entry(usertype2).State = EntityState.Added;
 
+            #region add staff
+
+            context.Entry(user0).State = EntityState.Added;
             context.Entry(user1).State = EntityState.Added;
             context.Entry(user2).State = EntityState.Added;
+            context.Entry(user3).State = EntityState.Added;
+            context.Entry(user4).State = EntityState.Added;
+            context.Entry(user5).State = EntityState.Added;
+            context.Entry(user6).State = EntityState.Added;
+            context.Entry(user7).State = EntityState.Added;
+            context.Entry(user8).State = EntityState.Added;
+            context.Entry(user9).State = EntityState.Added;
+
+            #endregion
 
             context.Entry(roomcalendar1).State = EntityState.Added;
             context.Entry(roomcalendar2).State = EntityState.Added;

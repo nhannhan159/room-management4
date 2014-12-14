@@ -89,7 +89,9 @@
     <Compile Include="Rooms\RoomAssetRepository.cs" />
     <Compile Include="Rooms\RoomRepository.cs" />
     <Compile Include="Rooms\RoomTypeRepository.cs" />
+    <Compile Include="Staffs\IStaffTypeRepository.cs" />
     <Compile Include="Staffs\IStaffRepository.cs" />
+    <Compile Include="Staffs\StaffTypeRepository.cs" />
     <Compile Include="Staffs\StaffRepository.cs" />
   </ItemGroup>
   <ItemGroup>

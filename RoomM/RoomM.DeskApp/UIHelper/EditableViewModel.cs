@@ -35,6 +35,7 @@ namespace RoomM.DeskApp.UIHelper
             this.entitiesView = CollectionViewSource.GetDefaultView(this.entitiesList);
             this.entitiesView.CurrentChanged += EntitySelectionChanged;
             this.entitiesView.SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
+            this.entitiesView.GroupDescriptions.Add(this.Grouping());
             this.NameFilter = "";
             this.allPlusIsCheck = false;
             this.filterIsCheck = false;
@@ -62,6 +63,11 @@ namespace RoomM.DeskApp.UIHelper
                     this.SetAdditionViewChange();
                 }
             }
+        }
+
+        protected virtual PropertyGroupDescription Grouping()
+        {
+            return new PropertyGroupDescription("");
         }
 
         protected virtual void EntitySelectionChanged(object sender, EventArgs e)
