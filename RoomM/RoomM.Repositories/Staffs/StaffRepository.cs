@@ -68,5 +68,21 @@ namespace RoomM.Repositories.Staffs
 
             return dic;
         }
+
+
+        public bool IsExists(string username)
+        {
+            return (from p in GetAllWithQuery()
+                    where p.Name.Equals(username)
+                    select p).ToList().Count > 0;
+        }
+
+
+        public int GetUserId(string username)
+        {
+            return (int) (from p in GetAllWithQuery()
+                    where p.Name.Equals(username)
+                    select p).ToList()[0].ID;
+        }
     }
 }

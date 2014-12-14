@@ -27,7 +27,7 @@
                         <DatePicker   SelectedDate="{Binding FromTimeRegister,StringFormat='dd/MM/yyy'}"/>
 
                         <Label   Content="Đến ngày:" Margin="100,0,0,0"/>
-                        <DatePicker   SelectedDate="{Binding ToTimeStaffRegister,StringFormat='dd/MM/yyy'}"/>
+                        <DatePicker   SelectedDate="{Binding ToTimeRegister,StringFormat='dd/MM/yyy'}"/>
 
                     </StackPanel>
                     <chartingToolkit:Chart Grid.Row="1" Height="450" 

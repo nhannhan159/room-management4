@@ -85,7 +85,7 @@ namespace RoomM.Repositories.Rooms
         public IList<RoomCalendar> GetByWatchedState(bool isWatched, int staffId)
         {
             return (from p in GetAllWithQuery()
-                    where p.Staff.ID == staffId && p.IsWatched == isWatched
+                    where p.Staff.ID == staffId && p.IsWatched == isWatched && null != p.RoomCalendarStatus
                     orderby p.Date descending
                     select p).ToList();
         }

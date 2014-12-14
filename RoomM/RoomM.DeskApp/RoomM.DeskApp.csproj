@@ -94,6 +94,9 @@
     <Compile Include="ViewModels\RoomManagementViewModel.cs" />
     <Compile Include="ViewModels\StaffManagementViewModel.cs" />
     <Compile Include="ViewModels\StatisticViewModel.cs" />
+    <Compile Include="Views\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AssetManagement.xaml.cs">
       <DependentUpon>AssetManagement.xaml</DependentUpon>
     </Compile>
@@ -115,6 +118,10 @@
     <Compile Include="Views\Statistic.xaml.cs">
       <DependentUpon>Statistic.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AssetManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -217,6 +224,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icon\page_excel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\cam.png" />
+    <Resource Include="Icon\xamxam.png" />
+    <Resource Include="Icon\xanhduong.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon\icon-launcher.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -310,7 +310,7 @@ namespace RoomM.DeskApp.ViewModels
             if (result == MessageBoxResult.Yes)
             {
                 try
-                {
+                { // CurrentRoomCalendar.RoomCalendarStatusId
                     this.roomCalRepo.Edit(this.CurrentRoomCalendar);
                     this.roomCalRepo.Save();
                     this.OnPropertyChanged("CurrentRoomCalendar");
@@ -409,14 +409,6 @@ namespace RoomM.DeskApp.ViewModels
 
         private void ExportToExcelCommandHandler()
         {
-
-            // Task task = Task.Delay(2000).ContinueWith(t => abc());
-            // task.Wait();
-
-            // Console.WriteLine("##");
-            // MainWindowViewModel.instance.ChangeStateToComplete("this is google");
-            
-
             RoomsReportToExcel report = new RoomsReportToExcel("sgu university", "roomM", "templates/roomlist_tmp.xls");
 
             List<Room> dataList = new List<Room>();
@@ -431,11 +423,6 @@ namespace RoomM.DeskApp.ViewModels
 
             report.setupExport(dataList);
             report.save();
-
-
-            /*(Task.Delay(2000).ContinueWith(t => 
-                (){MainWindowViewModel.instance.StatusExpend = MainWindowViewModel.COMPLETE}).Wait();
-            MainWindowViewModel.instance.StatusExpend = MainWindowViewModel.COMPLETE;*/
         }
 
         public ICommand ExportCalRegisterToExcelCommand { get { return new RelayCommand(ExportCalRegisterToExcelCommandHandler, CanExecute); } }
@@ -479,5 +466,42 @@ namespace RoomM.DeskApp.ViewModels
             report.save();
         }
 
+        // save command handler
+        protected override void SaveCommandHandler()
+        {
+            MainWindowViewModel.instance.ChangeStateToReady();
+            MessageBoxResult result = System.Windows.MessageBox.Show("Bạn muốn sửa thông tin phòng?", "Xác nhận sửa thông tin", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                // if (roomRepo.isUniqueName(CurrentEntity.Name.Trim()))
+                // {
+                    this.SaveCurrentEntity();
+                    MainWindowViewModel.instance.ChangeStateToComplete("Cập nhật thành công");
+                    base.SaveCommandHandler();
+                /* } 
+                else 
+                {
+                    
+                    System.Windows.Forms.MessageBox.Show("Cập nhật thất bại, tên phòng bị trùng lắp", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MainWindowViewModel.instance.ChangeStateToComplete("Cập nhật thất bại, tên phòng bị trùng lắp");
+                }*/
+            }
+        }
+        protected override void NewCommandHandler()
+        {
+            if (roomRepo.isUniqueName(newEntityViewModel.NewEntity.Name.Trim()))
+            {
+                this.CloseNewEntityDialog();
+                base.NewCommandHandler();
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Thêm thất bại, tên phòng bị trùng lắp", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MainWindowViewModel.instance.ChangeStateToComplete("Thêm thất bại, tên phòng bị trùng lắp");
+            }
+
+
+            
+        }
     }
 }

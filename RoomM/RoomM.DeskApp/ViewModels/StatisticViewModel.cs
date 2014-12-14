@@ -31,7 +31,6 @@ namespace RoomM.DeskApp.ViewModels
         public StatisticViewModel()
             //: base()
         {
-
             DateTime now = DateTime.Now;
             FromTimeStaff = new DateTime(now.Date.Year - 1, now.Date.Month, now.Date.Day);
             ToTimeStaff = now;

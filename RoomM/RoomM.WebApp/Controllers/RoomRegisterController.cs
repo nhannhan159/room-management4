@@ -1,6 +1,8 @@
 ﻿using RoomM.Models.Rooms;
+using RoomM.Models.Staffs;
 using RoomM.Repositories.RepositoryFramework;
 using RoomM.Repositories.Rooms;
+using RoomM.Repositories.Staffs;
 using RoomM.WebApp.Models.RoomM;
 using System;
 using System.Collections.Generic;
@@ -13,7 +15,7 @@ namespace RoomM.WebApp.Controllers
 {
     public class RoomRegisterController : Controller
     {
-
+        IStaffRepository staffRep = RepositoryFactory.GetRepository<IStaffRepository, Staff>();
         IRoomRepository roomRepo = RepositoryFactory.GetRepository<IRoomRepository, Room>();
         IRoomTypeRepository roomTypeRepo = RepositoryFactory.GetRepository<IRoomTypeRepository, RoomType>();
         IRoomCalendarRepository roomCalRepo = RepositoryFactory.GetRepository<IRoomCalendarRepository, RoomCalendar>();
@@ -53,9 +55,9 @@ namespace RoomM.WebApp.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult RoomRegistered(string messageConfirm)
         {
-            IList<RoomCalendar> calLst = roomCalRepo.GetByWatchedState(false, WebSecurity.GetUserId(User.Identity.Name));
-            // IList<RoomCalendar> calLst = roomCalRepo.GetByRegisteredState(1, 1);
-            // IList<RoomCalendar> calLst = roomCalRepo.GetByStaffId(1);
+            // IList<RoomCalendar> calLst1 = roomCalRepo.GetAll();
+
+            IList<RoomCalendar> calLst = roomCalRepo.GetByWatchedState(false, staffRep.GetUserId(User.Identity.Name));
             ViewBag.MessageConfirm = messageConfirm;
             return View(calLst);
         }
@@ -105,7 +107,7 @@ namespace RoomM.WebApp.Controllers
         [Authorize(Roles = "Teacher")]
         public ActionResult HistoryRegistered()
         {
-            IList<RoomCalendar> calLst = roomCalRepo.GetByWatchedState(true, WebSecurity.GetUserId(User.Identity.Name));
+            IList<RoomCalendar> calLst = roomCalRepo.GetByWatchedState(true, staffRep.GetUserId(User.Identity.Name));
             return View(calLst);
         }
 
@@ -187,7 +189,7 @@ namespace RoomM.WebApp.Controllers
                 {
                     // roomCal.Room = roomRepo.GetSingle(roomCal.RoomId);
                     roomCal.RoomCalendarStatusId = 1; // wait
-                    roomCal.StaffId = WebSecurity.GetUserId(User.Identity.Name);
+                    roomCal.StaffId = staffRep.GetUserId(User.Identity.Name);
 
                     // save
                     roomCalRepo.Add(roomCal);

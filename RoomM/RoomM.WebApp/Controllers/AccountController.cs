@@ -80,7 +80,8 @@ namespace RoomM.WebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
-            if (ModelState.IsValid)
+
+            if (ModelState.IsValid && !staffRep.IsExists(model.UserName))
             {
                 // Attempt to register the user
                 try
@@ -99,8 +100,6 @@ namespace RoomM.WebApp.Controllers
                         IsWorking = true,
                         LastLogin = DateTime.Now,
                         UserName = model.UserName
-                        
-                        
                     });
 
                     staffRep.Save();

@@ -20,6 +20,7 @@ namespace RoomM.Model.Mapping
             Property(t => t.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(t => t.Name).IsRequired();
             Property(t => t.IsUsing).IsRequired();
+            Property(t => t.Description).IsOptional();
 
             // table
             ToTable("Assets");

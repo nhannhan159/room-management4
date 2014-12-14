@@ -15,7 +15,6 @@
             <ColumnDefinition Width="0.8*"/>
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="60"/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
@@ -24,7 +23,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="65"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="Danh sách nhân viên" Height="27" Padding="5" VerticalAlignment="Top" FontSize="15" Background="LightGray" FontWeight="Bold"/>
+            <TextBlock Grid.Row="0" Text="DANH SÁCH NHÂN VIÊN" Padding="5" VerticalAlignment="Center" FontSize="15" Background="LightGray" FontWeight="Bold"/>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -144,8 +143,8 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <WrapPanel Grid.Row="0" Height="27" VerticalAlignment="Top" Background="LightGray">
-                <TextBlock Text="Nhân viên" Padding="5" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
-                <TextBlock Text="{Binding CurrentEntity.Name}" Padding="5" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
+                <TextBlock Text="Phòng" Padding="5" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
+                <TextBlock Text="111" Padding="5" Height="25" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="15" FontWeight="Bold"/>
             </WrapPanel>
             <TabControl Grid.Row="1" Margin="0,10,0,5">
                 <TabItem Header="Thông tin nhân viên" Width="120">

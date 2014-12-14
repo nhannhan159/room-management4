@@ -2,7 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:RoomM.DeskApp.ViewModels"
-        Title="Thêm tài sản mới" Height="120" Width="400">
+        Title="Thêm tài sản mới" Height="120" Width="400"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
     <Grid Margin="5,10,5,5" RenderTransformOrigin="0.725,0.434">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>

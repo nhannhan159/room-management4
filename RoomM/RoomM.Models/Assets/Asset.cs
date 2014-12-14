@@ -13,6 +13,7 @@ namespace RoomM.Models.Assets
     {
         public string Name { get; set; }
         public Boolean IsUsing { get; set; }
+        public string Description { get; set; }
 
         public virtual ICollection<RoomAsset> RoomAssets { get; set; }
         public virtual ICollection<RoomAssetHistory> AssetHistories { get; set; }

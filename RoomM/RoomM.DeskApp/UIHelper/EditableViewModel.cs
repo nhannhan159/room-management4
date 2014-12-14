@@ -143,21 +143,21 @@ namespace RoomM.DeskApp.UIHelper
             get { return this.entitiesList.Count; }
         }
 
-        private void SaveCommandHandler()
+        protected virtual void SaveCommandHandler()
         {
-            MainWindowViewModel.instance.ChangeStateToReady();
+            /* MainWindowViewModel.instance.ChangeStateToReady();
             MessageBoxResult result = MessageBox.Show("Bạn muốn sửa thông tin phòng?", "Xác nhận sửa thông tin", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
                 this.SaveCurrentEntity();
                 MainWindowViewModel.instance.ChangeStateToComplete("Cập nhật thành công");
-            }
+            }*/
             this.entitiesView.Refresh();
         }
 
-        private void NewCommandHandler()
+        protected virtual void NewCommandHandler()
         {
-            this.CloseNewEntityDialog();
+            // this.CloseNewEntityDialog();
             this.CurrentEntity = this.newEntityViewModel.NewEntity;
             this.SaveCurrentEntity();
             this.entitiesList.Add(this.currentEntity);

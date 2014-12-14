@@ -25,13 +25,13 @@ namespace RoomM.DeskApp.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string yahoo {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int BkgColor {
             get {
-                return ((string)(this["yahoo"]));
+                return ((int)(this["BkgColor"]));
             }
             set {
-                this["yahoo"] = value;
+                this["BkgColor"] = value;
             }
         }
         

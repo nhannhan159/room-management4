@@ -10,9 +10,13 @@ namespace RoomM.WebApp.Models
 {
     public class UsersContext : DbContext
     {
+        public static UsersContext instance;
+
+
         public UsersContext()
             : base("DefaultConnection")
         {
+            instance = this;
         }
 
         public DbSet<UserProfile> UserProfiles { get; set; }
@@ -24,6 +28,7 @@ namespace RoomM.WebApp.Models
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
+
         public string UserName { get; set; }
     }
 

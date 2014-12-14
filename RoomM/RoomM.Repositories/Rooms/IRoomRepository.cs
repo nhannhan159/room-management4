@@ -15,5 +15,6 @@ namespace RoomM.Repositories.Rooms
         IList<Room> GetByRoomTypeId(Int64 roomTypeId);
         IList<Room> GetRoomListLimitByRegister(int limit);
         List<DictionaryEntry> GetRoomLimitByRegister(int limit, DateTime from, DateTime to);
+        bool isUniqueName(string name);
     }
 }

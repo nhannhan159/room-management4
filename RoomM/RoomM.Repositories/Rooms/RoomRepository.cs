@@ -58,5 +58,14 @@ namespace RoomM.Repositories.Rooms
 
             return dic;
         }
+
+
+        public bool isUniqueName(string name)
+        {
+            return (from p in GetAllWithQuery()
+                    where p.Name.Equals(name)
+                    select p).ToList().Count == 0;
+
+        }
     }
 }
