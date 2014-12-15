@@ -83,6 +83,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Contants.cs" />
     <Compile Include="ReportUtils\AssetsReportToExcel.cs" />
     <Compile Include="ReportUtils\ReportToExcel.cs" />
     <Compile Include="ReportUtils\RoomCalendarsReportToExcel.cs" />

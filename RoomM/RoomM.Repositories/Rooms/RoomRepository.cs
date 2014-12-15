@@ -67,5 +67,8 @@ namespace RoomM.Repositories.Rooms
                     select p).ToList().Count == 0;
 
         }
+
+
+        
     }
 }

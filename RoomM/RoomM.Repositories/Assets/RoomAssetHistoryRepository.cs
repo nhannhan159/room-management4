@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RoomM.Models.Rooms;
 
 namespace RoomM.Repositories.Assets
 {
@@ -30,13 +31,10 @@ namespace RoomM.Repositories.Assets
                     select p).ToList();
         }
 
-
-
-
-        public IList<RoomAssetHistory> GetByRoomId(Int64 roomId, DateTime timeForBacktrace)
+        public IList<RoomAssetHistory> GetByRoom2RoomId(Room room, DateTime timeForBacktrace)
         {
             return (from p in GetAllWithQuery()
-                    where p.Room.ID == roomId && p.Date.Date <= timeForBacktrace.Date
+                    where (p.Room2.Equals(room.Name) || p.Room.ID == room.ID)
                     orderby p.Date
                     select p).ToList();
         }

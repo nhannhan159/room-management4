@@ -94,6 +94,20 @@ namespace RoomM.WebApp.Controllers
                 Date = rc.Date
             };
 
+            // check mark register for room
+            Room room = roomRepo.GetSingle(rc.RoomId);
+            bool haveRegistered = true;
+
+            foreach (RoomCalendar rcal in room.RoomCalendars)
+            {
+                if (rcal.RoomCalendarStatusId == 1)
+                    haveRegistered = false;
+            }
+
+            room.IsHaveRegistered = haveRegistered;
+            roomRepo.Edit(room);
+            roomRepo.Save();
+
             // rc.IsWatched = true;
             // roomCalRepo.Edit(rc);
             roomCalRepo.Delete(id);
@@ -190,6 +204,11 @@ namespace RoomM.WebApp.Controllers
                     // roomCal.Room = roomRepo.GetSingle(roomCal.RoomId);
                     roomCal.RoomCalendarStatusId = 1; // wait
                     roomCal.StaffId = staffRep.GetUserId(User.Identity.Name);
+
+                    Room room = roomRepo.GetSingle(roomCal.RoomId);
+                    room.IsHaveRegistered = true;
+                    roomRepo.Edit(room);
+                    roomRepo.Save();
 
                     // save
                     roomCalRepo.Add(roomCal);

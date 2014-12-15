@@ -17,6 +17,7 @@ using System.Windows.Data;
 using System.ComponentModel;
 using System.Windows.Forms;
 using RoomM.Repositories;
+using System.Collections;
 
 namespace RoomM.DeskApp.ViewModels
 {
@@ -54,9 +55,20 @@ namespace RoomM.DeskApp.ViewModels
             this.rhvTypeFilters = new CollectionView(rhvTypeList);
             this.rhvTypeFilter = rhvTypeList[rhvTypeList.Count - 1];
             this.currentRoomCalendar = default(RoomCalendar);
-        }
 
-    
+
+            this.timeForBacktrace = DateTime.Now;
+            this.historiesList = new List<HistoryRecord>();
+            /* historiesList.Add(new HistoryRecord
+            {
+                AssetName = "sadsadasdasd",
+                Amount = 1000
+            });*/
+
+            this.historiesView = new CollectionView(historiesList);
+
+
+        }
 
         #region PrivateField
 
@@ -99,7 +111,6 @@ namespace RoomM.DeskApp.ViewModels
         public List<HistoryRecord> HistoriesList
         {
             get { return historiesList; }
-
             set { historiesList = value; }
         }
 
@@ -348,9 +359,26 @@ namespace RoomM.DeskApp.ViewModels
             if (result == MessageBoxResult.Yes)
             {
                 try
-                { // CurrentRoomCalendar.RoomCalendarStatusId
+                {
+                    if (CurrentRoomCalendar.RoomCalendarStatusId == 2 || CurrentRoomCalendar.RoomCalendarStatusId == 3)
+                        CurrentRoomCalendar.IsWatched = true;
+
                     this.roomCalRepo.Edit(this.CurrentRoomCalendar);
                     this.roomCalRepo.Save();
+
+                    // check registerted state for room
+                    
+                    bool haveRegistered = false;
+                    foreach(RoomCalendar rc in CurrentEntity.RoomCalendars) 
+                    {
+                        if (rc.RoomCalendarStatusId == 1) 
+                            haveRegistered = true;
+                    }
+
+                    CurrentEntity.IsHaveRegistered = haveRegistered;
+                    
+
+                    this.EntitiesView.Refresh();
                     this.OnPropertyChanged("CurrentRoomCalendar");
                     System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thành công!");
                 }
@@ -510,13 +538,59 @@ namespace RoomM.DeskApp.ViewModels
 
         private void BacktraceCommandHandler()
         {
-            IList<RoomAssetHistory> hisList = assHisRepo.GetByRoomId(CurrentEntity.ID, timeForBacktrace);
+            // proc amount
+            // Dictionary<String, int> dic = new Dictionary<string,int>();
+            Hashtable hm = new Hashtable();
+            
+            IList<RoomAssetHistory> hisList = assHisRepo.GetByRoom2RoomId(CurrentEntity, timeForBacktrace);
+            foreach (RoomAssetHistory his in hisList)
+            {
+                if (his.Date.Date <= timeForBacktrace)
+                {
 
+                    if (!hm.ContainsKey(his.Asset.Name))
+                        hm[his.Asset.Name] = new HistoryRecord 
+                        {
+                            AssetName = his.Asset.Name,
+                            Amount = 0, AmountImport = 0, AmountRemove = 0
+                        };
 
+                    if (his.AssetHistoryTypeId == Contants.ASSETS_IMPORT)
+                    {
+                        (hm[his.Asset.Name] as HistoryRecord).Amount = (hm[his.Asset.Name] as HistoryRecord).Amount + his.Amount;
+                        (hm[his.Asset.Name] as HistoryRecord).AmountImport = (hm[his.Asset.Name] as HistoryRecord).AmountImport + his.Amount;
+                    }
+                    else if (his.AssetHistoryTypeId == Contants.ASSETS_REMOVE)
+                    {
+                        (hm[his.Asset.Name] as HistoryRecord).Amount = (hm[his.Asset.Name] as HistoryRecord).Amount - his.Amount;
+                        (hm[his.Asset.Name] as HistoryRecord).AmountRemove = (hm[his.Asset.Name] as HistoryRecord).AmountRemove + his.Amount;
+                    }
+                    else if (his.AssetHistoryTypeId == Contants.ASSETS_TRANSFER)
+                    {
+                        if (his.Room.ID == CurrentEntity.ID)
+                        {
+                            (hm[his.Asset.Name] as HistoryRecord).Amount = (hm[his.Asset.Name] as HistoryRecord).Amount - his.Amount;
+                            (hm[his.Asset.Name] as HistoryRecord).AmountRemove = (hm[his.Asset.Name] as HistoryRecord).AmountRemove + his.Amount;
+                        }
+                        else
+                        {
+                            (hm[his.Asset.Name] as HistoryRecord).Amount = (hm[his.Asset.Name] as HistoryRecord).Amount + his.Amount;
+                            (hm[his.Asset.Name] as HistoryRecord).AmountImport = (hm[his.Asset.Name] as HistoryRecord).AmountImport + his.Amount;
+                        }
+                    }
+                }
+            }
 
+            // refresh
+            historiesList.Clear();
 
+            foreach (String asset in hm.Keys)
+            {
+                historiesList.Add(hm[asset] as HistoryRecord);
+            }
 
-            Console.WriteLine("sadhabsdkjaskjdaskjdlksajdasld");
+            this.historiesView.Refresh();
+            Console.WriteLine(hm.Count +  "sadhabsdkjaskjdaskjdlksajdasld");
         }
 
 
@@ -558,14 +632,13 @@ namespace RoomM.DeskApp.ViewModels
 
 
         public class HistoryRecord {
-            public String RoomName { get; set; }
+            public String AssetName { get; set; }
             public int Amount { get; set; }
+            public int AmountRemove { get; set; }
+            public int AmountImport { get; set; }
 
-            public HistoryRecord(String roomName, int amount)
-            {
-                RoomName = roomName;
-                Amount = amount;
-            }
+            public HistoryRecord() { }
+
         }
             
     }

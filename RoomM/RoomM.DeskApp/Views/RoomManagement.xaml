@@ -358,12 +358,12 @@
                         
                         <DataGrid Grid.Row="1" VerticalAlignment="Stretch" Margin="0,7,0,0" 
                                   AutoGenerateColumns="False" CanUserAddRows="False"
-                                  ItemsSource="{Binding Path=CurrentRoomHistoryView}">
+                                  ItemsSource="{Binding Path=HistoriesView}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Tên tài sản" Width="0.2*" Binding="{Binding HistoryType.Name}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Số lượng hiện tại" Width="0.15*" Binding="{Binding Date, StringFormat=\{0:dd/MM/yyyy \}}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Số lượng trước thay đổi" Width="0.15*" Binding="{Binding Asset.Name}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Số lượng sau thay đổi" Width="0.15*" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Tên tài sản" Width="0.2*" Binding="{Binding AssetName}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Số lượng hiện tại" Width="0.15*" Binding="{Binding Amount}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Số lượng nhập" Width="0.15*" Binding="{Binding AmountImport}" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Số lượng xuất" Width="0.15*" Binding="{Binding AmountRemove}" IsReadOnly="True"/>
                             </DataGrid.Columns>
                         </DataGrid>
                         <Grid Grid.Row="2">
