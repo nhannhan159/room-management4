@@ -12,5 +12,7 @@ namespace RoomM.Repositories.Assets
     {
         RoomAssetHistory GetSingle(int id);
         IList<RoomAssetHistory> GetByRoomId(Int64 id);
+        // List<RoomAssetHistory> GetHistoriesByToRoomId(Int64 roomId);
+        IList<RoomAssetHistory> GetByRoomId(Int64 roomId, DateTime timeForBacktrace);
     }
 }

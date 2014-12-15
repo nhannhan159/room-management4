@@ -30,5 +30,15 @@ namespace RoomM.Repositories.Assets
                     select p).ToList();
         }
 
+
+
+
+        public IList<RoomAssetHistory> GetByRoomId(Int64 roomId, DateTime timeForBacktrace)
+        {
+            return (from p in GetAllWithQuery()
+                    where p.Room.ID == roomId && p.Date.Date <= timeForBacktrace.Date
+                    orderby p.Date
+                    select p).ToList();
+        }
     }
 }

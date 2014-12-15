@@ -29,6 +29,8 @@ namespace RoomM.Models.Rooms
 
         public Boolean IsUsing { get; set; }
 
+        public Boolean IsHaveRegistered { get; set; }
+
         public string Description { get; set; }
 
         public virtual ICollection<RoomAsset> RoomAssets { get; set; }
@@ -42,6 +44,7 @@ namespace RoomM.Models.Rooms
             this.RoomAssets = new List<RoomAsset>();
             this.AssetHistories = new List<RoomAssetHistory>();
             this.RoomCalendars = new List<RoomCalendar>();
+            this.IsHaveRegistered = true;
         }
 
         public override string ToString()

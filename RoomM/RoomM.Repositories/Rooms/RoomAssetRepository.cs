@@ -23,7 +23,7 @@ namespace RoomM.Repositories.Rooms
             return query;
         }
 
-        public void AddOrUpdate(Int64 roomId, Int64 assetId,int amount)
+        public void AddOrUpdate(Int64 roomId, Int64 assetId, int amount)
         {
             var query = from p in GetAllWithQuery()
                         where p.RoomId == roomId && p.AssetId == assetId
@@ -37,7 +37,7 @@ namespace RoomM.Repositories.Rooms
             }
             else
             {
-                entity = new RoomAsset(roomId, assetId, amount);
+                entity = new RoomAsset(assetId, roomId, amount);
                 this.Add(entity);
             }
         }

@@ -23,8 +23,6 @@ namespace RoomM.DeskApp.ViewModels
     class RoomManagementViewModel : EditableViewModel<Room>
     {
 
-        #region Construction
-
         public RoomManagementViewModel()
             : base()
         {
@@ -58,7 +56,7 @@ namespace RoomM.DeskApp.ViewModels
             this.currentRoomCalendar = default(RoomCalendar);
         }
 
-        #endregion
+    
 
         #region PrivateField
 
@@ -94,9 +92,28 @@ namespace RoomM.DeskApp.ViewModels
         private HistoryType rhvTypeFilter;
         private CollectionView rhvTypeFilters;
 
-        #endregion
+        private List<HistoryRecord> historiesList;
+        private ICollectionView historiesView;
+        private DateTime timeForBacktrace;
 
-        #region General
+        public List<HistoryRecord> HistoriesList
+        {
+            get { return historiesList; }
+
+            set { historiesList = value; }
+        }
+
+        public ICollectionView HistoriesView
+        {
+            get { return historiesView; }
+            set { historiesView = value; }
+        }
+
+        public DateTime TimeForBacktrace
+        {
+            get { return timeForBacktrace; }
+            set { timeForBacktrace = value; }
+        }
 
         public CollectionView RoomTypeFilters
         {
@@ -487,6 +504,22 @@ namespace RoomM.DeskApp.ViewModels
             report.save();
         }
 
+
+        // backtrace button
+        public ICommand BacktraceCommand { get { return new RelayCommand(BacktraceCommandHandler, CanExecute); } }
+
+        private void BacktraceCommandHandler()
+        {
+            IList<RoomAssetHistory> hisList = assHisRepo.GetByRoomId(CurrentEntity.ID, timeForBacktrace);
+
+
+
+
+
+            Console.WriteLine("sadhabsdkjaskjdaskjdlksajdasld");
+        }
+
+
         // save command handler
         protected override void SaveCommandHandler()
         {
@@ -521,7 +554,21 @@ namespace RoomM.DeskApp.ViewModels
                 System.Windows.Forms.MessageBox.Show("Thêm thất bại, tên phòng bị trùng lắp", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 MainWindowViewModel.instance.ChangeStateToComplete("Thêm thất bại, tên phòng bị trùng lắp");
             }
-            
         }
+
+
+        public class HistoryRecord {
+            public String RoomName { get; set; }
+            public int Amount { get; set; }
+
+            public HistoryRecord(String roomName, int amount)
+            {
+                RoomName = roomName;
+                Amount = amount;
+            }
+        }
+            
     }
+
 }
+

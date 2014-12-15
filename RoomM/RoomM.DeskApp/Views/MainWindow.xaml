@@ -4,7 +4,7 @@
         xmlns:local="clr-namespace:RoomM.DeskApp.ViewModels"
         Title="QUẢN LÍ PHÒNG HỌC" 
         Icon="/Icon/icon-launcher.png"
-        Height="720" Width="1200"
+        Height="720" Width="1250"
         WindowStartupLocation="CenterScreen" >
     <Window.DataContext>
         <local:MainWindowViewModel />
