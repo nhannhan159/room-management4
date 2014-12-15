@@ -320,8 +320,8 @@
                                 <DataGridTextColumn Header="Phân loại" Width="0.2*" Binding="{Binding HistoryType.Name}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Ngày" Width="0.2*" Binding="{Binding Date, StringFormat=\{0:dd/MM/yyyy \}}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Tài sản" Width="0.225*" Binding="{Binding Asset.Name}" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Số lượng" Width="0.125*" IsReadOnly="True"/>
-                                <DataGridTextColumn Header="Phòng (đến, đi)" Width="0.25*" IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Số lượng" Width="0.125*" IsReadOnly="True" Binding="{Binding Amount}"/>
+                                <DataGridTextColumn Header="Phòng (đến, đi)" Width="0.25*" IsReadOnly="True" Binding="{Binding Room2}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                         <Grid Grid.Row="2">

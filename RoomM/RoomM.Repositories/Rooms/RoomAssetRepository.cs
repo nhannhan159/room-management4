@@ -23,15 +23,15 @@ namespace RoomM.Repositories.Rooms
             return query;
         }
 
-        public void AddOrUpdate(Int64 roomId, Int64 assetId, int amount)
+        public void AddOrUpdate(Int64 assetId, Int64 roomId, int amount)
         {
             var query = from p in GetAllWithQuery()
                         where p.RoomId == roomId && p.AssetId == assetId
                         select p;
             RoomAsset entity;
-            if (query.FirstOrDefault() != null)
+            if (query.Count() > 0)
             {
-                entity = query.FirstOrDefault();
+                entity = query.First();
                 entity.Amount += amount;
                 this.Edit(entity);
             }
