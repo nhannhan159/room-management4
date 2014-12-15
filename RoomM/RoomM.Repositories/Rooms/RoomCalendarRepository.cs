@@ -21,7 +21,7 @@ namespace RoomM.Repositories.Rooms
             return query;
         }
 
-        public IList<RoomCalendar> GetByRoomId(int roomId)
+        public IList<RoomCalendar> GetByRoomId(Int64 roomId)
         {
             return (from p in GetAllWithQuery()
                     where p.Room.ID == roomId
@@ -29,7 +29,7 @@ namespace RoomM.Repositories.Rooms
         }
 
 
-        public IList<RoomCalendar> GetByStaffId(int staffId)
+        public IList<RoomCalendar> GetByStaffId(Int64 staffId)
         {
             return (from p in GetAllWithQuery()
                     where p.Staff.ID == staffId

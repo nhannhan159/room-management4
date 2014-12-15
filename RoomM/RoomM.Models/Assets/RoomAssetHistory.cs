@@ -22,6 +22,8 @@ namespace RoomM.Models.Assets
         public Int64 RoomId { get; set; }
         public virtual Room Room { get; set; }
 
+        public string Room2 { get; set; }
+
         public int Amount { get; set; }
 
         public override string ToString()
@@ -29,5 +31,18 @@ namespace RoomM.Models.Assets
             return ID + " # " + " #type:" + AssetHistoryTypeId + " #roomID: " + RoomId;
         }
 
+        public RoomAssetHistory(DateTime Date, Int64 AssetHistoryTypeId, Int64 AssetId, Int64 RoomId, string Room2, int Amount)
+        {
+            this.Date = Date;
+            this.AssetHistoryTypeId = AssetHistoryTypeId;
+            this.AssetId = AssetId;
+            this.RoomId = RoomId;
+            this.Room2 = Room2;
+            this.Amount = Amount;
+        }
+
+        public RoomAssetHistory()
+        {
+        }
     }
 }

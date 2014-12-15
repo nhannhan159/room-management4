@@ -23,5 +23,12 @@ namespace RoomM.Repositories.Assets
             return query;
         }
 
+        public IList<RoomAssetHistory> GetByRoomId(Int64 id)
+        {
+            return (from p in GetAllWithQuery()
+                    where p.Room.ID == id
+                    select p).ToList();
+        }
+
     }
 }

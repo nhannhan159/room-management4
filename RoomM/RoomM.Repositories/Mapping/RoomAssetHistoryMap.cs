@@ -22,6 +22,7 @@ namespace RoomM.Model.Mapping
             Property(t => t.AssetHistoryTypeId).IsOptional();
             Property(t => t.AssetId).IsOptional();
             Property(t => t.RoomId).IsOptional();
+            Property(t => t.Room2).IsOptional();
             Property(t => t.Amount).IsOptional();
 
             // table
@@ -34,7 +35,6 @@ namespace RoomM.Model.Mapping
                 .HasForeignKey(t => t.AssetId).WillCascadeOnDelete(true);
             HasOptional(t => t.Room).WithMany(c => c.AssetHistories)
                 .HasForeignKey(t => t.RoomId).WillCascadeOnDelete(true);
-
         }
 
     }

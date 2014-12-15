@@ -44,6 +44,8 @@ namespace RoomM.Models.Staffs
 
         public Boolean IsWorking { get; set; }
 
+        public string Description { get; set; }
+
         [Display(Name = "Lan cuoi dang nhap")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime LastLogin { get; set; }

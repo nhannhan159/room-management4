@@ -17,17 +17,42 @@ namespace RoomM.Repositories.Rooms
 
         }
 
-        public RoomAsset GetSingle(int roomDeviceId)
+        public RoomAsset GetSingle(Int64 roomDeviceId)
         {
             var query = GetAllWithQuery().SingleOrDefault(x => x.ID == roomDeviceId);
             return query;
         }
 
+        public void AddOrUpdate(Int64 roomId, Int64 assetId,int amount)
+        {
+            var query = from p in GetAllWithQuery()
+                        where p.RoomId == roomId && p.AssetId == assetId
+                        select p;
+            RoomAsset entity;
+            if (query.FirstOrDefault() != null)
+            {
+                entity = query.FirstOrDefault();
+                entity.Amount += amount;
+                this.Edit(entity);
+            }
+            else
+            {
+                entity = new RoomAsset(roomId, assetId, amount);
+                this.Add(entity);
+            }
+        }
 
-        public IList<RoomAsset> GetByRoomId(int id)
+        public IList<RoomAsset> GetByRoomId(Int64 id)
         {
             return (from p in GetAllWithQuery()
                     where p.Room.ID == id
+                    select p).ToList();
+        }
+
+        public IList<RoomAsset> GetByAssetId(Int64 id)
+        {
+            return (from p in GetAllWithQuery()
+                    where p.Asset.ID == id
                     select p).ToList();
         }
     }

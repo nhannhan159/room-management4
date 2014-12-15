@@ -37,7 +37,6 @@ namespace RoomM.Repositories.Staffs
                     select p).ToList().Count != 0;
         }
 
-
         public IList<Staff> GetStaffLimitByRegister(int limit)
         {
             return (from p in GetAllWithQuery()

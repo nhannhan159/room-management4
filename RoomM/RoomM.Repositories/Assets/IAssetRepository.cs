@@ -12,6 +12,6 @@ namespace RoomM.Repositories.Assets
     {
         Asset GetSingle(int deviceId);
         IList<String> GetNameList();
-        
+        bool isUniqueName(string name);
     }
 }

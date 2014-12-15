@@ -135,7 +135,7 @@
                         <TextBox Grid.Row="0" Grid.Column="1" Margin="0,0,0,5" Padding="3" HorizontalAlignment="Stretch" Text="{Binding CurrentEntity.Name}" IsEnabled="{Binding CanModify}"/>
                         <DatePicker Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Stretch" SelectedDate="{Binding CurrentEntity.DateCreate,StringFormat='dd/MM/yyy'}" IsEnabled="{Binding CanModify}"/>
                         <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=RoomTypesView}" SelectedValue="{Binding Path=CurrentEntity.RoomTypeId}" DisplayMemberPath="Name" SelectedValuePath="ID" IsEnabled="{Binding CanModify}"/>
-                        <TextBox Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" IsEnabled="{Binding CanModify}" Text="{Binding CurrentEntity.Description}"/>
+                        <TextBox Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" IsEnabled="{Binding CanModify}" Text="{Binding CurrentEntity.Description}" AcceptsReturn="True" AcceptsTab="True"/>
                         <Button Grid.Row="4" Grid.ColumnSpan="4" Content="Lưu thay đổi" Height="25" Width="120" Margin="0,6,0,0" Command="{Binding SaveCommand}" IsEnabled="{Binding CurrentEntity.IsUsing}"/>
                     </Grid>
                 </TabItem>
@@ -196,7 +196,7 @@
                                                           ItemsSource="{Binding Path=DataContext.RoomCalendarStatusView,
                                                                                 RelativeSource={RelativeSource FindAncestor, 
                                                                                                                AncestorType={x:Type DataGrid}}}" 
-                                                          SelectedValue="{Binding Path=RoomCalendarStatusId}" SelectedValuePath="ID" DisplayMemberPath="Name" Padding="5,0,0,0"/>
+                                                          SelectedValue="{Binding Path=RoomCalendarStatusId, UpdateSourceTrigger=LostFocus}" SelectedValuePath="ID" DisplayMemberPath="Name" Padding="5,0,0,0"/>
                                                 <Button Height="20" Width="40" Content="Đổi"
                                                         Command="{Binding Path=DataContext.ChangeCalendarStatusCommand,
                                                                           RelativeSource={RelativeSource FindAncestor, 

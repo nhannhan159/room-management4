@@ -25,6 +25,7 @@ namespace RoomM.Model.Mapping
             Property(t => t.UserName).IsRequired();
             Property(t => t.PasswordStored).IsRequired();
             Property(t => t.IsWorking).IsRequired();
+            Property(t => t.Description).IsOptional();
 
 
             // table

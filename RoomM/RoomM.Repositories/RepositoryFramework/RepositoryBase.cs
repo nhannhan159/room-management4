@@ -105,6 +105,10 @@ namespace RoomM.Repositories.RepositoryFramework
                     entry.State = EntityState.Modified;
                 }
             }
+            else
+            {
+                entry.State = EntityState.Modified;
+            }
         }
 
         public void Save()

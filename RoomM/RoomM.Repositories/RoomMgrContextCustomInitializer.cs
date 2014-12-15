@@ -28,6 +28,8 @@ namespace RoomM.Repositories
 
             HistoryType devicehistorytype1 = new HistoryType { Name = "Chuyển thiết bị" };
             HistoryType devicehistorytype2 = new HistoryType { Name = "Thanh lí thiết bị" };
+            HistoryType devicehistorytype3 = new HistoryType { Name = "Nhập thiết bị" };
+            HistoryType devicehistorytype4 = new HistoryType { Name = "Nhận thiết bị" };
 
             StaffType usertype0 = new StaffType { Name = "Quản trị viên" };
             StaffType usertype1 = new StaffType { Name = "Giảng viên" };
@@ -520,6 +522,8 @@ namespace RoomM.Repositories
 
             context.Entry(devicehistorytype1).State = EntityState.Added;
             context.Entry(devicehistorytype2).State = EntityState.Added;
+            context.Entry(devicehistorytype3).State = EntityState.Added;
+            context.Entry(devicehistorytype4).State = EntityState.Added;
 
             context.Entry(roomcalendarstatus1).State = EntityState.Added;
             context.Entry(roomcalendarstatus2).State = EntityState.Added;

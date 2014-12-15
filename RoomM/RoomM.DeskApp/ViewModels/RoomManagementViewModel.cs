@@ -22,15 +22,13 @@ namespace RoomM.DeskApp.ViewModels
 {
     class RoomManagementViewModel : EditableViewModel<Room>
     {
-        private IRoomRepository roomRepo = RepositoryFactory.GetRepository<IRoomRepository, Room>();
-        private IRoomCalendarRepository roomCalRepo = RepositoryFactory.GetRepository<IRoomCalendarRepository, RoomCalendar>();
-        private IRoomTypeRepository roomTypeRepo = RepositoryFactory.GetRepository<IRoomTypeRepository, RoomType>();
-        private IRoomCalendarStatusRepository roomCalStatusRepo = RepositoryFactory.GetRepository<IRoomCalendarStatusRepository, RoomCalendarStatus>();
-        private IRoomAssetHistoryTypeRepository assHistoryTypeRepo = RepositoryFactory.GetRepository<IRoomAssetHistoryTypeRepository, HistoryType>();  
+
+        #region Construction
 
         public RoomManagementViewModel()
             : base()
         {
+
             List<RoomType> roomTypeList = new List<RoomType>(this.roomTypeRepo.GetAll());
             roomTypeList.Add(new RoomType("Tất cả"));
             this.roomTypeFilters = new CollectionView(roomTypeList);
@@ -60,6 +58,18 @@ namespace RoomM.DeskApp.ViewModels
             this.currentRoomCalendar = default(RoomCalendar);
         }
 
+        #endregion
+
+        #region PrivateField
+
+        private IRoomRepository roomRepo = RepositoryFactory.GetRepository<IRoomRepository, Room>();
+        private IRoomAssetRepository roomAssRepo = RepositoryFactory.GetRepository<IRoomAssetRepository, RoomAsset>();
+        private IRoomCalendarRepository roomCalRepo = RepositoryFactory.GetRepository<IRoomCalendarRepository, RoomCalendar>();
+        private IRoomTypeRepository roomTypeRepo = RepositoryFactory.GetRepository<IRoomTypeRepository, RoomType>();
+        private IRoomCalendarStatusRepository roomCalStatusRepo = RepositoryFactory.GetRepository<IRoomCalendarStatusRepository, RoomCalendarStatus>();
+        private IRoomAssetHistoryTypeRepository assHistoryTypeRepo = RepositoryFactory.GetRepository<IRoomAssetHistoryTypeRepository, HistoryType>();
+        private IRoomAssetHistoryRepository assHisRepo = RepositoryFactory.GetRepository<IRoomAssetHistoryRepository, RoomAssetHistory>();
+
         private NewRoom newRoomDialog;
         private RoomType roomTypeFilter;
         private CollectionView roomTypeFilters;
@@ -83,6 +93,10 @@ namespace RoomM.DeskApp.ViewModels
         private string rhvAssetNameFilter;
         private HistoryType rhvTypeFilter;
         private CollectionView rhvTypeFilters;
+
+        #endregion
+
+        #region General
 
         public CollectionView RoomTypeFilters
         {
@@ -142,7 +156,7 @@ namespace RoomM.DeskApp.ViewModels
             this.newEntityViewModel = new NewEntityViewModel<Room>();
             this.newEntityViewModel.NewCommand = this.NewCommand;
             this.newRoomDialog = new NewRoom(this.newEntityViewModel);
-            this.newRoomDialog.roomTypeCB.ItemsSource = RoomTypesView;
+            this.newRoomDialog.roomTypeCB.ItemsSource = this.RoomTypesView;
             this.newRoomDialog.ShowDialog();
         }
 
@@ -169,18 +183,25 @@ namespace RoomM.DeskApp.ViewModels
             else
             {
                 this.currentRoomCalendarView = CollectionViewSource.GetDefaultView(this.CurrentEntity.RoomCalendars);
-                this.currentRoomAssetView = CollectionViewSource.GetDefaultView(this.CurrentEntity.RoomAssets);
-                this.currentRoomHistoryView = CollectionViewSource.GetDefaultView(this.CurrentEntity.AssetHistories);
+                this.currentRoomAssetView = CollectionViewSource.GetDefaultView(this.roomAssRepo.GetByRoomId(this.CurrentEntity.ID));
+                this.currentRoomHistoryView = CollectionViewSource.GetDefaultView(this.assHisRepo.GetByRoomId(this.CurrentEntity.ID));
             }
             this.currentRoomCalendarView.Filter += RoomCalendarViewFilter;
             this.currentRoomAssetView.Filter += RoomAssetViewFilter;
             this.currentRoomHistoryView.Filter += RoomHistoryViewFilter;
+            this.OnPropertyChanged("CurrentRoomAssetView");
+            this.OnPropertyChanged("CurrentRoomHistoryView");
         }
+
 
         public ICollectionView RoomTypesView
         {
             get { return CollectionViewSource.GetDefaultView(roomTypeRepo.GetAll()); }
         }
+
+        #endregion
+
+
 
         public ICollectionView RoomCalendarStatusView
         {
@@ -487,6 +508,7 @@ namespace RoomM.DeskApp.ViewModels
                 }*/
             }
         }
+
         protected override void NewCommandHandler()
         {
             if (roomRepo.isUniqueName(newEntityViewModel.NewEntity.Name.Trim()))
@@ -499,8 +521,6 @@ namespace RoomM.DeskApp.ViewModels
                 System.Windows.Forms.MessageBox.Show("Thêm thất bại, tên phòng bị trùng lắp", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 MainWindowViewModel.instance.ChangeStateToComplete("Thêm thất bại, tên phòng bị trùng lắp");
             }
-
-
             
         }
     }

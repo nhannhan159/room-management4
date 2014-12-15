@@ -31,5 +31,16 @@ namespace RoomM.Models.Rooms
             return ID + " #RoomId: " + RoomId + " #DeviceId: " + AssetId + " #amount: " + Amount;
         }
 
+        public RoomAsset(Int64 AssetId, Int64 RoomId, int Amount)
+        {
+            this.AssetId = AssetId;
+            this.RoomId = RoomId;
+            this.Amount = Amount;
+        }
+
+        public RoomAsset()
+        {
+        }
+
     }
 }

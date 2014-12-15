@@ -10,7 +10,9 @@ namespace RoomM.Repositories.Rooms
 {
     public interface IRoomAssetRepository : IRepository<RoomAsset>
     {
-        RoomAsset GetSingle(int roomDeviceId);
-        IList<RoomAsset> GetByRoomId(int id);
+        RoomAsset GetSingle(Int64 roomDeviceId);
+        IList<RoomAsset> GetByRoomId(Int64 id);
+        IList<RoomAsset> GetByAssetId(Int64 id);
+        void AddOrUpdate(Int64 roomId, Int64 assetId, int amount);
     }
 }

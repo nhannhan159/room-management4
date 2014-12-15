@@ -11,7 +11,6 @@ namespace RoomM.Repositories.Assets
     public interface IRoomAssetHistoryRepository : IRepository<RoomAssetHistory>
     {
         RoomAssetHistory GetSingle(int id);
-        
-        
+        IList<RoomAssetHistory> GetByRoomId(Int64 id);
     }
 }
