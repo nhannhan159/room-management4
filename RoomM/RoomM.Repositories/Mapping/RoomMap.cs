@@ -23,7 +23,7 @@ namespace RoomM.Model.Mapping
             Property(t => t.DateCreate);
             Property(t => t.IsUsing).IsRequired();
             Property(t => t.Description).IsOptional();
-            Property(t => t.IsHaveRegistered).IsOptional();
+            //Property(t => t.IsHaveRegistered).IsOptional();
 
             // table
             ToTable("Rooms");

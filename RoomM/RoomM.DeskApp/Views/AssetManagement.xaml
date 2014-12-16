@@ -124,7 +124,7 @@
                 </WrapPanel>
             </Grid>
             <DataGrid Grid.Row="2" VerticalAlignment="Stretch" Margin="0,7,0,0" 
-                      AutoGenerateColumns="False" CanUserAddRows="False"
+                      AutoGenerateColumns="False" CanUserAddRows="False" CanUserSortColumns="True"
                       IsSynchronizedWithCurrentItem="True"
                       SelectedItem="{Binding Path=CurrentEntity}"
                       ItemsSource="{Binding Path=EntitiesView}"

@@ -49,11 +49,12 @@
                 </WrapPanel> 
             </Grid>
             <DataGrid Grid.Row="2" VerticalAlignment="Stretch" Margin="0,7,0,0" 
-                      AutoGenerateColumns="False" CanUserAddRows="False"
+                      AutoGenerateColumns="False" CanUserAddRows="False" CanUserSortColumns="True"
                       IsSynchronizedWithCurrentItem="True"
                       SelectedItem="{Binding Path=CurrentEntity}"
                       ItemsSource="{Binding Path=EntitiesView}"
-                      SelectedIndex="0">
+                      SelectedIndex="0"
+                      RowHeaderWidth="17">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Tên" Width="0.3*" Binding="{Binding Name}" IsReadOnly="True"/>
                     <DataGridTextColumn Header="Ngày tạo" Width="0.2*" Binding="{Binding DateCreate, StringFormat=\{0:dd/MM/yyyy \}}" IsReadOnly="True"/>
@@ -75,13 +76,19 @@
                             <DataTrigger Binding="{Binding IsUsing}" Value="false">
                                 <Setter Property="Foreground" Value="LightGray"/>
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding IsHaveRegistered}" Value="true">
-                                <Setter Property="Background" Value="Red"/>
+                            <DataTrigger Binding="{Binding IsUsing}" Value="true">
                             </DataTrigger>
                             
                         </Style.Triggers>
                     </Style>
                 </DataGrid.Resources>
+                <DataGrid.RowHeaderStyle>
+                    <Style TargetType="DataGridRowHeader">
+                        <Setter Property="Content" Value="{Binding NotifyText}" />
+                        <Setter Property="Foreground" Value="Red"/>
+                        <Setter Property="ToolTip" Value="{Binding NotifyToolTip}"/>
+                     </Style>
+                </DataGrid.RowHeaderStyle>
             </DataGrid>
             <Grid Grid.Row="3">
                 <Grid.ColumnDefinitions>

@@ -193,13 +193,6 @@ namespace RoomM.DeskApp.ViewModels
             this.newRoomDialog.Close();
         }
 
-        protected override void EntitySelectionChanged(object sender, EventArgs e)
-        {
-            this.OnPropertyChanged("CurrentRoomCalendarView");
-            this.OnPropertyChanged("CurrentRoomAssetView");
-            this.OnPropertyChanged("CurrentRoomHistoryView");
-        }
-
         protected override void SetAdditionViewChange()
         {
             if (this.CurrentEntity == null)
@@ -217,10 +210,10 @@ namespace RoomM.DeskApp.ViewModels
             this.currentRoomCalendarView.Filter += RoomCalendarViewFilter;
             this.currentRoomAssetView.Filter += RoomAssetViewFilter;
             this.currentRoomHistoryView.Filter += RoomHistoryViewFilter;
+            this.OnPropertyChanged("CurrentRoomCalendarView");
             this.OnPropertyChanged("CurrentRoomAssetView");
             this.OnPropertyChanged("CurrentRoomHistoryView");
         }
-
 
         public ICollectionView RoomTypesView
         {
@@ -365,19 +358,6 @@ namespace RoomM.DeskApp.ViewModels
 
                     this.roomCalRepo.Edit(this.CurrentRoomCalendar);
                     this.roomCalRepo.Save();
-
-                    // check registerted state for room
-                    
-                    bool haveRegistered = false;
-                    foreach(RoomCalendar rc in CurrentEntity.RoomCalendars) 
-                    {
-                        if (rc.RoomCalendarStatusId == 1) 
-                            haveRegistered = true;
-                    }
-
-                    CurrentEntity.IsHaveRegistered = haveRegistered;
-                    roomRepo.Edit(CurrentEntity);
-                    roomRepo.Save();
 
                     this.EntitiesView.Refresh();
                     this.OnPropertyChanged("CurrentRoomCalendar");

@@ -29,7 +29,26 @@ namespace RoomM.Models.Rooms
 
         public Boolean IsUsing { get; set; }
 
-        public Boolean IsHaveRegistered { get; set; }
+        public Boolean IsHaveRegistered
+        {
+            get
+            {
+                var query = from p in RoomCalendars
+                            where p.RoomCalendarStatusId == 1
+                            select p;
+                return query.Count() > 0;
+            }
+        }
+
+        public string NotifyText
+        {
+            get { return this.IsHaveRegistered ? "!!!" : ""; }
+        }
+
+        public string NotifyToolTip
+        {
+            get { return this.IsHaveRegistered ? "Đang có người đăng ký cần xác nhận" : ""; }
+        }
 
         public string Description { get; set; }
 
@@ -44,7 +63,6 @@ namespace RoomM.Models.Rooms
             this.RoomAssets = new List<RoomAsset>();
             this.AssetHistories = new List<RoomAssetHistory>();
             this.RoomCalendars = new List<RoomCalendar>();
-            this.IsHaveRegistered = true;
         }
 
         public override string ToString()

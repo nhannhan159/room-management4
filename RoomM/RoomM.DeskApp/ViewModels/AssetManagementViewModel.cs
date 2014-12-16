@@ -143,11 +143,6 @@ namespace RoomM.DeskApp.ViewModels
             this.newAssetDialog.Close();
         }
 
-        protected override void EntitySelectionChanged(object sender, EventArgs e)
-        {
-            this.OnPropertyChanged("CurrentRoomAssetView");
-        }
-
         protected override void SetAdditionViewChange()
         {
             if (this.CurrentEntity == null)

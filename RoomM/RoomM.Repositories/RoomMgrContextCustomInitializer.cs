@@ -124,7 +124,6 @@ namespace RoomM.Repositories
                 Name = "B000",
                 DateCreate = new DateTime(2011, 1, 2),
                 RoomType = roomLI,
-                IsHaveRegistered = false
             };
 
             Room room11 = new Room
@@ -132,7 +131,6 @@ namespace RoomM.Repositories
                 Name = "B001",
                 DateCreate = new DateTime(2011, 1, 2),
                 RoomType = roomLI,
-                IsHaveRegistered = false
             };
 
             Room room12 = new Room
@@ -140,7 +138,6 @@ namespace RoomM.Repositories
                 Name = "B002",
                 DateCreate = new DateTime(2011, 1, 2),
                 RoomType = roomLI,
-                IsHaveRegistered = false
             };
 
             Room room13 = new Room
@@ -148,7 +145,6 @@ namespace RoomM.Repositories
                 Name = "B003",
                 DateCreate = new DateTime(2011, 1, 2),
                 RoomType = roomLI,
-                IsHaveRegistered = false
             };
 
             Room room14 = new Room
@@ -156,7 +152,6 @@ namespace RoomM.Repositories
                 Name = "B004",
                 DateCreate = new DateTime(2011, 1, 2),
                 RoomType = roomLI,
-                IsHaveRegistered = false
             };
 
             Room room15 = new Room
@@ -164,7 +159,6 @@ namespace RoomM.Repositories
                 Name = "B005",
                 DateCreate = new DateTime(2011, 1, 2),
                 RoomType = roomLI,
-                IsHaveRegistered = false
             };
 
             #endregion
@@ -175,28 +169,24 @@ namespace RoomM.Repositories
                 Name = "A112",
                 DateCreate = new DateTime(2011, 1, 3),
                 RoomType = roomTH,
-                IsHaveRegistered = false
             };
             Room room17 = new Room
             {
                 Name = "B015",
                 DateCreate = new DateTime(2011, 1, 5),
                 RoomType = roomHO,
-                IsHaveRegistered = false
             };
             Room room18 = new Room
             {
                 Name = "A112",
                 DateCreate = new DateTime(2011, 1, 7),
                 RoomType = roomVM,
-                IsHaveRegistered = false
             };
             Room room19 = new Room
             {
                 Name = "B016",
                 DateCreate = new DateTime(2011, 1, 8),
                 RoomType = roomCK,
-                IsHaveRegistered = false
             };
 
             #endregion
@@ -290,7 +280,7 @@ namespace RoomM.Repositories
             };
 
             #endregion
-            /*
+            
             #region room A100
             RoomAsset roomD1 = new RoomAsset
             {
@@ -366,8 +356,7 @@ namespace RoomM.Repositories
                 Asset = device2,
                 Room = room2,
             };
-            */
-            /*
+            
             #region staff
 
             Staff user0 = new Staff
@@ -480,9 +469,9 @@ namespace RoomM.Repositories
                 LastLogin = new DateTime(2011, 1, 6),
             };
 
-            #endregion*/
+            #endregion
 
-            /* RoomCalendar roomcalendar1 = new RoomCalendar
+            RoomCalendar roomcalendar1 = new RoomCalendar
             {
                 Date = new DateTime(2011, 1, 5),
                 Start = 4,
@@ -531,7 +520,7 @@ namespace RoomM.Repositories
                 Room = room4,
                 Staff = user1
             };
-            */
+            
 
             context.Entry(roomTH).State = EntityState.Added;
             context.Entry(roomHO).State = EntityState.Added;
@@ -594,7 +583,7 @@ namespace RoomM.Repositories
             context.Entry(room19).State = EntityState.Added;
             #endregion
 
-            /*#region add room assets
+            #region add room assets
             context.Entry(roomD1).State = EntityState.Added;
             context.Entry(roomD2).State = EntityState.Added;
             context.Entry(roomD3).State = EntityState.Added;
@@ -602,11 +591,11 @@ namespace RoomM.Repositories
             context.Entry(roomD5).State = EntityState.Added;
             context.Entry(roomD6).State = EntityState.Added;
             context.Entry(roomD7).State = EntityState.Added;
-            #endregion*/
+            #endregion
 
-            /*context.Entry(devicehistory1).State = EntityState.Added;
+            context.Entry(devicehistory1).State = EntityState.Added;
             context.Entry(devicehistory2).State = EntityState.Added;
-            context.Entry(devicehistory3).State = EntityState.Added;*/
+            context.Entry(devicehistory3).State = EntityState.Added;
 
             context.Entry(usertype0).State = EntityState.Added;
             context.Entry(usertype1).State = EntityState.Added;
@@ -614,7 +603,7 @@ namespace RoomM.Repositories
 
             #region add staff
 
-            /*context.Entry(user0).State = EntityState.Added;
+            context.Entry(user0).State = EntityState.Added;
             context.Entry(user1).State = EntityState.Added;
             context.Entry(user2).State = EntityState.Added;
             context.Entry(user3).State = EntityState.Added;
@@ -624,15 +613,15 @@ namespace RoomM.Repositories
             context.Entry(user7).State = EntityState.Added;
             context.Entry(user8).State = EntityState.Added;
             context.Entry(user9).State = EntityState.Added;
-            */
+            
             #endregion
-            /*
+            
             context.Entry(roomcalendar1).State = EntityState.Added;
             context.Entry(roomcalendar2).State = EntityState.Added;
             context.Entry(roomcalendar3).State = EntityState.Added;
             context.Entry(roomcalendar4).State = EntityState.Added;
             context.Entry(roomcalendar5).State = EntityState.Added;
-            */
+            
             context.SaveChanges();
         }
        
