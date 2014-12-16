@@ -83,5 +83,13 @@ namespace RoomM.Repositories.Staffs
                     where p.Name.Equals(username)
                     select p).ToList()[0].ID;
         }
+
+
+        public bool UserNameIsWorking(string username)
+        {
+            return (from p in GetAllWithQuery()
+                         where p.Name.Equals(username) && p.IsWorking
+                         select p).ToList().Count > 0;
+        }
     }
 }

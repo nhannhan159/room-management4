@@ -97,7 +97,7 @@ namespace RoomM.DeskApp.ViewModels
                 else
                     this.assRepo.Add(this.CurrentEntity);
                 this.assRepo.Save();
-                System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thành công!");
+                // System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thành công!");
             }
             catch (Exception ex)
             {
@@ -278,7 +278,7 @@ namespace RoomM.DeskApp.ViewModels
                         this.assHisRepo.Add(roomAssHis);
                         this.assHisRepo.Save();
                         this.SetAdditionViewChange();
-                        System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thành công!");
+                        // System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thành công!");
                     }
                     //catch (Exception ex)
                     {
@@ -314,7 +314,8 @@ namespace RoomM.DeskApp.ViewModels
                         this.assHisRepo.Add(roomAssHis);
                         this.assHisRepo.Save();
                         this.SetAdditionViewChange();
-                        System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thành công!");
+                        // System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thành công!");
+                        MainWindowViewModel.instance.ChangeStateToComplete("Cập nhật thành công");
                     }
                     catch (Exception ex)
                     {
@@ -354,7 +355,8 @@ namespace RoomM.DeskApp.ViewModels
                         this.assHisRepo.Add(roomAssHis2);
                         this.assHisRepo.Save(); 
                         this.SetAdditionViewChange();
-                        System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thành công!");
+                        // System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thành công!");
+                        MainWindowViewModel.instance.ChangeStateToComplete("Cập nhật thành công");
                     }
                     catch (Exception ex)
                     {

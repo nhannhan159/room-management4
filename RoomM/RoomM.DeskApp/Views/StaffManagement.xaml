@@ -66,7 +66,7 @@
                     <DataGridTemplateColumn Header="Hành động" Width="Auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Xoá" Width="50" Height="20"  IsEnabled="{Binding IsWatched}"
+                                <Button Content="Xoá" Width="50" Height="20"  IsEnabled="{Binding IsWorking}"
                                         Command="{Binding Path=DataContext.DelCommand,
                                                           RelativeSource={RelativeSource FindAncestor, 
                                                                                          AncestorType={x:Type DataGrid}}}"/>
@@ -119,10 +119,11 @@
                 <DataGrid.Resources>
                     <Style TargetType="DataGridRow">
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsUsing}" Value="false">
+                            <DataTrigger Binding="{Binding IsWorking}" Value="false">
                                 <Setter Property="Background" Value="LightGray"/>
+                                <Setter Property="Foreground" Value="White" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding IsUsing}" Value="true"/>
+                            <DataTrigger Binding="{Binding IsWorking}" Value="true"/>
                         </Style.Triggers>
                     </Style>
                 </DataGrid.Resources>
@@ -219,8 +220,8 @@
                                 </WrapPanel>
                                 <ComboBox Grid.Row="3" Grid.Column="1" Margin="0,0,0,5" Padding="3" HorizontalAlignment="Stretch" ItemsSource="{Binding Path=StaffTypesView}" SelectedValue="{Binding Path=CurrentEntity.StaffTypeId}" DisplayMemberPath="Name" SelectedValuePath="ID"/>
                                 <TextBox Grid.Row="4" Grid.Column="1" Margin="0,0,0,5" Padding="3" HorizontalAlignment="Stretch" Text="{Binding CurrentEntity.Phone}"/>
-                                <RichTextBox Grid.Row="5" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
-                                <Button Grid.Row="7" Grid.ColumnSpan="4" Content="Lưu thay đổi" Height="25" Width="120" Margin="0,6,0,0" Command="{Binding SaveCommand}"/>
+                                <TextBox Grid.Row="5" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Text="{Binding CurrentEntity.Description}"/>
+                                <Button Grid.Row="7" Grid.ColumnSpan="4" Content="Lưu thay đổi" Height="25" Width="120" Margin="0,6,0,0" Command="{Binding SaveCommand}" IsEnabled="{Binding CurrentEntity.IsWorking}" />
                             </Grid>
                         </Border>
                     </Grid>

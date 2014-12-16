@@ -361,7 +361,7 @@ namespace RoomM.DeskApp.ViewModels
                 try
                 {
                     if (CurrentRoomCalendar.RoomCalendarStatusId == 2 || CurrentRoomCalendar.RoomCalendarStatusId == 3)
-                        CurrentRoomCalendar.IsWatched = true;
+                        // CurrentRoomCalendar.IsWatched = true;
 
                     this.roomCalRepo.Edit(this.CurrentRoomCalendar);
                     this.roomCalRepo.Save();
@@ -376,7 +376,8 @@ namespace RoomM.DeskApp.ViewModels
                     }
 
                     CurrentEntity.IsHaveRegistered = haveRegistered;
-                    
+                    roomRepo.Edit(CurrentEntity);
+                    roomRepo.Save();
 
                     this.EntitiesView.Refresh();
                     this.OnPropertyChanged("CurrentRoomCalendar");
@@ -586,11 +587,12 @@ namespace RoomM.DeskApp.ViewModels
 
             foreach (String asset in hm.Keys)
             {
-                historiesList.Add(hm[asset] as HistoryRecord);
+                HistoryRecord hr = hm[asset] as HistoryRecord;
+                if (hr.Amount > 0 || hr.AmountImport > 0 || hr.AmountRemove > 0)
+                    historiesList.Add(hr);
             }
 
             this.historiesView.Refresh();
-            Console.WriteLine(hm.Count +  "sadhabsdkjaskjdaskjdlksajdasld");
         }
 
 
