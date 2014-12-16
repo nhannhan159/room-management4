@@ -74,11 +74,10 @@
                     <Style TargetType="DataGridRow">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsUsing}" Value="false">
-                                <Setter Property="Foreground" Value="LightGray"/>
+                                <Setter Property="Background" Value="LightGray"/>
+                                <Setter Property="Foreground" Value="White" />
                             </DataTrigger>
-                            <DataTrigger Binding="{Binding IsUsing}" Value="true">
-                            </DataTrigger>
-                            
+                            <DataTrigger Binding="{Binding IsUsing}" Value="true"/>
                         </Style.Triggers>
                     </Style>
                 </DataGrid.Resources>

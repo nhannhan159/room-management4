@@ -41,8 +41,6 @@ namespace RoomM.DeskApp.ViewModels
             List<Room> roomList = new List<Room>(this.roomRepo.GetAll());
             this.roomView1 = CollectionViewSource.GetDefaultView(roomList);
             this.roomView2 = CollectionViewSource.GetDefaultView(roomList);
-            this.roomView1.Filter += RoomTypeFilter11;
-            this.roomView2.Filter += RoomTypeFilter22;
             this.room1 = (roomList.Count == 0) ? null : roomList[0];
             this.room2 = (roomList.Count == 0) ? null : roomList[0];
             this.amount1 = 0;
@@ -260,7 +258,7 @@ namespace RoomM.DeskApp.ViewModels
 
         private void AssFunc1CommandHandler()
         {
-            if (this.Amount1 > 0)
+            if (this.Amount1 > 0 && this.Room1 != null)
             {
                 MessageBoxResult result = System.Windows.MessageBox.Show("Bạn muốn nhập tài sản?", "Xác nhận nhập tài sản", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
@@ -325,7 +323,7 @@ namespace RoomM.DeskApp.ViewModels
 
         private void AssFunc3CommandHandler()
         {
-            if (this.Amount3 > 0 && this.Amount3 <= this.CurrentRoomAsset.Amount)
+            if (this.Amount3 > 0 && this.Amount3 <= this.CurrentRoomAsset.Amount && this.Room2 != null)
             {
                 MessageBoxResult result = System.Windows.MessageBox.Show("Bạn muốn chuyển tài sản?", "Xác nhận chuyển tài sản", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
@@ -390,9 +388,13 @@ namespace RoomM.DeskApp.ViewModels
                 {
                     var query = roomList.Where(p => p.RoomType.Name == this.roomTypeFilter1.Name);
                     this.roomView1 = CollectionViewSource.GetDefaultView(query.ToList());
+                    this.Room1 = (query.Count() > 0) ? query.First() : null;
                 }
                 else
+                {
                     this.roomView1 = CollectionViewSource.GetDefaultView(roomList);
+                    this.Room1 = roomList.First();
+                }
                 OnPropertyChanged("RoomView1");
             }
         }
@@ -409,39 +411,34 @@ namespace RoomM.DeskApp.ViewModels
                 {
                     var query = roomList.Where(p => p.RoomType.Name == this.roomTypeFilter2.Name);
                     this.roomView2 = CollectionViewSource.GetDefaultView(query.ToList());
+                    this.Room2 = (query.Count() > 0) ? query.First() : null;
                 }
                 else
+                {
                     this.roomView2 = CollectionViewSource.GetDefaultView(roomList);
+                    this.Room2 = roomList.First();
+                }
                 OnPropertyChanged("RoomView2");
             }
-        }
-
-        public bool RoomTypeFilter11(object obj)
-        {
-            Room entity = obj as Room;
-            if (this.roomTypeFilter1.Name != "Tất cả")
-                return entity.RoomType.Name == this.roomTypeFilter1.Name;
-            else return true;
-        }
-
-        public bool RoomTypeFilter22(object obj)
-        {
-            Room entity = obj as Room;
-            if (this.roomTypeFilter2.Name != "Tất cả")
-                return entity.RoomType.Name == this.roomTypeFilter2.Name;
-            else return true;
         }
 
         public Room Room1
         {
             get { return this.room1; }
-            set { this.room1 = value; }
+            set { 
+                this.room1 = value;
+                this.OnPropertyChanged("Room1");
+            }
         }
 
         public Room Room2
         {
             get { return this.room2; }
-            set { this.room2 = value; }
+            set
+            {
+                this.room2 = value;
+                this.OnPropertyChanged("Room2");
+            }
         }
 
         public ICollectionView RoomView1

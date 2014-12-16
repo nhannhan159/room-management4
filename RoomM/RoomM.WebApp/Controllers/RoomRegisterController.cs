@@ -94,6 +94,7 @@ namespace RoomM.WebApp.Controllers
                 Date = rc.Date
             };
 
+            /*
             // check mark register for room
             Room room = roomRepo.GetSingle(rc.RoomId);
             bool haveRegistered = true;
@@ -107,6 +108,7 @@ namespace RoomM.WebApp.Controllers
             room.IsHaveRegistered = haveRegistered;
             roomRepo.Edit(room);
             roomRepo.Save();
+             */
 
             // rc.IsWatched = true;
             // roomCalRepo.Edit(rc);
@@ -205,8 +207,9 @@ namespace RoomM.WebApp.Controllers
                     roomCal.RoomCalendarStatusId = 1; // wait
                     roomCal.StaffId = staffRep.GetUserId(User.Identity.Name);
 
+
                     Room room = roomRepo.GetSingle(roomCal.RoomId);
-                    room.IsHaveRegistered = true;
+                    //room.IsHaveRegistered = true;
                     roomRepo.Edit(room);
                     roomRepo.Save();
 
