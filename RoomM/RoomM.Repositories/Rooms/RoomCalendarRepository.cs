@@ -84,10 +84,19 @@ namespace RoomM.Repositories.Rooms
 
         public IList<RoomCalendar> GetByWatchedState(bool isWatched, int staffId)
         {
-            return (from p in GetAllWithQuery()
-                    where p.Staff.ID == staffId && p.IsWatched == isWatched && null != p.RoomCalendarStatus
-                    orderby p.Date descending
-                    select p).ToList();
+            IList<RoomCalendar> dataR = new List<RoomCalendar>();
+            IList<RoomCalendar> dataLst = (from p in GetAllWithQuery()
+                                           orderby p.Date descending
+                                           select p).ToList();
+
+            foreach (RoomCalendar p in dataLst)
+            {
+                if (p.Staff.ID == staffId && p.IsWatched == isWatched)
+                    dataR.Add(p);
+            }
+
+            return dataR;
+            
         }
 
 

@@ -704,8 +704,8 @@ input[type="checkbox"].input-validation-error {
 
 /* time table design */
 table {
-    width="90%";
-    align="center";
+    width:"90%";
+    align:"center";
     font-size: 12pt;
 }
 

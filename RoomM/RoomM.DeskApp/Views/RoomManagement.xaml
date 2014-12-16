@@ -46,7 +46,8 @@
                 <WrapPanel Grid.Row="2" Grid.ColumnSpan="4">
                     <CheckBox Margin="10,5,5,5" Command="{Binding FilterAllPlusCommand}" IsChecked="{Binding AllPlusIsCheck}"/>
                     <TextBlock Margin="0,5,5,5" Text="Hiện thị các phòng đã xoá" FontStyle="Italic"/>
-                </WrapPanel> 
+                </WrapPanel>
+                <Button Grid.Row="2" Grid.Column="3" Content="Làm mới" Width="80" Height="20" Command="{Binding RefreshCommand}"/>
             </Grid>
             <DataGrid Grid.Row="2" VerticalAlignment="Stretch" Margin="0,7,0,0" 
                       AutoGenerateColumns="False" CanUserAddRows="False" CanUserSortColumns="True"

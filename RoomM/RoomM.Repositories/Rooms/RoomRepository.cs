@@ -14,7 +14,9 @@ namespace RoomM.Repositories.Rooms
     public class RoomRepository : RepositoryBase<EFDataContext, Room>, IRoomRepository
     {
         public RoomRepository()
-        { 
+        {
+
+            
         }
 
         public Room GetSingle(Int64 roomId)

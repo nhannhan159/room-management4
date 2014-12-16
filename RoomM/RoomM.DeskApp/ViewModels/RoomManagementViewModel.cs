@@ -316,6 +316,7 @@ namespace RoomM.DeskApp.ViewModels
             this.currentRoomCalendarView.Refresh();
         }
 
+
         private void RoomAssetViewFilterCommandHandler()
         {
             this.roomAssetViewFilterIsCheck = true;
@@ -575,6 +576,29 @@ namespace RoomM.DeskApp.ViewModels
             this.historiesView.Refresh();
         }
 
+        // refresh
+        public ICommand RefreshCommand { get { return new RelayCommand(RefreshCommandHandler, CanExecute); } }
+
+        private void RefreshCommandHandler()
+        {
+
+            // init data context;
+            // EFDataContext.instance = new EFDataContext();
+
+            // EFDataContext
+
+            this.EntitiesList = this.GetEntitiesList();
+            this.EntitiesView.Refresh();
+
+            this.currentRoomAssetView.Refresh();
+            this.currentRoomHistoryView.Refresh();
+            this.currentRoomCalendarView.Refresh();
+            this.currentRoomAssetView.Refresh();
+            this.currentRoomHistoryView.Refresh();
+        }
+        
+
+
 
         // save command handler
         protected override void SaveCommandHandler()
@@ -611,6 +635,9 @@ namespace RoomM.DeskApp.ViewModels
                 MainWindowViewModel.instance.ChangeStateToComplete("Thêm thất bại, tên phòng bị trùng lắp");
             }
         }
+
+
+
 
 
         public class HistoryRecord {

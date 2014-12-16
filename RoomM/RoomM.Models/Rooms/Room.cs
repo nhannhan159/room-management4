@@ -38,6 +38,7 @@ namespace RoomM.Models.Rooms
                             select p;
                 return query.Count() > 0;
             }
+           
         }
 
         public string NotifyText

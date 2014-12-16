@@ -21,22 +21,24 @@
                     </section>
                     <nav>
                         <ul id="menu">
-                            <li>@Html.ActionLink("Lịch phòng", "Index", "RoomRegister")
-                            @if (Roles.IsUserInRole("Manager")) {
-                                <li>@Html.ActionLink("Thiết bị phòng", "Index", "RoomAssets")</li>
-                            }
-                            @if (Roles.IsUserInRole("Teacher")) {
-                                <li>@Html.ActionLink("Đăng kí phòng", "Create", "RoomRegister")</li>
-                                <li> @Html.ActionLink("Phòng đã đăng kí", "RoomRegistered", "RoomRegister")</li>
-                                <li>@Html.ActionLink("Lịch sử đăng kí", "HistoryRegistered", "RoomRegister")</li>
-                            }
-                            @if (Roles.IsUserInRole("Admin")) {
-                                <li>@Html.ActionLink("Quản lí quyền", "RoleIndex", "Account")</li>
-                                <li>@Html.ActionLink("Gán quyền", "RoleAddToUser", "Account")</li>
-                            } else {
-                                <li>@Html.ActionLink("Thông tin", "About", "Home")</li>
-                                <li>@Html.ActionLink("Liên hệ", "Contact", "Home")</li>
-                            }
+                      
+                                <li>@Html.ActionLink("Lịch phòng", "Index", "RoomRegister")
+                                @if (Roles.IsUserInRole("Manager")) {
+                                    <li>@Html.ActionLink("Thiết bị phòng", "Index", "RoomAssets")</li>
+                                }
+                                @if (Roles.IsUserInRole("Teacher")) {
+                                    <li>@Html.ActionLink("Đăng kí phòng", "Create", "RoomRegister")</li>
+                                    <li> @Html.ActionLink("Phòng đã đăng kí", "RoomRegistered", "RoomRegister")</li>
+                                    <li>@Html.ActionLink("Lịch sử đăng kí", "HistoryRegistered", "RoomRegister")</li>
+                                }
+                                @if (Roles.IsUserInRole("Admin")) {
+                                    <li>@Html.ActionLink("Quản lí quyền", "RoleIndex", "Account")</li>
+                                    <li>@Html.ActionLink("Gán quyền", "RoleAddToUser", "Account")</li>
+                                } else {
+                                    <li>@Html.ActionLink("Thông tin", "About", "Home")</li>
+                                    <li>@Html.ActionLink("Liên hệ", "Contact", "Home")</li>
+                                }
+                           
                         </ul>
                     </nav>
                 </div>

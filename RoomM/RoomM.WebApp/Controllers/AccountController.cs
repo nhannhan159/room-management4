@@ -429,12 +429,19 @@ namespace RoomM.WebApp.Controllers
 
             if (Roles.IsUserInRole(UserName, RoleName))
             {
-                ViewBag.ResultMessage = "This user already has the role specified !";
+                ViewBag.ResultMessage = "Quyền của người dùng này đã được gán từ trước!";
             }
             else
             {
-                Roles.AddUserToRole(UserName, RoleName);
-                ViewBag.ResultMessage = "Username added to the role succesfully !";
+                try
+                {
+                    Roles.AddUserToRole(UserName, RoleName);
+                    ViewBag.ResultMessage = "Gán quyền thành công!";
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.ResultMessage = "Người dùng không tồn tại!";
+                }
             }
 
             SelectList list = new SelectList(Roles.GetAllRoles());

@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -21,6 +23,7 @@ namespace RoomM.Repositories.RepositoryFramework
 
         public virtual IEnumerable<T> GetWithRawSql(string query, params object[] parameters)
         {
+
             return _entities.Set<T>().SqlQuery(query, parameters).ToList();
         }
 
@@ -29,6 +32,18 @@ namespace RoomM.Repositories.RepositoryFramework
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
             string includeProperties = "")
         {
+
+            var context = ((IObjectContextAdapter)_entities).ObjectContext;
+            var refreshableObjects = (from entry in context.ObjectStateManager.GetObjectStateEntries(
+                                                        EntityState.Added
+                                                       | EntityState.Deleted
+                                                       | EntityState.Modified
+                                                       | EntityState.Unchanged)
+                                      where entry.EntityKey != null
+                                      select entry.Entity).ToList();
+
+            context.Refresh(RefreshMode.StoreWins, refreshableObjects);
+
             IQueryable<T> query = _entities.Set<T>();
 
             if (filter != null)

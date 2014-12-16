@@ -335,7 +335,7 @@ namespace RoomM.Repositories
             };
             #endregion 
 
-            RoomAssetHistory devicehistory1 = new RoomAssetHistory
+            /*RoomAssetHistory devicehistory1 = new RoomAssetHistory
             {
                 Date = new DateTime(2011, 1, 1),
                 HistoryType = devicehistorytype1,
@@ -520,7 +520,7 @@ namespace RoomM.Repositories
                 Room = room4,
                 Staff = user1
             };
-            
+            */
 
             context.Entry(roomTH).State = EntityState.Added;
             context.Entry(roomHO).State = EntityState.Added;
@@ -593,15 +593,15 @@ namespace RoomM.Repositories
             context.Entry(roomD7).State = EntityState.Added;
             #endregion
 
-            context.Entry(devicehistory1).State = EntityState.Added;
+            /*context.Entry(devicehistory1).State = EntityState.Added;
             context.Entry(devicehistory2).State = EntityState.Added;
-            context.Entry(devicehistory3).State = EntityState.Added;
+            context.Entry(devicehistory3).State = EntityState.Added;*/
 
             context.Entry(usertype0).State = EntityState.Added;
             context.Entry(usertype1).State = EntityState.Added;
             context.Entry(usertype2).State = EntityState.Added;
 
-            #region add staff
+            /*#region add staff
 
             context.Entry(user0).State = EntityState.Added;
             context.Entry(user1).State = EntityState.Added;
@@ -620,7 +620,7 @@ namespace RoomM.Repositories
             context.Entry(roomcalendar2).State = EntityState.Added;
             context.Entry(roomcalendar3).State = EntityState.Added;
             context.Entry(roomcalendar4).State = EntityState.Added;
-            context.Entry(roomcalendar5).State = EntityState.Added;
+            context.Entry(roomcalendar5).State = EntityState.Added;*/
             
             context.SaveChanges();
         }
