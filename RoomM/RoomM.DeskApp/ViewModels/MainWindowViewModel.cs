@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Diagnostics;
 using System.IO;
 using RoomM.DeskApp.Views;
+using System.Windows;
 
 namespace RoomM.DeskApp.ViewModels
 {
@@ -178,6 +179,14 @@ namespace RoomM.DeskApp.ViewModels
         private void AboutCommandHandler()
         {
             (new About()).ShowDialog();
+        }
+
+        public ICommand ExitCommand { get { return new RelayCommand(ExitCommandHandler, CanExecute); } }
+
+        private void ExitCommandHandler()
+        {
+            Window window = Application.Current.Windows.OfType<Window>().Where(w => w.Name == "MainWindowForApp").FirstOrDefault();
+            if (window != null) window.Close();
         }
 
     }

@@ -85,6 +85,7 @@
     </ApplicationDefinition>
     <Compile Include="Contants.cs" />
     <Compile Include="ReportUtils\AssetsReportToExcel.cs" />
+    <Compile Include="ReportUtils\PureAssetsReportToExcel.cs" />
     <Compile Include="ReportUtils\ReportToExcel.cs" />
     <Compile Include="ReportUtils\RoomCalendarsReportToExcel.cs" />
     <Compile Include="ReportUtils\RoomHistoriesReportToExcel.cs" />

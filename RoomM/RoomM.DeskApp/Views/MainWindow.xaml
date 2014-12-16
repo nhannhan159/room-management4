@@ -5,6 +5,7 @@
         Title="QUẢN LÍ PHÒNG HỌC" 
         Icon="/Icon/icon-launcher.png"
         Height="720" Width="1250"
+        Name="MainWindowForApp"
         WindowStartupLocation="CenterScreen" >
     <Window.DataContext>
         <local:MainWindowViewModel />
@@ -16,6 +17,10 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0" IsMainMenu="True" FontSize="10.5pt" HorizontalAlignment="Left" VerticalAlignment="Stretch" Background="WhiteSmoke">
+            <MenuItem Header="CHƯƠNG TRÌNH">
+                <MenuItem Header="Thoát" Command="{Binding ExitCommand}" />
+            </MenuItem>
+            
             <MenuItem Header="CÀI ĐẶT">
                 <MenuItem Header="Màu nền">
                     <MenuItem Header="Xám xẫm" Command="{Binding BkgGrayCommand}">

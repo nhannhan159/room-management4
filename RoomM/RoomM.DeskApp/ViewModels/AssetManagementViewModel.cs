@@ -25,7 +25,7 @@ namespace RoomM.DeskApp.ViewModels
         #region Contruction
 
         public AssetManagementViewModel()
-            : base() 
+            : base()
         {
 
             this.roomFilter = "";
@@ -270,27 +270,25 @@ namespace RoomM.DeskApp.ViewModels
                 MessageBoxResult result = System.Windows.MessageBox.Show("Bạn muốn nhập tài sản?", "Xác nhận nhập tài sản", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
                 {
-                    //try
-                    {
-                        this.roomAssRepo.AddOrUpdate(this.CurrentEntity.ID, this.Room1.ID, this.Amount1);
-                        this.roomAssRepo.Save();
-                        RoomAssetHistory roomAssHis = new RoomAssetHistory(DateTime.Now, 3, this.CurrentEntity.ID, this.Room1.ID, "", this.Amount1);
-                        this.assHisRepo.Add(roomAssHis);
-                        this.assHisRepo.Save();
-                        this.SetAdditionViewChange();
-                        // System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thành công!");
-                    }
-                    //catch (Exception ex)
-                    {
-                        //System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thất bại! \nMã lỗi: " + ex.Message);
-                    }
+                    this.roomAssRepo.AddOrUpdate(this.CurrentEntity.ID, this.Room1.ID, this.Amount1);
+                    this.roomAssRepo.Save();
+                    RoomAssetHistory roomAssHis = new RoomAssetHistory(DateTime.Now, 3, this.CurrentEntity.ID, this.Room1.ID, "", this.Amount1);
+                    this.assHisRepo.Add(roomAssHis);
+                    this.assHisRepo.Save();
+                    this.SetAdditionViewChange();
+                    MainWindowViewModel.instance.ChangeStateToComplete("Cập nhật thành công");
                 }
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Thông tin nhập không hợp lệ");
+                MainWindowViewModel.instance.ChangeStateToComplete("Thông tin nhập không hợp lệ");
             }
         }
 
         private void AssFunc2CommandHandler()
         {
-            if (this.Amount2 > 0)
+            if (this.Amount2 > 0 && this.Amount2 <= this.CurrentRoomAsset.Amount)
             {
                 MessageBoxResult result = System.Windows.MessageBox.Show("Bạn muốn thanh lý tài sản?", "Xác nhận thanh lý", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
@@ -323,11 +321,16 @@ namespace RoomM.DeskApp.ViewModels
                     }
                 }
             }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Thông tin nhập không hợp lệ");
+                MainWindowViewModel.instance.ChangeStateToComplete("Thông tin nhập không hợp lệ");
+            }
         }
 
         private void AssFunc3CommandHandler()
         {
-            if (this.Amount3 > 0)
+            if (this.Amount3 > 0 && this.Amount3 <= this.CurrentRoomAsset.Amount)
             {
                 MessageBoxResult result = System.Windows.MessageBox.Show("Bạn muốn chuyển tài sản?", "Xác nhận chuyển tài sản", MessageBoxButton.YesNo);
                 if (result == MessageBoxResult.Yes)
@@ -353,7 +356,7 @@ namespace RoomM.DeskApp.ViewModels
                         RoomAssetHistory roomAssHis2 = new RoomAssetHistory(DateTime.Now, 4, this.CurrentEntity.ID, this.Room2.ID, this.CurrentRoomAsset.Room.Name, num);
                         this.assHisRepo.Add(roomAssHis1);
                         this.assHisRepo.Add(roomAssHis2);
-                        this.assHisRepo.Save(); 
+                        this.assHisRepo.Save();
                         this.SetAdditionViewChange();
                         // System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thành công!");
                         MainWindowViewModel.instance.ChangeStateToComplete("Cập nhật thành công");
@@ -362,6 +365,11 @@ namespace RoomM.DeskApp.ViewModels
                     {
                         System.Windows.Forms.MessageBox.Show("Cập nhật dữ liệu thất bại! \nMã lỗi: " + ex.Message);
                     }
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("Thông tin nhập không hợp lệ");
+                    MainWindowViewModel.instance.ChangeStateToComplete("Thông tin nhập không hợp lệ");
                 }
             }
         }
@@ -400,16 +408,16 @@ namespace RoomM.DeskApp.ViewModels
             set
             {
                 this.roomTypeFilter2 = value;
-                
-                    List<Room> roomList = new List<Room>(this.roomRepo.GetAll());
-                    if (this.roomTypeFilter2.Name != "Tất cả")
-                    {
-                        var query = roomList.Where(p => p.RoomType.Name == this.roomTypeFilter2.Name);
-                        this.roomView2 = CollectionViewSource.GetDefaultView(query.ToList());
-                    }
-                    else
-                        this.roomView2 = CollectionViewSource.GetDefaultView(roomList);
-                    OnPropertyChanged("RoomView2");
+
+                List<Room> roomList = new List<Room>(this.roomRepo.GetAll());
+                if (this.roomTypeFilter2.Name != "Tất cả")
+                {
+                    var query = roomList.Where(p => p.RoomType.Name == this.roomTypeFilter2.Name);
+                    this.roomView2 = CollectionViewSource.GetDefaultView(query.ToList());
+                }
+                else
+                    this.roomView2 = CollectionViewSource.GetDefaultView(roomList);
+                OnPropertyChanged("RoomView2");
             }
         }
 
@@ -470,5 +478,29 @@ namespace RoomM.DeskApp.ViewModels
         }
 
         #endregion
+
+
+
+
+        // command handler
+        public ICommand AssetsToExcelCommand { get { return new RelayCommand(AssetsToExcelCommandHandler, CanExecute); } }
+
+        private void AssetsToExcelCommandHandler()
+        {
+            PureAssetsReportToExcel report = new PureAssetsReportToExcel("sgu university", "roomM", "templates/asset_tmp.xls");
+
+            List<Asset> dataList = new List<Asset>();
+            if (AllPlusIsCheck)
+                dataList = EntitiesList;
+            else
+            {
+                foreach (Asset r in EntitiesList)
+                    if (r.IsUsing)
+                        dataList.Add(r);
+            }
+
+            report.setupExport(dataList);
+            report.save();
+        }
     }
 }
