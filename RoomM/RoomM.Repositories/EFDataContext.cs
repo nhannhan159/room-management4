@@ -15,12 +15,11 @@ namespace RoomM.Repositories
         public static EFDataContext instance = new EFDataContext();
 
         // connection string:
-        private const string connectionString =
-            //"Data Source=QUOCVU\\SQLEXPRESS;Initial Catalog=room_mgr;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False";
-            "Data Source=.\\SQLEXPRESS;Initial Catalog=room_mgr;Integrated Security=True";
-        public EFDataContext() : base(connectionString) {
-        
-        }
+        // private const string connectionString =
+            // "Data Source=QUOCVU\\SQLEXPRESS;Initial Catalog=room_mgr;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False";
+            // "Data Source=TIENTQ;Initial Catalog=room_mgr;Integrated Security=True";
+            // "metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=TIENTQ;initial catalog=room_mgr;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;";
+        public EFDataContext() : base("name=RoomDB") { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
